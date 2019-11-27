@@ -48,6 +48,19 @@ class AnnounceViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+        //Changing status bar color
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            UIApplication.shared.statusBarStyle = .lightContent
+        }
+        
         // Isso aqui ó
         db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").addSnapshotListener { documentSnapshot, error in
         guard let document = documentSnapshot else {
