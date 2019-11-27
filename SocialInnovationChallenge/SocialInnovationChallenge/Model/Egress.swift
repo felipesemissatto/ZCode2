@@ -21,7 +21,7 @@ class Egress{
     public var experiences: [String]?
     public var skills: [String]?
     public var desires: [String]?
-    public var contact: String?
+    public var contact: String
     
     //MARK: Constructors
     init(name: String = "",
@@ -33,8 +33,8 @@ class Egress{
         courses: [String]? = nil,
         experiences: [String]? = nil,
         skills: [String]? = nil,
-        desires: [String]? = [],
-        contact: String? = ""){
+        desires: [String]? = ["", "", ""],
+        contact: String = ""){
         
             self.name = name
             self.dateOfBirth = dateOfBirth
