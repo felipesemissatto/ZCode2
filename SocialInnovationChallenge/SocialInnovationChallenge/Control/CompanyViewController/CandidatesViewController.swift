@@ -104,9 +104,9 @@ class CandidatesViewController: UIViewController {
 
                     egress.name = document.get("name") as! String
                     egress.region = document.get("region") as! String
-                    
-                    //provisório só pra testar pq não consegui pegar do firebase - isa
-                    egress.description = "Busco uma oportunidade para recomeçar minha vida. Sou casado, tenho 2 filhos e meu maior sonho é ser um exemplo para eles e dar a educação que eu não tive."
+                    egress.description = document.get("description") as! String
+                    egress.contact = document.get("contact") as! String
+                
 
                     self.egress.append(egress)
                 }
