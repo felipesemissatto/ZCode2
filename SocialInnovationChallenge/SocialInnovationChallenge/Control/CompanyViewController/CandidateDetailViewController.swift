@@ -29,9 +29,9 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         inviteButton.layer.cornerRadius = 4
         nameLabel.text = egress!.name
         descriptionTextView.text = egress!.description
-        dreamLabel0.text! = egress!.desires![0]
-        dreamLabel1.text! = egress!.desires![1]
-        dreamLabel2.text! = egress!.desires![2]
+        dreamLabel0.text! = egress!.desires[0]
+        dreamLabel1.text! = egress!.desires[1]
+        dreamLabel2.text! = egress!.desires[2]
 
     }
     
@@ -74,14 +74,14 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         }
     }
     
-    func sendAnEmail(){
+    func sendAnEmail(adress : String){
         // Check the result or perform other tasks.
         if MFMailComposeViewController.canSendMail() {
             let composeVC = MFMailComposeViewController()
             composeVC.mailComposeDelegate = self
              
             // Configure the fields of the interface.
-            composeVC.setToRecipients(["address@example.com"])
+            composeVC.setToRecipients([adress])
              
             // Present the view controller modally.
             self.present(composeVC, animated: true, completion: nil)
@@ -132,15 +132,15 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         let alert = UIAlertController(title: "Como deseja entrar em contato?", message: "Selecione uma opção", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Ligar", style: .default, handler: { (_) in
-            self.call(number : "5519993085702")
+            self.call(number : self.egress!.contact[0])
         }))
 
         alert.addAction(UIAlertAction(title: "Enviar email", style: .default, handler: { (_) in
-            self.sendAnEmail()
+            self.sendAnEmail(adress : self.egress!.contact[1])
         }))
         
         alert.addAction(UIAlertAction(title: "Enviar mensagem via Whatsapp", style: .default, handler: { (_) in
-            self.sendAWhatsappMessage(number: "5519993085702") //número pra teste
+            self.sendAWhatsappMessage(number: self.egress!.contact[0]) //número pra teste
         }))
         
 //        alert.addAction(UIAlertAction(title: "Salvar em Meu Contatos", style: .default, handler: { (_) in
