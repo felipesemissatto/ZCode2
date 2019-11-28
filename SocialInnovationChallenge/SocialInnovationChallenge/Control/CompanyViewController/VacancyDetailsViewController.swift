@@ -13,7 +13,7 @@ class VacancyDetailsViewController: UITableViewController {
 
     //MARK: Properties
     var vacancy: Vacancy?
-
+    var segueIdentifier: String = ""
     //MARK: Outlets
     
     @IBOutlet weak var vacancyNameLabel: UILabel!
@@ -50,10 +50,22 @@ class VacancyDetailsViewController: UITableViewController {
        // cellDescription.frame.size.height = descriptionLabel.frame.size.height + 16
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.vacancy?.isActivated ?? true {
+            self.activatedSwitch.isOn = true
+        } else {
+            self.activatedSwitch.isOn = false
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        activated()
+        if segueIdentifier == "visualizeDetailSegue"{
+            activated()
+        }
     }
     
     func activated() {
@@ -61,9 +73,9 @@ class VacancyDetailsViewController: UITableViewController {
         
         if self.activatedSwitch.isOn {
             // Adicionar um completion
-        db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").updateData(["isActivated": true])
+            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": true])
         } else {
-            db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").updateData(["isActivated": false])
+            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": false])
         }
     }
     

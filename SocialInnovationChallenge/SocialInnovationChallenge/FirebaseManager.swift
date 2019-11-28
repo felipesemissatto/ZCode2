@@ -45,7 +45,7 @@ class FirebaseManager {
         let salary = vacancy.salary
         let typeOfWork: String = vacancy.typeOfWork
         let isActivated = vacancy.isActivated
-
+        
         var ref: DocumentReference? = nil
         
         ref = db.collection("vacancyTeste").addDocument(data: ["benefits": benefits,

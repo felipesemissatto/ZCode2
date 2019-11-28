@@ -11,9 +11,11 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var vacancy: Vacancy?
+    var segueIdentifier: String = ""
     
     var titleSaveButton: String = "Publicar"
     var isHiddenSaveButton: Bool = false
+    
     
     @IBOutlet weak var saveButton: UIButton!
     

@@ -32,13 +32,10 @@ class AnnounceViewController: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var announceVacancyButton: UIButton!
     
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadVacancies()
 
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -60,25 +57,13 @@ class AnnounceViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
             UIApplication.shared.statusBarStyle = .lightContent
         }
-        
-        // Isso aqui ó
-        db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").addSnapshotListener { documentSnapshot, error in
-        guard let document = documentSnapshot else {
-            print("Error")
-            return
-        }
-        guard let data = document.data() else {
-            print("Documento vazio.")
-            return
-        }
-        print("Documento: \(data)")
-        self.tableView.reloadData()
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("Will Appear!!!")
         super.viewWillAppear(animated)
+        
+        loadVacancies()
         
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -108,11 +93,15 @@ class AnnounceViewController: UIViewController {
     //MARK: Functions
     private func loadVacancies(){
         
+        print("Load!")
+        
         db.collection("vacancy").getDocuments() { (snapshot,error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
+                self.vacancies = []
                 for document in snapshot!.documents {
+                    
                     let vacancy = Vacancy(name: "Makoto",
                                           company: self.company,
                                           releaseTime: 0,
@@ -130,20 +119,18 @@ class AnnounceViewController: UIViewController {
                     vacancy.salary = document.get("salary") as! String
                     vacancy.workday = document.get("workday") as! String
                     vacancy.isActivated = document.get("isActivated") as! Bool
-
+                    vacancy.ID = document.documentID
+//                    self.vacancies = self.vacancies + [vacancy]
                     self.vacancies.append(vacancy)
+                    
                 }
             }
+
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-    }
-
     
-    
-    private func loadSampleVacancies(){
-//        let vacancy1 = Vacancy(name: "Operador de Máquinas")
     }
     
     // MARK: Navigation
@@ -192,6 +179,8 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "TableViewCell"
         var vacancy: Vacancy
@@ -205,10 +194,14 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         
         // Fetches the appropriate living being for the data source layout.
         if isFiltering() {
+            print("FIltered")
             vacancy = filteredVacancies[indexPath.row]
         } else {
+            print("Not FIltered")
             vacancy = vacancies[indexPath.row]
         }
+        
+        print ("Cell \(vacancy.isActivated) ")
         
         // configuring the cell -> sets each of the views in the table view cell to display the corresponding data
         cell.nameVacancyLabel.text = vacancy.name
