@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseFirestore
 
 class AnnounceViewController: UIViewController {
     
@@ -27,8 +26,6 @@ class AnnounceViewController: UIViewController {
                           sectors: "Costura; Corte; Limpeza",
                           contact: "(019)3263-6537",
                           vancancies: nil)
-    
-    let db = Firestore.firestore()
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -90,50 +87,19 @@ class AnnounceViewController: UIViewController {
     }
 
     //MARK: Functions
-    private func loadVacancies(){
+    private func loadVacancies() {
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
+        VacancyServices.getAll { (error, vacancies) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error loading document: \(error.localizedDescription)")
             } else {
-                self.vacancies = []
-                for document in snapshot!.documents {
-
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
-
-                    vacancy.name = document.get("name") as! String
-                    vacancy.company = self.company
-                    vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
-                    vacancy.workday = document.get("workday") as! String
-                    vacancy.isActivated = document.get("isActivated") as! Bool
-                    vacancy.ID = document.documentID
-//                    self.vacancies = self.vacancies + [vacancy]
-                    self.vacancies.append(vacancy)
-
+                self.vacancies  = vacancies!
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
-//                VacancyServices.getAllVacancy { (error, vacancies) in
-//                    self.vacancies  = vacancies!
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                        }
-//                }
-            }
-
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
             }
         }
-    
     }
     
     // MARK: Navigation

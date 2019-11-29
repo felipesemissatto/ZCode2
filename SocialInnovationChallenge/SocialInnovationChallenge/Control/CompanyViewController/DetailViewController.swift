@@ -59,7 +59,7 @@ class DetailViewController: UIViewController {
     //Func for write in Firebase
     @IBAction func writeFirebase(_ sender: Any) {
         
-        VacancyServices.createVacancy(vacancy: self.vacancy!) { (error, vacancy ) in
+        VacancyServices.create(vacancy: self.vacancy!) { (error, vacancy ) in
             
             if let err = error {
                 print("Error adding document: \(err.localizedDescription)")
@@ -80,7 +80,7 @@ class DetailViewController: UIViewController {
         let alert = UIAlertController(title: nil,
                                       message: "Desculpa, não foi possível cadastrar.",
                                       preferredStyle: .alert)
-        let buttonAdd = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
 
         }
         alert.addAction(buttonAdd)
@@ -88,10 +88,10 @@ class DetailViewController: UIViewController {
     }
     
     func successAlert() {
-        let alert = UIAlertController(title: nil,
-                                      message: "Parabéns! Sua vaga foi anunciada com sucesso.",
+        let alert = UIAlertController(title: "Parabéns!",
+                                      message: "Sua vaga foi anunciada.\nAgora é só aguardar os candidatos.",
                                       preferredStyle: .alert)
-        let buttonAdd = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
             self.performSegue(withIdentifier: "unwindSegueToAnnounce", sender: self)
         }
         alert.addAction(buttonAdd)

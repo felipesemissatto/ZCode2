@@ -22,47 +22,14 @@ class VacancyDAO: DAO {
         
     }
     
-//    static func findAll(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) throws -> [Vacancy] {
-//        // list of seasons to be returned
-//        var vacancyList:[Vacancy]
-//        
-//        do {
-//            // perform search
-//            vacancyList = try FirebaseManager.sharedInstance.readFirebase(completion: (error?, vacancies?) -> [Vacancy])
-//        }
-//        catch let error {
-//            print(error)
-//        }
-//        
-//        return vacancyList
-//    }
+    static func findAll(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.readVacanciesFirebase { (error, vacancies) in
+            if let err = error {
+                completion(err, nil)
+            } else {
+                completion(nil, vacancies)
+            }
+        }
+    }
 }
-
-//static func create(_ objectToBeSaved: Season) throws {
-//    do {
-//        // add object to be saved to the context
-//        CoreDataManager.sharedInstance.persistentContainer.viewContext.insert(objectToBeSaved)
-//        
-//        // persist changes at the context
-//        try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
-//    }
-//    catch {
-//        throw Errors.DatabaseFailure
-//    }
-//}
-//static func findAll() throws -> [Season] {
-//    // list of seasons to be returned
-//    var seasonList:[Season]
-//
-//    do {
-//        // creating fetch request
-//        let request:NSFetchRequest<Season> = fetchRequest()
-//
-//        // perform search
-//        seasonList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
-//    }
-//    catch {
-//        throw Errors.DatabaseFailure
-//    }
-//
-//    return seasonList

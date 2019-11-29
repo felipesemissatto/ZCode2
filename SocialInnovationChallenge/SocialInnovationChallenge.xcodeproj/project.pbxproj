@@ -50,7 +50,6 @@
 		54A0E94C2372F0150028EB89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54A0E94B2372F0150028EB89 /* GoogleService-Info.plist */; };
 		54A552E52375CBF200F7B0F9 /* ViewController + HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A552E42375CBF200F7B0F9 /* ViewController + HideKeyboard.swift */; };
 		54A552E92375FD8200F7B0F9 /* CreateAnnounceViewController + CustomDataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A552E82375FD8200F7B0F9 /* CreateAnnounceViewController + CustomDataPicker.swift */; };
-		54B54AF82386C9D600598292 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B54AF72386C9D600598292 /* FirebaseManager.swift */; };
 		54B54AFD2386CC7700598292 /* VacancyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B54AFC2386CC7700598292 /* VacancyServices.swift */; };
 		54B54B012386CDD500598292 /* VacancyDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B54B002386CDD500598292 /* VacancyDAO.swift */; };
 		54B54B032386CE6D00598292 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B54B022386CE6D00598292 /* DAO.swift */; };
@@ -59,6 +58,9 @@
 		54BA966C2379A612000B918F /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA96692379A612000B918F /* Company.swift */; };
 		54BA966D2379A612000B918F /* Vacancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA966A2379A612000B918F /* Vacancy.swift */; };
 		54DBEB472382DE440054391C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DBEB462382DE440054391C /* DetailViewController.swift */; };
+		54F9C14C2391671D0009D490 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9C14B2391671D0009D490 /* FirebaseManager.swift */; };
+		54F9C14E239168A70009D490 /* EgressDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9C14D239168A70009D490 /* EgressDAO.swift */; };
+		54F9C150239169520009D490 /* EgressServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9C14F239169520009D490 /* EgressServices.swift */; };
 		625F090EF606FA8BECA88013 /* Pods_SocialInnovationChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9342422E397FEC80A6624D41 /* Pods_SocialInnovationChallengeTests.framework */; };
 		C1137234ABD1A503A76B091A /* Pods_SocialInnovationChallenge_SocialInnovationChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A2FFA257D69C2885ABD934 /* Pods_SocialInnovationChallenge_SocialInnovationChallengeUITests.framework */; };
 		F0E91A91173B3A818FC9516C /* Pods_SocialInnovationChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED6E41CA280ED5342E8B149 /* Pods_SocialInnovationChallenge.framework */; };
@@ -134,7 +136,6 @@
 		54A0E94B2372F0150028EB89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54A552E42375CBF200F7B0F9 /* ViewController + HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + HideKeyboard.swift"; sourceTree = "<group>"; };
 		54A552E82375FD8200F7B0F9 /* CreateAnnounceViewController + CustomDataPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateAnnounceViewController + CustomDataPicker.swift"; sourceTree = "<group>"; };
-		54B54AF72386C9D600598292 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		54B54AFC2386CC7700598292 /* VacancyServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyServices.swift; sourceTree = "<group>"; };
 		54B54B002386CDD500598292 /* VacancyDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyDAO.swift; sourceTree = "<group>"; };
 		54B54B022386CE6D00598292 /* DAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
@@ -143,6 +144,9 @@
 		54BA96692379A612000B918F /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		54BA966A2379A612000B918F /* Vacancy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vacancy.swift; sourceTree = "<group>"; };
 		54DBEB462382DE440054391C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		54F9C14B2391671D0009D490 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		54F9C14D239168A70009D490 /* EgressDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EgressDAO.swift; sourceTree = "<group>"; };
+		54F9C14F239169520009D490 /* EgressServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EgressServices.swift; sourceTree = "<group>"; };
 		61755C5E890BD3009B260AF0 /* Pods-SocialInnovationChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialInnovationChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-SocialInnovationChallengeTests/Pods-SocialInnovationChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		91843AA0B0BC6194CD00EC33 /* Pods-SocialInnovationChallengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialInnovationChallengeTests.debug.xcconfig"; path = "Target Support Files/Pods-SocialInnovationChallengeTests/Pods-SocialInnovationChallengeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9342422E397FEC80A6624D41 /* Pods_SocialInnovationChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialInnovationChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -363,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				54B54AFC2386CC7700598292 /* VacancyServices.swift */,
+				54F9C14F239169520009D490 /* EgressServices.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -370,8 +375,8 @@
 		54B54AFE2386CD3300598292 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				54F9C14B2391671D0009D490 /* FirebaseManager.swift */,
 				54B54AFF2386CD5E00598292 /* DAO */,
-				54B54AF72386C9D600598292 /* FirebaseManager.swift */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				54B54B002386CDD500598292 /* VacancyDAO.swift */,
+				54F9C14D239168A70009D490 /* EgressDAO.swift */,
 				54B54B022386CE6D00598292 /* DAO.swift */,
 			);
 			path = DAO;
@@ -678,6 +684,7 @@
 				54A552E92375FD8200F7B0F9 /* CreateAnnounceViewController + CustomDataPicker.swift in Sources */,
 				236242FB2373268500019C3D /* AnnounceViewController.swift in Sources */,
 				54BA966D2379A612000B918F /* Vacancy.swift in Sources */,
+				54F9C14E239168A70009D490 /* EgressDAO.swift in Sources */,
 				2FC5C08823705CA800520F18 /* MainViewController.swift in Sources */,
 				5429FBDF2379980A001BD7CE /* CreateAnnounceViewController.swift in Sources */,
 				54B54B012386CDD500598292 /* VacancyDAO.swift in Sources */,
@@ -686,11 +693,12 @@
 				54BA96652379A5AF000B918F /* Egress.swift in Sources */,
 				54DBEB472382DE440054391C /* DetailViewController.swift in Sources */,
 				2FF853942386D40E003A124F /* CandidateTableViewCell.swift in Sources */,
-				54B54AF82386C9D600598292 /* FirebaseManager.swift in Sources */,
 				236243062373272600019C3D /* VacancyViewController.swift in Sources */,
 				2FC5C08E23705CA800520F18 /* SocialInnovationChallenge.xcdatamodeld in Sources */,
 				54B54AFD2386CC7700598292 /* VacancyServices.swift in Sources */,
 				2FC5C08423705CA800520F18 /* AppDelegate.swift in Sources */,
+				54F9C150239169520009D490 /* EgressServices.swift in Sources */,
+				54F9C14C2391671D0009D490 /* FirebaseManager.swift in Sources */,
 				23826C47238D697A00A40C5F /* VacancyEgressTableViewCell.swift in Sources */,
 				23624300237326D600019C3D /* EgressProfileViewController.swift in Sources */,
 				2FC5C08623705CA800520F18 /* SceneDelegate.swift in Sources */,

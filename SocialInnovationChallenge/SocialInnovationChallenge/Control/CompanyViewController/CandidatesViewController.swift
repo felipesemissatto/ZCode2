@@ -94,29 +94,18 @@ class CandidatesViewController: UIViewController {
     
     //MARK: Functions
     private func loadEgress(){
-        
-        db.collection("egress").getDocuments() { (snapshot,error) in
+
+        EgressServices.getAll { (error, egress) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error loading document: \(error.localizedDescription)")
             } else {
-                for document in snapshot!.documents {
-                    let egress = Egress()
-
-                    egress.name = document.get("name") as! String
-                    egress.region = document.get("region") as! String
-                    egress.description = document.get("description") as! String
-                    egress.contact = document.get("contact") as! [String]
-                    egress.desires = document.get("dreams") as! [String]
-                
-
-                    self.egress.append(egress)
+                self.egress = egress!
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
-
     }
     
     // MARK: Navigation
