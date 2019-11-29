@@ -60,7 +60,6 @@ class AnnounceViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Will Appear!!!")
         super.viewWillAppear(animated)
         
         loadVacancies()
@@ -93,15 +92,13 @@ class AnnounceViewController: UIViewController {
     //MARK: Functions
     private func loadVacancies(){
         
-        print("Load!")
-        
         db.collection("vacancy").getDocuments() { (snapshot,error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 self.vacancies = []
                 for document in snapshot!.documents {
-                    
+
                     let vacancy = Vacancy(name: "Makoto",
                                           company: self.company,
                                           releaseTime: 0,
@@ -122,8 +119,14 @@ class AnnounceViewController: UIViewController {
                     vacancy.ID = document.documentID
 //                    self.vacancies = self.vacancies + [vacancy]
                     self.vacancies.append(vacancy)
-                    
+
                 }
+//                VacancyServices.getAllVacancy { (error, vacancies) in
+//                    self.vacancies  = vacancies!
+//                        DispatchQueue.main.async {
+//                            self.tableView.reloadData()
+//                        }
+//                }
             }
 
             DispatchQueue.main.async {
@@ -141,16 +144,18 @@ class AnnounceViewController: UIViewController {
             return
         }
         
-        guard let livingBeingDetailViewController = segue.destination as? DetailViewController else {
+        guard let detailViewController = segue.destination as? DetailViewController else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
     
-         livingBeingDetailViewController.vacancy = selected
+        detailViewController.vacancy = selected
+        detailViewController.segueIdentifier = "showDetailSegue"
         
         if segue.identifier == "showDetailSegue",
             let vacancyDetails = segue.destination as? DetailViewController {
             vacancyDetails.titleSaveButton = ""
             vacancyDetails.isHiddenSaveButton = true
+            
         }
     }
     
@@ -194,14 +199,10 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         
         // Fetches the appropriate living being for the data source layout.
         if isFiltering() {
-            print("FIltered")
             vacancy = filteredVacancies[indexPath.row]
         } else {
-            print("Not FIltered")
             vacancy = vacancies[indexPath.row]
         }
-        
-        print ("Cell \(vacancy.isActivated) ")
         
         // configuring the cell -> sets each of the views in the table view cell to display the corresponding data
         cell.nameVacancyLabel.text = vacancy.name

@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController {
 
     var vacancy: Vacancy?
-    var segueIdentifier: String = ""
+    var segueIdentifier: String?
     
     var titleSaveButton: String = "Publicar"
     var isHiddenSaveButton: Bool = false
@@ -45,12 +45,15 @@ class DetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "tableViewShowDetailSegue" {
+//        if segue.identifier == "tableViewShowDetailSegue" {
             if let vacancyDetailsVC = segue.destination as? VacancyDetailsViewController {
                 //Some property on ChildVC that needs to be set
                 vacancyDetailsVC.vacancy = self.vacancy
+                if segueIdentifier == "showDetailSegue" {
+                    vacancyDetailsVC.segueIdentifier = segueIdentifier
+                }
             }
-        }
+//        }
     }
     
     //Func for write in Firebase

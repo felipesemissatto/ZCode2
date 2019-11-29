@@ -13,7 +13,7 @@ class VacancyDetailsViewController: UITableViewController {
 
     //MARK: Properties
     var vacancy: Vacancy?
-    var segueIdentifier: String = ""
+    var segueIdentifier: String?
     //MARK: Outlets
     
     @IBOutlet weak var vacancyNameLabel: UILabel!
@@ -63,7 +63,7 @@ class VacancyDetailsViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if segueIdentifier == "visualizeDetailSegue"{
+        if segueIdentifier == "showDetailSegue"{
             activated()
         }
     }

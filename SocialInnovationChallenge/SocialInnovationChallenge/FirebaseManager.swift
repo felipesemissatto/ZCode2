@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class FirebaseManager {
     
-    var vacancies = [Vacancy]()
+    var vacancies: [Vacancy] = []
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
@@ -48,7 +48,7 @@ class FirebaseManager {
         
         var ref: DocumentReference? = nil
         
-        ref = db.collection("vacancyTeste").addDocument(data: ["benefits": benefits,
+        ref = db.collection("vacancy").addDocument(data: ["benefits": benefits,
                                                      "description": description ,
         //                                           "company": "/company/\(company)",
                                                      "isActivated": isActivated,
@@ -69,38 +69,49 @@ class FirebaseManager {
         }
     }
     
-    func redFirebase() -> [Vacancy]{
+    func readFirebase(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) -> [Vacancy] {
         let db = Firestore.firestore()
+        let vacancy = Vacancy(name: "",
+                              company: self.company,
+                              releaseTime: 0,
+                              description: "",
+                              workday: "",
+                              numberOfVacancies: "",
+                              benefits: "",
+                              salary: "",
+                              region: "",
+                              typeOfWork: "",
+                              isActivated: true)
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
-            if let error = error {
+        db.collection("vacancy").getDocuments() { (snapshot, err) in
+            if let error = err {
                 print("Error getting documents: \(error)")
+                completion(error, nil)
             } else {
                 for document in snapshot!.documents {
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
 
                     vacancy.name = document.get("name") as! String
                     vacancy.company = self.company
                     vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
+                    vacancy.releaseTime = document.get("releaseTime") as! Int
                     vacancy.workday = document.get("workday") as! String
-
-
+                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
+                    vacancy.benefits = document.get("benefits") as? String
+                    vacancy.salary = document.get("salary") as! String
+                    vacancy.region = document.get("region") as! String
+                    vacancy.typeOfWork = document.get("typeOfWork") as! String
+                    vacancy.isActivated = document.get("isActivated") as! Bool
+                    vacancy.ID = document.documentID
+        
                     self.vacancies.append(vacancy)
-                }
+                    completion(nil, self.vacancies)
+                        
+                    }
             }
         }
-        
         return self.vacancies
     }
+        
 }
+
 
