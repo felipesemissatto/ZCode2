@@ -25,27 +25,9 @@
                                     <segue destination="8nA-hY-kcS" kind="embed" identifier="tableViewShowDetailSegue" id="6yl-A5-z2a"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utd-X0-Kun">
-                                <rect key="frame" x="91.5" y="705" width="231" height="44"/>
-                                <color key="backgroundColor" red="0.28627450980392155" green="0.63921568627450975" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="231" id="9eu-vQ-PVP"/>
-                                    <constraint firstAttribute="height" constant="44" id="dGd-KD-LHH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="Publicar">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="button:" destination="JBy-Ep-Sxt" eventType="touchUpInside" id="qxe-RL-5h4"/>
-                                    <action selector="tapButton:" destination="JBy-Ep-Sxt" eventType="touchUpInside" id="LHG-Uz-kMI"/>
-                                    <action selector="writeFirebase:" destination="gg5-NN-9GF" eventType="touchUpInside" id="oZj-4J-Zwh"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="utd-X0-Kun" firstAttribute="centerX" secondItem="hlo-H7-uaQ" secondAttribute="centerX" id="Bsm-mq-qQl"/>
                             <constraint firstItem="hse-8h-4Dc" firstAttribute="bottom" secondItem="dVK-k7-fEN" secondAttribute="bottom" id="CL4-BU-Zme"/>
                             <constraint firstItem="dVK-k7-fEN" firstAttribute="top" secondItem="hse-8h-4Dc" secondAttribute="top" id="QDo-4o-v9r"/>
                             <constraint firstItem="hse-8h-4Dc" firstAttribute="trailing" secondItem="dVK-k7-fEN" secondAttribute="trailing" id="Qn2-nq-u0x"/>
@@ -54,15 +36,20 @@
                             <constraint firstItem="aEd-tJ-Sb0" firstAttribute="top" secondItem="hse-8h-4Dc" secondAttribute="top" id="umo-vW-iGm"/>
                             <constraint firstItem="aEd-tJ-Sb0" firstAttribute="leading" secondItem="hse-8h-4Dc" secondAttribute="leading" id="vrk-vY-lPa"/>
                             <constraint firstItem="aEd-tJ-Sb0" firstAttribute="trailing" secondItem="hse-8h-4Dc" secondAttribute="trailing" id="vwU-Zg-cqa"/>
-                            <constraint firstItem="hse-8h-4Dc" firstAttribute="bottom" secondItem="utd-X0-Kun" secondAttribute="bottom" constant="64" id="xg5-mV-YYG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hse-8h-4Dc"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="always" id="0Hc-s5-gqU"/>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="always" id="0Hc-s5-gqU">
+                        <barButtonItem key="rightBarButtonItem" title="Publicar" id="k1G-EW-QEz">
+                            <connections>
+                                <action selector="writeFirebase:" destination="gg5-NN-9GF" id="zp8-AZ-BPh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="saveButton" destination="utd-X0-Kun" id="chp-Og-AdL"/>
+                        <outlet property="saveButton" destination="k1G-EW-QEz" id="icR-Xd-fHh"/>
                         <segue destination="JBy-Ep-Sxt" kind="unwind" identifier="unwindSegueToAnnounce" unwindAction="unwindToAnnounceWithSegue:" id="Qhg-xW-NY1"/>
                     </connections>
                 </viewController>

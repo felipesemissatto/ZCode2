@@ -16,9 +16,7 @@ class DetailViewController: UIViewController {
     var titleSaveButton: String = "Publicar"
     var isHiddenSaveButton: Bool = false
     
-    
-    @IBOutlet weak var saveButton: UIButton!
-    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +24,33 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.title = vacancy?.company.name
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Setup the Announce Button
-        self.saveButton.setTitle(titleSaveButton, for: .normal)
-        self.saveButton.isHidden = self.isHiddenSaveButton
-        saveButton.layer.cornerRadius = 4
-        saveButton.layer.zPosition = 10
+        if !self.isHiddenSaveButton {
+            self.saveButton.isEnabled = true
+            self.saveButton.title = "Publicar"
+        } else {
+            self.saveButton.isEnabled = false
+            self.saveButton.title = ""
+        }
+        
+        //Changing status bar color
+        navigationController?.navigationBar.prefersLargeTitles = false
+        UIApplication.shared.statusBarStyle = .darkContent
+
+        if #available(iOS 13.0, *) {
+            
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,7 +73,6 @@ class DetailViewController: UIViewController {
     
     //Func for write in Firebase
     @IBAction func writeFirebase(_ sender: Any) {
-        
         VacancyServices.create(vacancy: self.vacancy!) { (error, vacancy ) in
             
             if let err = error {
@@ -70,10 +84,7 @@ class DetailViewController: UIViewController {
                 self.successAlert()
             }
         }
-        
     }
-    
-
     
     //MARK: Alert
     func errorAlert() {

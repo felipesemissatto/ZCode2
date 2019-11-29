@@ -41,6 +41,15 @@ class AnnounceViewController: UIViewController {
         searchController.searchBar.searchTextField.backgroundColor = .white
         navigationItem.searchController = searchController
         definesPresentationContext = true
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadVacancies()
+        
+        self.tabBarController?.tabBar.isHidden = false
         
         //Changing status bar color
         if #available(iOS 13.0, *) {
@@ -54,14 +63,6 @@ class AnnounceViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
             UIApplication.shared.statusBarStyle = .lightContent
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadVacancies()
-        
-        self.tabBarController?.tabBar.isHidden = false
     }
     
   
@@ -174,16 +175,14 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         cell.nameVacancyLabel.text = vacancy.name
         cell.numberOfVacanciesLabel.text = "\(vacancy.numberOfVacancies) vagas"
         cell.timeReleaseLabel.text = "anunciada há \(vacancy.releaseTime) dias"
+        cell.isActivatedLabel.textColor = UIColor(displayP3Red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
         
         if !vacancy.isActivated {
-            cell.isActivatedLabel.textColor = .red
             cell.isActivatedLabel.text = "Inativo"
-            
-            cell.ballView.backgroundColor = .red
+            cell.ballView.backgroundColor = UIColor(displayP3Red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
         } else {
-            cell.isActivatedLabel.textColor = .green
             cell.isActivatedLabel.text = "Ativo"
-            cell.ballView.backgroundColor = .green
+            cell.ballView.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
         }
         
         return cell

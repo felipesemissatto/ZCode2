@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseFirestore
 
 class CandidatesViewController: UIViewController {
     
@@ -19,16 +18,14 @@ class CandidatesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     let company = Company(name: "PanoSocial",
-    foundationDate: 2005,
-    region: "Campinas, SP",
-    photo: nil,
-    description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-    site: nil,
-    sectors: "Costura; Corte; Limpeza",
-    contact: "(019)3263-6537",
-    vancancies: nil)
-    
-    let db = Firestore.firestore()
+                          foundationDate: 2005,
+                          region: "Campinas, SP",
+                          photo: nil,
+                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
+                          site: nil,
+                          sectors: "Costura; Corte; Limpeza",
+                          contact: "(019)3263-6537",
+                          vancancies: nil)
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -38,14 +35,11 @@ class CandidatesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.layer.zPosition = 0
+        loadEgress()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadEgress()
         
         //Setup the Search Controller
         searchController.searchResultsUpdater = self

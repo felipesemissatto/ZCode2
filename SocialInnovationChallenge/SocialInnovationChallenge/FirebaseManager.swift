@@ -79,6 +79,8 @@ class FirebaseManager {
                 print("Error getting documents: \(error)")
                 completion(error, nil)
             } else {
+                self.vacancies = []
+                
                 for document in snapshot!.documents {
                     
                     let name = document.get("name") as! String

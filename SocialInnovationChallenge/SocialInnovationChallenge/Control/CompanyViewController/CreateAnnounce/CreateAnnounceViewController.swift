@@ -50,6 +50,19 @@ class CreateAnnounceViewController: UIViewController {
         self.salaryTextField.customTextField()
         self.workdayTextField.customTextField()
         self.benefitsTextField.customTextField()
+        
+         //Changing status bar color
+        navigationController?.navigationBar.prefersLargeTitles = false
+        UIApplication.shared.statusBarStyle = .darkContent
+
+        if #available(iOS 13.0, *) {
+            
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
     }
     
     override func viewDidLoad() {
@@ -64,6 +77,7 @@ class CreateAnnounceViewController: UIViewController {
         dataPicker = ["Integral", "Noturno"]
         
     }
+    
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
