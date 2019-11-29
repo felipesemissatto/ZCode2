@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 class AnnounceViewController: UIViewController {
     
 
     //MARK: Properties
+    let db = Firestore.firestore()
+    
     var vacancies = [Vacancy]()
     var filteredVacancies = [Vacancy]()
     let searchController = UISearchController(searchResultsController: nil)
@@ -52,8 +55,11 @@ class AnnounceViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         
         //Changing status bar color
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -200,6 +206,21 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         }
         
         self.performSegue(withIdentifier: "showDetailSegue", sender: vacancy)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            db.collection("vacancy").document(vacancies[indexPath.row].ID!).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            
+            vacancies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
     }
 }
 

@@ -76,6 +76,8 @@ class CreateAnnounceViewController: UIViewController {
         createDataPicker.createToolBar(category: workdayTextField, viewController: self)
         dataPicker = ["Integral", "Noturno"]
         
+        //button dismiss datapicker
+        createToolBar()
     }
     
     

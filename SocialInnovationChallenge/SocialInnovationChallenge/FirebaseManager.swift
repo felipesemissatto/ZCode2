@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class FirebaseManager {
     
@@ -46,27 +47,29 @@ class FirebaseManager {
         let salary = vacancy.salary
         let typeOfWork: String = vacancy.typeOfWork
         let isActivated = vacancy.isActivated
+        let uid = Auth.auth().currentUser!.uid
         
         var ref: DocumentReference? = nil
         
         ref = db.collection("vacancy").addDocument(data: ["benefits": benefits,
-                                                          "description": description ,
-//                                                          "company": "/company/\(company)",
-                                                          "isActivated": isActivated,
-                                                          "name": name ,
-                                                          "numberOfVacancies": numberOfVacancies ,
-                                                          "region": region,
-                                                          "releaseTime": releaseTime,
-                                                          "salary": salary ,
-                                                          "typeOfWork": typeOfWork,
-                                                          "workday": workday]) { err in
-                                                            if let err = err {
-                                                                print("Error adding document: \(err)")
-                                                                completion(err, nil)
-                                                            } else {
-                                                                print("Document added with ID: \(ref!.documentID)")
-                                                                completion(nil, ref!.documentID)
-                                                            }
+                                                               "description": description ,
+//                                                             "company": "/company/\(company)",
+                                                                "isActivated": isActivated,
+                                                                "name": name ,
+                                                                "numberOfVacancies": numberOfVacancies ,
+                                                                "region": region,
+                                                                "releaseTime": releaseTime,
+                                                                "salary": salary ,
+                                                                "typeOfWork": typeOfWork,
+                                                                "workday": workday,
+                                                                "UID": uid]) { err in
+                                                                    if let err = err {
+                                                                        print("Error adding document: \(err)")
+                                                                        completion(err, nil)
+                                                                    } else {
+                                                                        print("Document added with ID: \(ref!.documentID)")
+                                                                        completion(nil, ref!.documentID)
+                                                                    }
         }
     }
     
@@ -95,6 +98,7 @@ class FirebaseManager {
                     let typeOfWork = document.get("typeOfWork") as! String
                     let isActivated = document.get("isActivated") as! Bool
                     let ID = document.documentID
+                    let uid = document.get("UID") as! String
                     
                     vacancy = Vacancy(name: name,
                                       company: company,
@@ -108,6 +112,7 @@ class FirebaseManager {
                                       typeOfWork: typeOfWork,
                                       isActivated: isActivated)
                     vacancy.ID = ID
+                    vacancy.UID = uid
                     
                     self.vacancies.append(vacancy)
                 }

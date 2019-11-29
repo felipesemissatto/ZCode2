@@ -11,6 +11,7 @@ class Vacancy {
     
     //MARK: Properties
     public var ID: String?
+    public var UID: String?
     public var name: String
     public var company: Company
     public var releaseTime: Int //days, weeks or months
