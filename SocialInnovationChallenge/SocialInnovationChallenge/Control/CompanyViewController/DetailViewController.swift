@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class DetailViewController: UIViewController {
 
@@ -16,6 +18,8 @@ class DetailViewController: UIViewController {
     var titleSaveButton: String = "Publicar"
     var isHiddenSaveButton: Bool = false
     
+    var db = Firestore.firestore()
+    
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -23,8 +27,17 @@ class DetailViewController: UIViewController {
         
 //        self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        self.title = vacancy?.company.name
-        
+        let uid = (Auth.auth().currentUser?.uid)!
+        let docRef = db.collection("company").document(uid)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let name = document.get("name") as! String
+                self.title = name
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

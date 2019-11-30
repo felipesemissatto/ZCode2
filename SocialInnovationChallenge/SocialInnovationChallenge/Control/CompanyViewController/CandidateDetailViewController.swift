@@ -89,7 +89,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         else{
             let alert = UIAlertController(title: "Não foi possível abrir o Mail", message: "", preferredStyle: UIAlertController.Style.alert)
 
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
                 //Cancel Action
             }))
             self.present(alert, animated: true, completion: nil)

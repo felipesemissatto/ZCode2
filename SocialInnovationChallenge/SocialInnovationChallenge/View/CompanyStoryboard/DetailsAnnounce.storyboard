@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Detail View Controller-->
         <scene sceneID="w9y-v5-NUK">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="gg5-NN-9GF" customClass="DetailViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hse-8h-4Dc"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="always" id="0Hc-s5-gqU">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="0Hc-s5-gqU">
                         <barButtonItem key="rightBarButtonItem" title="Publicar" id="k1G-EW-QEz">
                             <connections>
                                 <action selector="writeFirebase:" destination="gg5-NN-9GF" id="zp8-AZ-BPh"/>
