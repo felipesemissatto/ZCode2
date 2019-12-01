@@ -140,12 +140,13 @@ class FirebaseManager {
                     let description = document.get("description") as! String
                     let contact = document.get("contact") as! [String]
                     let desires = document.get("dreams") as! [String]
+                    let photo = document.get("photo") as! String
                     
                     egress = Egress(name: name,
                                     dateOfBirth: "",
                                     description: description,
                                     region: region,
-                                    photos: nil,
+                                    photo: photo,
                                     video: nil,
                                     courses: nil,
                                     experiences: nil,
