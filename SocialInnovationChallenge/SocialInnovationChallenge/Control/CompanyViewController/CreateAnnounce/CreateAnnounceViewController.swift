@@ -89,11 +89,12 @@ class CreateAnnounceViewController: UIViewController {
             return
         }
         
-        guard let detailViewController = segue.destination as? DetailViewController else {
+        guard let detailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
 
         detailViewController.vacancy = selected
+        detailViewController.screenBefore = false
         detailViewController.segueIdentifier = "visualizeDetailSegue"
 
     }

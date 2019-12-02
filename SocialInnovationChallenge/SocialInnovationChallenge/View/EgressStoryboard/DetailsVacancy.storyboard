@@ -450,7 +450,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Detalhes da vaga" id="ene-at-KAf">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Lg4-1M-u5F"/>
+                        <barButtonItem key="rightBarButtonItem" title="Publicar" id="XGu-Lj-UV0">
+                            <connections>
+                                <action selector="writeFirebase:" destination="35T-CQ-0gn" id="i42-x0-QAi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="activatedSwitch" destination="RaA-3D-YfI" id="OFh-If-rSg"/>
                         <outlet property="benefitsLabel" destination="aPm-Qv-mg9" id="cSQ-Ws-D5A"/>
@@ -463,13 +469,16 @@
                         <outlet property="regionLabel" destination="bEK-xA-fzQ" id="pI4-im-Tx9"/>
                         <outlet property="releaseTimeLabel" destination="C5Q-yC-x02" id="qLc-6t-pok"/>
                         <outlet property="salaryLabel" destination="LdW-Ud-WXe" id="3Lo-Gx-Mi6"/>
+                        <outlet property="saveButton" destination="XGu-Lj-UV0" id="BKJ-bc-ByU"/>
                         <outlet property="startWorkLabel" destination="key-fQ-n0m" id="5wE-eG-WKs"/>
                         <outlet property="typeOfWorkLabel" destination="q64-35-HWa" id="2z5-7T-6kn"/>
                         <outlet property="viewLine" destination="naY-SV-5dG" id="6tP-ay-Lbd"/>
                         <outlet property="workdayLabel" destination="6ej-ig-SAx" id="8yk-XY-DmW"/>
+                        <segue destination="sqk-SG-Aro" kind="unwind" identifier="unwindSegueToAnnounce" unwindAction="unwindToAnnounceWithSegue:" id="6X5-bz-iMj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iag-Dx-S3H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="sqk-SG-Aro" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1985.5072463768117" y="-839.0625"/>
         </scene>

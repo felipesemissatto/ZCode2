@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ahk-Nr-BEZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ahk-Nr-BEZ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -153,8 +153,8 @@
                         <outlet property="scrollView" destination="ln5-A1-Q9o" id="fd2-Ik-47N"/>
                         <outlet property="typeOfWorkTextField" destination="zJ9-Ld-djv" id="ML0-5g-4ZP"/>
                         <outlet property="workdayTextField" destination="RW4-ft-ul5" id="ssO-7H-ar9"/>
-                        <segue destination="IZh-zi-ycY" kind="show" identifier="visualizeDetailSegue" id="q45-ca-jhm"/>
                         <segue destination="Wqe-7c-8IP" kind="unwind" identifier="unwindSegueToAnnounce" unwindAction="unwindToAnnounceWithSegue:" id="9sA-SX-VD7"/>
+                        <segue destination="YwM-OD-iuC" kind="show" identifier="visualizeDetailSegue" id="47b-Av-PtK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIp-cs-aIR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -162,17 +162,15 @@
             </objects>
             <point key="canvasLocation" x="2050.7246376811595" y="134.59821428571428"/>
         </scene>
-        <!--DetailsAnnounce-->
-        <scene sceneID="d6q-ae-oPm">
+        <!--DetailsVacancy-->
+        <scene sceneID="MeG-6y-1gF">
             <objects>
-                <viewControllerPlaceholder storyboardName="DetailsAnnounce" id="IZh-zi-ycY" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="6jM-hp-6yd">
-                        <barButtonItem key="rightBarButtonItem" title="Salvar" id="e8v-4q-Sab"/>
-                    </navigationItem>
+                <viewControllerPlaceholder storyboardName="DetailsVacancy" id="YwM-OD-iuC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4gS-6w-gPi"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ey-BL-HzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bjl-lt-PuO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2720" y="146"/>
+            <point key="canvasLocation" x="2753" y="128"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.0" green="0.43137254901960786" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

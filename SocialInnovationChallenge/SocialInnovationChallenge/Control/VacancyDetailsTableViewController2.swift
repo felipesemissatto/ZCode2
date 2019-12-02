@@ -13,9 +13,13 @@ class VacancyDetailsTableViewController2: UITableViewController {
 
     //MARK: Properties
     var vacancy: Vacancy?
-    var screenBefore: Bool? // true -> Vacancy; false ->
+    var screenBefore: Bool? // true -> Vacancy; false -> Company
+    var segueIdentifier: String?
+    var isHiddenSaveButton: Bool = false
     
     //MARK: Outlets
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     //cell1
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var activatedSwitch: UISwitch!
@@ -69,6 +73,16 @@ class VacancyDetailsTableViewController2: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Setup the Announce Button
+        if !self.isHiddenSaveButton {
+            self.saveButton.isEnabled = true
+            self.saveButton.title = "Publicar"
+        } else {
+            
+            self.saveButton.isEnabled = false
+            self.saveButton.title = ""
+        }
+        
         if self.vacancy?.isActivated ?? true {
             self.activatedSwitch.isOn = true
         } else {
@@ -78,12 +92,51 @@ class VacancyDetailsTableViewController2: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        activated()
+        
+        if segueIdentifier == "showDetailSegue"{
+            activated()
+        }
     }
     
     //MARK: Actions
     @IBAction func tapApplyNow(_ sender: Any) {
         
+    }
+    @IBAction func writeFirebase(_ sender: Any) {
+        VacancyServices.create(vacancy: self.vacancy!) { (error, vacancy ) in
+            
+            if let err = error {
+                print("Error adding document: \(err.localizedDescription)")
+                self.errorAlert()
+            } else {
+                self.vacancy = vacancy
+                print("Sucesso")
+                self.successAlert()
+            }
+        }
+    }
+    
+    //MARK: Alert
+    func errorAlert() {
+        let alert = UIAlertController(title: nil,
+                                      message: "Desculpa, não foi possível cadastrar.",
+                                      preferredStyle: .alert)
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
+
+        }
+        alert.addAction(buttonAdd)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func successAlert() {
+        let alert = UIAlertController(title: "Parabéns!",
+                                      message: "Sua vaga foi anunciada.\nAgora é só aguardar os candidatos.",
+                                      preferredStyle: .alert)
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.performSegue(withIdentifier: "unwindSegueToAnnounce", sender: self)
+        }
+        alert.addAction(buttonAdd)
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: Functions

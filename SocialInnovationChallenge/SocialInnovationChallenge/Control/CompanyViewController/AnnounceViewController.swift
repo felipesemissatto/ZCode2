@@ -125,8 +125,7 @@ class AnnounceViewController: UIViewController {
         detailViewController.screenBefore = false
         
         if segue.identifier == "showDetailSegue",
-            let vacancyDetails = segue.destination as? DetailViewController {
-            vacancyDetails.titleSaveButton = ""
+            let vacancyDetails = segue.destination as? VacancyDetailsTableViewController2 {
             vacancyDetails.isHiddenSaveButton = true
             
         }
