@@ -10,6 +10,7 @@ target 'SocialInnovationChallenge' do
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   # Pods for SocialInnovationChallenge
 
   target 'SocialInnovationChallengeTests' do
@@ -20,6 +21,7 @@ target 'SocialInnovationChallenge' do
     pod 'Firebase/Database'
     pod 'Firebase/Firestore'
     pod 'Firebase/Auth'
+    pod 'Firebase/Storage'
   end
 
   target 'SocialInnovationChallengeUITests' do
@@ -28,6 +30,7 @@ target 'SocialInnovationChallenge' do
     pod 'Firebase/Database'
     pod 'Firebase/Firestore'
     pod 'Firebase/Auth'
+    pod 'Firebase/Storage'
   end
 
 end

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseFirestore
 
 class CandidatesViewController: UIViewController {
     
@@ -19,16 +18,14 @@ class CandidatesViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     let company = Company(name: "PanoSocial",
-    foundationDate: 2005,
-    region: "Campinas, SP",
-    photo: nil,
-    description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-    site: nil,
-    sectors: "Costura; Corte; Limpeza",
-    contact: "(019)3263-6537",
-    vancancies: nil)
-    
-    let db = Firestore.firestore()
+                          foundationDate: 2005,
+                          region: "Campinas, SP",
+                          photo: nil,
+                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
+                          site: nil,
+                          sectors: "Costura; Corte; Limpeza",
+                          contact: "(019)3263-6537",
+                          vancancies: nil)
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -38,14 +35,11 @@ class CandidatesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.tabBarController?.tabBar.layer.zPosition = 0
+        loadEgress()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadEgress()
         
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -94,28 +88,18 @@ class CandidatesViewController: UIViewController {
     
     //MARK: Functions
     private func loadEgress(){
-        
-        db.collection("egress").getDocuments() { (snapshot,error) in
+
+        EgressServices.getAll { (error, egress) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error loading document: \(error.localizedDescription)")
             } else {
-                for document in snapshot!.documents {
-                    let egress = Egress()
-
-                    egress.name = document.get("name") as! String
-                    egress.region = document.get("region") as! String
-                    egress.description = document.get("description") as! String
-                    egress.contact = document.get("contact") as! String
-                
-
-                    self.egress.append(egress)
+                self.egress = egress!
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
-
     }
     
     // MARK: Navigation
@@ -130,6 +114,7 @@ class CandidatesViewController: UIViewController {
             }
         }
     }
+    
     
 }
 
@@ -180,6 +165,26 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
         }
         cell.nameLabel.text = egressSelected.name
         cell.nameRegion?.text = egressSelected.region
+        
+        // Add photo  profile
+        if egressSelected.photo != "" {
+            let profileImageUrl = egressSelected.photo
+            let url = NSURL(string: profileImageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
+                        cell.imageEgress?.contentMode = .scaleAspectFit
+                        cell.imageEgress?.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
         
         return cell
     }

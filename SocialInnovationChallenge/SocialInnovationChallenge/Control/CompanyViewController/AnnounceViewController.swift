@@ -14,6 +14,8 @@ class AnnounceViewController: UIViewController {
     
 
     //MARK: Properties
+    let db = Firestore.firestore()
+    
     var vacancies = [Vacancy]()
     var filteredVacancies = [Vacancy]()
     let searchController = UISearchController(searchResultsController: nil)
@@ -28,17 +30,12 @@ class AnnounceViewController: UIViewController {
                           contact: "(019)3263-6537",
                           vancancies: nil)
     
-    let db = Firestore.firestore()
-    
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var announceVacancyButton: UIButton!
     
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadVacancies()
 
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -47,10 +44,22 @@ class AnnounceViewController: UIViewController {
         searchController.searchBar.searchTextField.backgroundColor = .white
         navigationItem.searchController = searchController
         definesPresentationContext = true
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadVacancies()
+        
+        self.tabBarController?.tabBar.isHidden = false
         
         //Changing status bar color
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -60,27 +69,6 @@ class AnnounceViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
             UIApplication.shared.statusBarStyle = .lightContent
         }
-        
-        // Isso aqui ó
-        db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").addSnapshotListener { documentSnapshot, error in
-        guard let document = documentSnapshot else {
-            print("Error")
-            return
-        }
-        guard let data = document.data() else {
-            print("Documento vazio.")
-            return
-        }
-        print("Documento: \(data)")
-        self.tableView.reloadData()
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.tabBarController?.tabBar.isHidden = false
     }
     
   
@@ -106,44 +94,19 @@ class AnnounceViewController: UIViewController {
     }
 
     //MARK: Functions
-    private func loadVacancies(){
+    private func loadVacancies() {
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
+        VacancyServices.getAll { (error, vacancies) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error loading document: \(error.localizedDescription)")
             } else {
-                for document in snapshot!.documents {
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
-
-                    vacancy.name = document.get("name") as! String
-                    vacancy.company = self.company
-                    vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
-                    vacancy.workday = document.get("workday") as! String
-                    vacancy.isActivated = document.get("isActivated") as! Bool
-
-                    self.vacancies.append(vacancy)
+                self.vacancies  = vacancies!
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
-    }
-
-    
-    
-    private func loadSampleVacancies(){
-//        let vacancy1 = Vacancy(name: "Operador de Máquinas")
     }
     
     // MARK: Navigation
@@ -154,16 +117,18 @@ class AnnounceViewController: UIViewController {
             return
         }
         
-        guard let livingBeingDetailViewController = segue.destination as? DetailViewController else {
+        guard let detailViewController = segue.destination as? DetailViewController else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
     
-         livingBeingDetailViewController.vacancy = selected
+        detailViewController.vacancy = selected
+        detailViewController.segueIdentifier = "showDetailSegue"
         
         if segue.identifier == "showDetailSegue",
             let vacancyDetails = segue.destination as? DetailViewController {
             vacancyDetails.titleSaveButton = ""
             vacancyDetails.isHiddenSaveButton = true
+            
         }
     }
     
@@ -192,6 +157,8 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cellIdentifier = "TableViewCell"
         var vacancy: Vacancy
@@ -214,16 +181,14 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         cell.nameVacancyLabel.text = vacancy.name
         cell.numberOfVacanciesLabel.text = "\(vacancy.numberOfVacancies) vagas"
         cell.timeReleaseLabel.text = "anunciada há \(vacancy.releaseTime) dias"
+        cell.isActivatedLabel.textColor = UIColor(displayP3Red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
         
         if !vacancy.isActivated {
-            cell.isActivatedLabel.textColor = .red
             cell.isActivatedLabel.text = "Inativo"
-            
-            cell.ballView.backgroundColor = .red
+            cell.ballView.backgroundColor = UIColor(displayP3Red: 218/255, green: 218/255, blue: 218/255, alpha: 1)
         } else {
-            cell.isActivatedLabel.textColor = .green
             cell.isActivatedLabel.text = "Ativo"
-            cell.ballView.backgroundColor = .green
+            cell.ballView.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
         }
         
         return cell
@@ -241,6 +206,21 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         }
         
         self.performSegue(withIdentifier: "showDetailSegue", sender: vacancy)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            db.collection("vacancy").document(vacancies[indexPath.row].ID!).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            
+            vacancies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
     }
 }
 

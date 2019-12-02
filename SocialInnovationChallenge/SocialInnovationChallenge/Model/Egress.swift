@@ -15,32 +15,32 @@ class Egress{
     public var dateOfBirth: String
     public var description: String
     public var region: String
-    public var photos: [URL]?
+    public var photo: String
     public var video: URL?
     public var courses: [String]?
     public var experiences: [String]?
     public var skills: [String]?
-    public var desires: [String]?
-    public var contact: String
+    public var desires: [String]
+    public var contact: [String]
     
     //MARK: Constructors
     init(name: String = "",
         dateOfBirth: String = "",
         description: String = "",
         region: String = "",
-        photos: [URL]? = nil,
+        photo: String = "",
         video: URL? = nil,
         courses: [String]? = nil,
         experiences: [String]? = nil,
         skills: [String]? = nil,
-        desires: [String]? = ["", "", ""],
-        contact: String = ""){
+        desires: [String] = ["", "", ""],
+        contact: [String] = []){
         
             self.name = name
             self.dateOfBirth = dateOfBirth
             self.description = description
             self.region = region
-            self.photos = photos
+            self.photo = photo
             self.video = video
             self.courses = courses
             self.experiences = experiences
