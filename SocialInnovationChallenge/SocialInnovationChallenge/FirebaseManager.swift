@@ -141,6 +141,8 @@ class FirebaseManager {
                     let contact = document.get("contact") as! [String]
                     let desires = document.get("dreams") as! [String]
                     let photo = document.get("photo") as! String
+                    let courses = document.get("courses") as! [String]
+                    let experiences = document.get("experiences") as! [String]
                     
                     egress = Egress(name: name,
                                     dateOfBirth: "",
@@ -148,8 +150,8 @@ class FirebaseManager {
                                     region: region,
                                     photo: photo,
                                     video: nil,
-                                    courses: nil,
-                                    experiences: nil,
+                                    courses: courses,
+                                    experiences: experiences,
                                     skills: nil,
                                     desires: desires,
                                     contact: contact)

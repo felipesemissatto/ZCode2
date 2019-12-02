@@ -43,17 +43,20 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         
         if egress!.courses != nil{
             var index : CGFloat = 1
-            for desire in egress!.desires{
-                createAtributeLabel(index, content: desire, yPosition: coursesLabel.frame.origin.y, nextLabelVerticalSpacing: experiencesLabelConstraint)
+            for course in egress!.courses!{
+                createAtributeLabel(index, content: course, yPosition: coursesLabel.frame.origin.y, nextLabelVerticalSpacing: experiencesLabelConstraint)
                 index += 1
             }
+            contentView.layoutIfNeeded()
         }
         if egress!.experiences != nil{
             var index : CGFloat = 1
-            for desire in egress!.desires{
-                createAtributeLabel(index, content: desire, yPosition: experiencesLabel.frame.origin.y, nextLabelVerticalSpacing: dreamsLabelConstraint)
+            for experience in egress!.experiences!{
+                createAtributeLabel(index, content: experience, yPosition: experiencesLabel.frame.origin.y, nextLabelVerticalSpacing: dreamsLabelConstraint)
                 index += 1
             }
+            print(experiencesLabel.frame.origin.y)
+            contentView.layoutIfNeeded()
         }
         if !egress!.desires.isEmpty{
             var index : CGFloat = 1
@@ -61,6 +64,8 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
                 createAtributeLabel(index, content: desire, yPosition: dreamsLabel.frame.origin.y, nextLabelVerticalSpacing: nil)
                 index += 1
             }
+            print(dreamsLabel.frame.origin.y)
+            contentView.layoutIfNeeded()
         }
         
     }
@@ -178,8 +183,8 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         createLabel(text: content, rect: rect)
         
         contentViewHeightConstrant.constant += verticalSapacing
-        if nextLabelVerticalSpacing != nil{
-            nextLabelVerticalSpacing!.constant += verticalSapacing
-        }
+//        if nextLabelVerticalSpacing != nil{
+//            nextLabelVerticalSpacing!.constant += verticalSapacing
+//        }
     }
 }
