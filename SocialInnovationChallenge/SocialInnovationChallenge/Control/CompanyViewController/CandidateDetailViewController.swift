@@ -19,9 +19,16 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var inviteButton: UIButton!
-    @IBOutlet weak var dreamLabel0: UILabel!
-    @IBOutlet weak var dreamLabel1: UILabel!
-    @IBOutlet weak var dreamLabel2: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var contentViewHeightConstrant: NSLayoutConstraint!
+    
+    @IBOutlet weak var coursesLabel: UILabel!
+    @IBOutlet weak var experiencesLabel: UILabel!
+    @IBOutlet weak var experiencesLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dreamsLabel: UILabel!
+    @IBOutlet weak var dreamsLabelConstraint: NSLayoutConstraint!
+    
     
     //MARK: Views
     override func viewWillAppear(_ animated: Bool) {
@@ -29,14 +36,33 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         inviteButton.layer.cornerRadius = 4
         nameLabel.text = egress!.name
         descriptionTextView.text = egress!.description
-        dreamLabel0.text! = egress!.desires[0]
-        dreamLabel1.text! = egress!.desires[1]
-        dreamLabel2.text! = egress!.desires[2]
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if egress!.courses != nil{
+            var index : CGFloat = 1
+            for desire in egress!.desires{
+                createAtributeLabel(index, content: desire, yPosition: coursesLabel.frame.origin.y, nextLabelVerticalSpacing: experiencesLabelConstraint)
+                index += 1
+            }
+        }
+        if egress!.experiences != nil{
+            var index : CGFloat = 1
+            for desire in egress!.desires{
+                createAtributeLabel(index, content: desire, yPosition: experiencesLabel.frame.origin.y, nextLabelVerticalSpacing: dreamsLabelConstraint)
+                index += 1
+            }
+        }
+        if !egress!.desires.isEmpty{
+            var index : CGFloat = 1
+            for desire in egress!.desires{
+                createAtributeLabel(index, content: desire, yPosition: dreamsLabel.frame.origin.y, nextLabelVerticalSpacing: nil)
+                index += 1
+            }
+        }
+        
     }
 
     
@@ -101,31 +127,6 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         // Dismiss the mail compose view controller.
         controller.dismiss(animated: true, completion: nil)
     }
-    
-    func saveAContact(){
-        let contact = CNMutableContact()
-         
-        contact.givenName = "John"
-        contact.familyName = "Appleseed"
-
-        //não funciona por algum motivo x
-//        let homeEmail = CNLabeledValue(label: CNLabelHome, value:"john@example.com")
-//        let workEmail = CNLabeledValue(label:CNLabelWork, value:"j.appleseed@icloud.com")
-//        contact.emailAddresses = [homeEmail, workEmail]
-         
-        contact.phoneNumbers = [CNLabeledValue(
-            label:CNLabelPhoneNumberiPhone,
-            value:CNPhoneNumber(stringValue:"(408) 555-0126"))]
-         
-         
-         
-        // Saving the newly created contact
-        let store = CNContactStore()
-        let saveRequest = CNSaveRequest()
-        saveRequest.add(contact, toContainerWithIdentifier:nil)
-        try! store.execute(saveRequest)
-    }
-
 
 
     func showSimpleActionSheet(controller: UIViewController) {
@@ -142,10 +143,6 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         alert.addAction(UIAlertAction(title: "Enviar mensagem via Whatsapp", style: .default, handler: { (_) in
             self.sendAWhatsappMessage(number: self.egress!.contact[0]) //número pra teste
         }))
-        
-//        alert.addAction(UIAlertAction(title: "Salvar em Meu Contatos", style: .default, handler: { (_) in
-//            self.saveAContact()
-//        }))
 
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: { (_) in
         }))
@@ -155,5 +152,34 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         })
     }
     
-//    link bom que ensina a criar alertas: https://medium.com/swift-india/uialertcontroller-in-swift-22f3c5b1dd68
+    func createLabel(text : String, rect : CGRect){
+        let label = UILabel(frame: rect)
+        label.text = text
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        self.contentView.addSubview(label)
+    }
+    
+    func createAtributeLabel(_ index : CGFloat, content : String, yPosition : CGFloat, nextLabelVerticalSpacing : NSLayoutConstraint?){
+        
+        var increase : CGFloat
+        var verticalSapacing : CGFloat = 0
+        
+        if index == 1{
+            increase = 35
+            verticalSapacing += 35
+        }
+        else{
+            increase = 35 + 25 * (index - 1)
+            verticalSapacing += 25
+        }
+        
+        let rect = CGRect(x: 24, y: yPosition + increase, width: 360, height: 18)
+        createLabel(text: content, rect: rect)
+        
+        contentViewHeightConstrant.constant += verticalSapacing
+        if nextLabelVerticalSpacing != nil{
+            nextLabelVerticalSpacing!.constant += verticalSapacing
+        }
+    }
 }
