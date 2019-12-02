@@ -66,9 +66,18 @@ class VacancyDetailsTableViewController2: UITableViewController {
         typeOfWorkLabel.text = vacancy?.typeOfWork
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.vacancy?.isActivated ?? true {
+            self.activatedSwitch.isOn = true
+        } else {
+            self.activatedSwitch.isOn = false
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         activated()
     }
     
@@ -83,9 +92,9 @@ class VacancyDetailsTableViewController2: UITableViewController {
         
         if self.activatedSwitch.isOn {
             // Adicionar um completion
-        db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").updateData(["isActivated": true])
+            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": true])
         } else {
-            db.collection("vacancy").document("7sbbqrWigesWGF7Tha4R").updateData(["isActivated": false])
+            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": false])
         }
     }
     
