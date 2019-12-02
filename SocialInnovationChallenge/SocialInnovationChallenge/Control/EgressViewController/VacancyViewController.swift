@@ -115,6 +115,7 @@ class VacancyViewController: UIViewController {
                     vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
                     vacancy.salary = document.get("salary") as! String
                     vacancy.workday = document.get("workday") as! String
+                    vacancy.typeOfWork = document.get("typeOfWork") as! String
                     
 
 

@@ -47,10 +47,13 @@ class VacancyDetailsTableViewController2: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Button corner radius
+        self.buttonApplyNow.layer.cornerRadius = 6
+
 //        activatedSwitch
         nameVacancyLabel.text = vacancy?.name
 //        nameCompanyLabel.text = vacancy?.company.name
-        regionLabel.text = vacancy?.company.region
+        regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
 //        viewLine.isHidden = true or false
         releaseTimeLabel.text = "há \(vacancy?.releaseTime) dias atrás"
@@ -59,10 +62,6 @@ class VacancyDetailsTableViewController2: UITableViewController {
 //        startWorkLabel.text = vacancy?.startWork
         descriptionLabel.text = vacancy?.description
         typeOfWorkLabel.text = vacancy?.typeOfWork
-        
-        tableView.estimatedRowHeight = 150
-        
-       // cellDescription.frame.size.height = descriptionLabel.frame.size.height + 16
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,7 +88,15 @@ class VacancyDetailsTableViewController2: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        var rowHeight:CGFloat = 0.0
+        
+        if(indexPath.row == 0){
+            cell1.isHidden = true
+            rowHeight = 0.0
+        } else{
+            rowHeight = UITableView.automaticDimension
+        }
+        
+        return rowHeight
     }
-    
 }
