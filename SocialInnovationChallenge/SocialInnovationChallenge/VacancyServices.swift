@@ -10,7 +10,7 @@ import UIKit
 
 class VacancyServices {
     
-    static func createVacancy(vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: Vacancy?) -> (Void)) {
+    static func create(vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: Vacancy?) -> (Void)) {
         
         do {
             try VacancyDAO.create(vacancy) { (error, documentID) in
@@ -28,17 +28,22 @@ class VacancyServices {
         }
     }
     
-    static func getAllVacancy(_ completion: ((_ error: Error?, _ vacancies: [Vacancy]?) -> Void)?) {
-        // error to be returned in case of failure
-        var raisedError: Error? = nil
-        var vacancies: [Vacancy]?
+    static func getAll(_ completion: @escaping ((_ error: Error?, _ vacancies: [Vacancy]?) -> Void)) {
         
         do {
             // save information
-            vacancies = try VacancyDAO.findAll()
+            try VacancyDAO.findAll() { (error, vacancies) in
+                
+                if let error = error {
+                    completion(error, nil)
+                } else {
+                    completion(nil, vacancies)
+                }
+            }
         }
         catch let error {
-            raisedError = error
+            print(error)
         }
     }
 }
+

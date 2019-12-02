@@ -8,10 +8,12 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class FirebaseManager {
     
-    var vacancies = [Vacancy]()
+    var vacancies: [Vacancy] = []
+    var egress: [Egress] = []
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
@@ -26,7 +28,7 @@ class FirebaseManager {
     private init() {
         
     }
-
+    
     // Database manager singleton
     static let sharedInstance = FirebaseManager()
     
@@ -34,7 +36,7 @@ class FirebaseManager {
     //Write in firebase if all textFiels filled
     func writeFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
         let db = Firestore.firestore()
-                
+        
         let name = vacancy.name
         let region = vacancy.region
         let releaseTime = vacancy.releaseTime
@@ -45,62 +47,120 @@ class FirebaseManager {
         let salary = vacancy.salary
         let typeOfWork: String = vacancy.typeOfWork
         let isActivated = vacancy.isActivated
-
+        let uid = Auth.auth().currentUser!.uid
+        
         var ref: DocumentReference? = nil
         
-        ref = db.collection("vacancyTeste").addDocument(data: ["benefits": benefits,
-                                                     "description": description ,
-        //                                           "company": "/company/\(company)",
-                                                     "isActivated": isActivated,
-                                                     "name": name ,
-                                                     "numberOfVacancies": numberOfVacancies ,
-                                                     "region": region,
-                                                     "releaseTime": releaseTime,
-                                                     "salary": salary ,
-                                                     "typeOfWork": typeOfWork,
-                                                     "workday": workday]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-                completion(err, nil)
+        ref = db.collection("vacancy").addDocument(data: ["benefits": benefits,
+                                                               "description": description ,
+//                                                             "company": "/company/\(company)",
+                                                                "isActivated": isActivated,
+                                                                "name": name ,
+                                                                "numberOfVacancies": numberOfVacancies ,
+                                                                "region": region,
+                                                                "releaseTime": releaseTime,
+                                                                "salary": salary ,
+                                                                "typeOfWork": typeOfWork,
+                                                                "workday": workday,
+                                                                "UID": uid]) { err in
+                                                                    if let err = err {
+                                                                        print("Error adding document: \(err)")
+                                                                        completion(err, nil)
+                                                                    } else {
+                                                                        print("Document added with ID: \(ref!.documentID)")
+                                                                        completion(nil, ref!.documentID)
+                                                                    }
+        }
+    }
+    
+    func readVacanciesFirebase(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
+        let db = Firestore.firestore()
+        var vacancy: Vacancy! = nil
+        
+        db.collection("vacancy").getDocuments() { (snapshot, err) in
+            if let error = err {
+                print("Error getting documents: \(error)")
+                completion(error, nil)
             } else {
-                print("Document added with ID: \(ref!.documentID)")
-                completion(nil, ref!.documentID)
+                self.vacancies = []
+                
+                for document in snapshot!.documents {
+                    
+                    let name = document.get("name") as! String
+                    let company = self.company
+                    let releaseTime = document.get("releaseTime") as! Int
+                    let description = document.get("description") as! String
+                    let workday = document.get("workday") as! String
+                    let numberOfVacancies = document.get("numberOfVacancies") as! String
+                    let benefits = document.get("benefits") as? String
+                    let salary = document.get("salary") as! String
+                    let region = document.get("region") as! String
+                    let typeOfWork = document.get("typeOfWork") as! String
+                    let isActivated = document.get("isActivated") as! Bool
+                    let ID = document.documentID
+                    let uid = document.get("UID") as! String
+                    
+                    vacancy = Vacancy(name: name,
+                                      company: company,
+                                      releaseTime: releaseTime,
+                                      description: description,
+                                      workday: workday,
+                                      numberOfVacancies: numberOfVacancies,
+                                      benefits: benefits,
+                                      salary: salary,
+                                      region: region,
+                                      typeOfWork: typeOfWork,
+                                      isActivated: isActivated)
+                    vacancy.ID = ID
+                    vacancy.UID = uid
+                    
+                    self.vacancies.append(vacancy)
+                }
+                
+                completion(nil, self.vacancies)
             }
         }
     }
     
-    func redFirebase() -> [Vacancy]{
+    func readEgressFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
         let db = Firestore.firestore()
+        var egress:  Egress! = nil
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
-            if let error = error {
+        db.collection("egress").getDocuments() { (snapshot, err) in
+            if let error = err {
                 print("Error getting documents: \(error)")
+                completion(error, nil)
             } else {
+                self.egress = []
+                
                 for document in snapshot!.documents {
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
-
-                    vacancy.name = document.get("name") as! String
-                    vacancy.company = self.company
-                    vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
-                    vacancy.workday = document.get("workday") as! String
-
-
-                    self.vacancies.append(vacancy)
+                    
+                    let name = document.get("name") as! String
+                    let region = document.get("region") as! String
+                    let description = document.get("description") as! String
+                    let contact = document.get("contact") as! [String]
+                    let desires = document.get("dreams") as! [String]
+                    let photo = document.get("photo") as! String
+                    
+                    egress = Egress(name: name,
+                                    dateOfBirth: "",
+                                    description: description,
+                                    region: region,
+                                    photo: photo,
+                                    video: nil,
+                                    courses: nil,
+                                    experiences: nil,
+                                    skills: nil,
+                                    desires: desires,
+                                    contact: contact)
+                    
+                    self.egress.append(egress)
                 }
+                
+                completion(nil, self.egress)
             }
         }
-        
-        return self.vacancies
     }
 }
+
 

@@ -22,15 +22,14 @@ class VacancyDAO: DAO {
         
     }
     
-    static func findAll() throws -> [Vacancy] {
-        // list of seasons to be returned
-        var vacancyList:[Vacancy]
+    static func findAll(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) throws {
         
-        do {
-            // perform search
-            vacancyList = try FirebaseManager.sharedInstance.redFirebase()
+        FirebaseManager.sharedInstance.readVacanciesFirebase { (error, vacancies) in
+            if let err = error {
+                completion(err, nil)
+            } else {
+                completion(nil, vacancies)
+            }
         }
-        
-        return vacancyList
     }
 }

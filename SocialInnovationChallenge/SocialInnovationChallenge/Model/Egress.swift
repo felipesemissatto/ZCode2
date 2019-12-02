@@ -15,7 +15,7 @@ class Egress{
     public var dateOfBirth: String
     public var description: String
     public var region: String
-    public var photos: [URL]?
+    public var photo: String
     public var video: URL?
     public var courses: [String]?
     public var experiences: [String]?
@@ -28,7 +28,7 @@ class Egress{
         dateOfBirth: String = "",
         description: String = "",
         region: String = "",
-        photos: [URL]? = nil,
+        photo: String = "",
         video: URL? = nil,
         courses: [String]? = nil,
         experiences: [String]? = nil,
@@ -40,7 +40,7 @@ class Egress{
             self.dateOfBirth = dateOfBirth
             self.description = description
             self.region = region
-            self.photos = photos
+            self.photo = photo
             self.video = video
             self.courses = courses
             self.experiences = experiences
