@@ -20,6 +20,10 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var dreamLabel0: UILabel!
+    @IBOutlet weak var dreamLabel1: UILabel!
+    @IBOutlet weak var dreamLabel2: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var contentViewHeightConstrant: NSLayoutConstraint!
     
@@ -36,6 +40,10 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         inviteButton.layer.cornerRadius = 4
         nameLabel.text = egress!.name
         descriptionTextView.text = egress!.description
+        dreamLabel0.text! = egress!.desires[0]
+        dreamLabel1.text! = egress!.desires[1]
+        dreamLabel2.text! = egress!.desires[2]
+        
     }
     
     override func viewDidLoad() {
@@ -68,6 +76,8 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
             contentView.layoutIfNeeded()
         }
         
+            
+        downloadImage()
     }
 
     
@@ -187,4 +197,25 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
 //            nextLabelVerticalSpacing!.constant += verticalSapacing
 //        }
     }
+    func downloadImage() {
+        // Add photo  profile
+        if egress!.photo != "" {
+            let profileImageUrl = egress!.photo
+            let url = NSURL(string: profileImageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
+                        self.profileImage.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
+    }
+//    link bom que ensina a criar alertas: https://medium.com/swift-india/uialertcontroller-in-swift-22f3c5b1dd68
 }

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseStorage
 
 class CandidatesViewController: UIViewController {
     
@@ -17,8 +16,6 @@ class CandidatesViewController: UIViewController {
     var egressSelected: Egress?
     var filteredEgress = [Egress]()
     let searchController = UISearchController(searchResultsController: nil)
-    
-    let storage = Storage.storage()
     
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
@@ -117,6 +114,8 @@ class CandidatesViewController: UIViewController {
             }
         }
     }
+    
+    
 }
 
 //MARK: Extension
@@ -167,6 +166,7 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
         cell.nameLabel.text = egressSelected.name
         cell.nameRegion?.text = egressSelected.region
         
+        // Add photo  profile
         if egressSelected.photo != "" {
             let profileImageUrl = egressSelected.photo
             let url = NSURL(string: profileImageUrl)
@@ -178,10 +178,8 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
                 }
                 
                 DispatchQueue.global(qos: .background).async {
-
-                    // Background Thread
-
                     DispatchQueue.main.async {
+                        cell.imageEgress?.contentMode = .scaleAspectFit
                         cell.imageEgress?.image = UIImage(data: data!)
                     }
                 }
