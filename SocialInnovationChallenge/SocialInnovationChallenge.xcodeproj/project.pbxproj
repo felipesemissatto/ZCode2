@@ -39,6 +39,8 @@
 		2FCB79FE2373179F004E6DF6 /* Announce.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB79FD2373179F004E6DF6 /* Announce.storyboard */; };
 		2FCB7A00237317C3004E6DF6 /* CompanyNotification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB79FF237317C3004E6DF6 /* CompanyNotification.storyboard */; };
 		2FCB7A022373180A004E6DF6 /* CompanyProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB7A012373180A004E6DF6 /* CompanyProfile.storyboard */; };
+		2FE5A37B23944F2600EB869E /* DetailsVacancy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FE5A37A23944F2600EB869E /* DetailsVacancy.storyboard */; };
+		2FE5A37F239451D100EB869E /* VacancyDetailsTableViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5A37E239451D100EB869E /* VacancyDetailsTableViewController2.swift */; };
 		2FF853942386D40E003A124F /* CandidateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF853932386D40E003A124F /* CandidateTableViewCell.swift */; };
 		2FFAE1F823799078000611CA /* DetailsAnnounce.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FFAE1F723799078000611CA /* DetailsAnnounce.storyboard */; };
 		5413895323885BE2009DAAC8 /* AlertSuccess.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5413895223885BE2009DAAC8 /* AlertSuccess.xib */; };
@@ -122,6 +124,8 @@
 		2FCB79FD2373179F004E6DF6 /* Announce.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Announce.storyboard; sourceTree = "<group>"; };
 		2FCB79FF237317C3004E6DF6 /* CompanyNotification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CompanyNotification.storyboard; sourceTree = "<group>"; };
 		2FCB7A012373180A004E6DF6 /* CompanyProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CompanyProfile.storyboard; sourceTree = "<group>"; };
+		2FE5A37A23944F2600EB869E /* DetailsVacancy.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailsVacancy.storyboard; sourceTree = "<group>"; };
+		2FE5A37E239451D100EB869E /* VacancyDetailsTableViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyDetailsTableViewController2.swift; sourceTree = "<group>"; };
 		2FF853932386D40E003A124F /* CandidateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTableViewCell.swift; sourceTree = "<group>"; };
 		2FFAE1F723799078000611CA /* DetailsAnnounce.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailsAnnounce.storyboard; sourceTree = "<group>"; };
 		3ED6E41CA280ED5342E8B149 /* Pods_SocialInnovationChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialInnovationChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +302,7 @@
 				54A552E42375CBF200F7B0F9 /* ViewController + HideKeyboard.swift */,
 				236242F52373261200019C3D /* CompanyViewController */,
 				236242FE237326B000019C3D /* EgressViewController */,
+				2FE5A37E239451D100EB869E /* VacancyDetailsTableViewController2.swift */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				2FCB79F62373168F004E6DF6 /* EgressNotification.storyboard */,
 				2FCB79F423731651004E6DF6 /* Comunity.storyboard */,
 				2FCB79F223731632004E6DF6 /* Vacancy.storyboard */,
+				2FE5A37A23944F2600EB869E /* DetailsVacancy.storyboard */,
 			);
 			path = EgressStoryboard;
 			sourceTree = "<group>";
@@ -521,6 +527,7 @@
 				2FCB79EF23731379004E6DF6 /* RootEgress.storyboard in Resources */,
 				2FCB79F323731632004E6DF6 /* Vacancy.storyboard in Resources */,
 				2FCB7A00237317C3004E6DF6 /* CompanyNotification.storyboard in Resources */,
+				2FE5A37B23944F2600EB869E /* DetailsVacancy.storyboard in Resources */,
 				54850A02237480BB00B07E25 /* CreateAnnounce.storyboard in Resources */,
 				2FCB79FC23731769004E6DF6 /* Candidates.storyboard in Resources */,
 				2FFAE1F823799078000611CA /* DetailsAnnounce.storyboard in Resources */,
@@ -688,6 +695,7 @@
 				2FF853942386D40E003A124F /* CandidateTableViewCell.swift in Sources */,
 				54B54AF82386C9D600598292 /* FirebaseManager.swift in Sources */,
 				236243062373272600019C3D /* VacancyViewController.swift in Sources */,
+				2FE5A37F239451D100EB869E /* VacancyDetailsTableViewController2.swift in Sources */,
 				2FC5C08E23705CA800520F18 /* SocialInnovationChallenge.xcdatamodeld in Sources */,
 				54B54AFD2386CC7700598292 /* VacancyServices.swift in Sources */,
 				2FC5C08423705CA800520F18 /* AppDelegate.swift in Sources */,

@@ -136,23 +136,23 @@ class VacancyViewController: UIViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//
-//        guard let selected =  sender as? Vacancy else {
-//            return
-//        }
-//
-//        guard let livingBeingDetailViewController = segue.destination as? DetailViewController else {
-//            fatalError("Unexpected destination: \(segue.destination)")
-//        }
-//
-//         livingBeingDetailViewController.vacancy = selected
-//
-//        if segue.identifier == "showDetailSegue",
-//            let vacancyDetails = segue.destination as? DetailViewController {
-//            vacancyDetails.titleSaveButton = ""
-//            vacancyDetails.isHiddenSaveButton = true
-//        }
+        super.prepare(for: segue, sender: sender)
+
+        guard let selected =  sender as? Vacancy else {
+            return
+        }
+
+        guard let livingBeingDetailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+
+         livingBeingDetailViewController.vacancy = selected
+
+        if segue.identifier == "segueDetailsVacancy",
+            let vacancyDetails = segue.destination as? DetailViewController {
+            vacancyDetails.titleSaveButton = ""
+            vacancyDetails.isHiddenSaveButton = true
+        }
     }
 
 }
@@ -214,16 +214,16 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        var vacancy: Vacancy
-//
-//        // Fetches the appropriate living being for the data source layout.
-//        if isFiltering() {
-//            vacancy = filteredVacancies[indexPath.row]
-//        } else {
-//            vacancy = vacancies[indexPath.row]
-//        }
-//
-//        self.performSegue(withIdentifier: "showDetailSegue", sender: vacancy)
+        var vacancy: Vacancy
+
+        // Fetches the appropriate living being for the data source layout.
+        if isFiltering() {
+            vacancy = filteredVacancies[indexPath.row]
+        } else {
+            vacancy = vacancies[indexPath.row]
+        }
+
+        self.performSegue(withIdentifier: "segueDetailsVacancy", sender: vacancy)
     }
 }
 
