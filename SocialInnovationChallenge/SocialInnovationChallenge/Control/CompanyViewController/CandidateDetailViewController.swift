@@ -20,9 +20,6 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var dreamLabel0: UILabel!
-    @IBOutlet weak var dreamLabel1: UILabel!
-    @IBOutlet weak var dreamLabel2: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var contentViewHeightConstrant: NSLayoutConstraint!
@@ -40,9 +37,6 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         inviteButton.layer.cornerRadius = 4
         nameLabel.text = egress!.name
         descriptionTextView.text = egress!.description
-        dreamLabel0.text! = egress!.desires[0]
-        dreamLabel1.text! = egress!.desires[1]
-        dreamLabel2.text! = egress!.desires[2]
         
     }
     
