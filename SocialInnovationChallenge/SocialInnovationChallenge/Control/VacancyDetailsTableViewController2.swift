@@ -13,6 +13,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
 
     //MARK: Properties
     var vacancy: Vacancy?
+    var screenBefore: Bool? // true -> Vacancy; false ->
     
     //MARK: Outlets
     //cell1
@@ -20,6 +21,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
     @IBOutlet weak var activatedSwitch: UISwitch!
     
     //cell2
+    @IBOutlet weak var cell2: UITableViewCell!
     @IBOutlet weak var nameVacancyLabel: UILabel!
     @IBOutlet weak var nameCompanyLabel: UILabel!
     @IBOutlet weak var regionLabel: UILabel!
@@ -90,13 +92,15 @@ class VacancyDetailsTableViewController2: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight:CGFloat = 0.0
         
-        if(indexPath.row == 0){
+        if indexPath.row == 0 && screenBefore == true{
             cell1.isHidden = true
+            rowHeight = 0.0
+        } else if indexPath.row == 1 && screenBefore == false{
+            cell2.isHidden = true
             rowHeight = 0.0
         } else{
             rowHeight = UITableView.automaticDimension
         }
-        
         return rowHeight
     }
 }

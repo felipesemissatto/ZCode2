@@ -147,7 +147,8 @@ class VacancyViewController: UIViewController {
             fatalError("Unexpected destination: \(segue.destination)")
         }
 
-         livingBeingDetailViewController.vacancy = selected
+        livingBeingDetailViewController.vacancy = selected
+        livingBeingDetailViewController.screenBefore = true
 
         if segue.identifier == "segueDetailsVacancy",
             let vacancyDetails = segue.destination as? DetailViewController {

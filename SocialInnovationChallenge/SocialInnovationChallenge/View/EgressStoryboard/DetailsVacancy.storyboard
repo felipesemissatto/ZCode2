@@ -456,6 +456,7 @@
                         <outlet property="benefitsLabel" destination="aPm-Qv-mg9" id="cSQ-Ws-D5A"/>
                         <outlet property="buttonApplyNow" destination="MYZ-lg-L8a" id="ajA-xU-gh1"/>
                         <outlet property="cell1" destination="eDm-n2-y7e" id="XnV-2m-sId"/>
+                        <outlet property="cell2" destination="L5r-AZ-xRC" id="oBH-n7-sIo"/>
                         <outlet property="descriptionLabel" destination="ciL-Ug-4EL" id="1jE-Y9-Ltd"/>
                         <outlet property="nameCompanyLabel" destination="o7K-VT-YdQ" id="MId-1Z-fBS"/>
                         <outlet property="nameVacancyLabel" destination="dPn-t6-Syw" id="cu7-6t-qBd"/>
