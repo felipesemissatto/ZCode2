@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class VacancyDetailsTableViewController2: UITableViewController {
 
@@ -19,6 +20,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
     
     //MARK: Outlets
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var applyButton: UIButton!
     
     //cell1
     @IBOutlet weak var cell1: UITableViewCell!
@@ -61,7 +63,6 @@ class VacancyDetailsTableViewController2: UITableViewController {
 //        nameCompanyLabel.text = vacancy?.company.name
         regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
-//        viewLine.isHidden = true or false
         releaseTimeLabel.text = "há \(vacancy?.releaseTime) dias atrás"
         workdayLabel.text = vacancy?.workday
         benefitsLabel.text = vacancy?.benefits
@@ -88,6 +89,8 @@ class VacancyDetailsTableViewController2: UITableViewController {
         } else {
             self.activatedSwitch.isOn = false
         }
+        
+        settingApplyButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -98,10 +101,36 @@ class VacancyDetailsTableViewController2: UITableViewController {
         }
     }
     
+    func settingApplyButton() {
+        let candidate = Auth.auth().currentUser?.uid
+        
+        for item in self.vacancy!.candidateList {
+            if candidate == item {
+                applyButton.setTitle("Você já se candidatou!",for: .normal)
+                applyButton.setTitleColor(UIColor(displayP3Red: 129/255, green: 129/255, blue: 129/255, alpha: 1), for: .normal)
+                applyButton.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
+                applyButton.isEnabled = false
+            } else {
+                applyButton.setTitle("Quero me candidatar",for: .normal)
+                applyButton.setTitleColor(UIColor(displayP3Red: 251/255, green: 251/255, blue: 251/255, alpha: 1), for: .normal)
+                applyButton.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
+                applyButton.isEnabled = true
+            }
+        }
+    }
+    
     //MARK: Actions
     @IBAction func tapApplyNow(_ sender: Any) {
         
+        let db = Firestore.firestore()
+        let candidate = Auth.auth().currentUser?.uid
+        
+        self.vacancy?.candidateList.append(candidate!)
+        
+        db.collection("vacancy").document(self.vacancy!.ID!).updateData(["candidatesList": self.vacancy?.candidateList])
+        applayAlert()
     }
+    
     @IBAction func writeFirebase(_ sender: Any) {
         VacancyServices.create(vacancy: self.vacancy!) { (error, vacancy ) in
             
@@ -139,6 +168,19 @@ class VacancyDetailsTableViewController2: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func applayAlert() {
+        let alert = UIAlertController(title: "",
+                                      message: "Você se candidatou",
+                                      preferredStyle: .alert)
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.applyButton.setTitle("Você já se candidatou!",for: .normal)
+            self.applyButton.setTitleColor(UIColor(displayP3Red: 129/255, green: 129/255, blue: 129/255, alpha: 1), for: .normal)
+            self.applyButton.backgroundColor = UIColor(displayP3Red: 222/255, green: 222/255, blue: 222/255, alpha: 1)
+            self.applyButton.isEnabled = false
+        }
+        alert.addAction(buttonAdd)
+        present(alert, animated: true, completion: nil)
+    }
     //MARK: Functions
     func activated() {
         let db = Firestore.firestore()

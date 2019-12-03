@@ -47,6 +47,7 @@ class FirebaseManager {
         let salary = vacancy.salary
         let typeOfWork: String = vacancy.typeOfWork
         let isActivated = vacancy.isActivated
+        let candidateList = vacancy.candidateList
         let uid = Auth.auth().currentUser!.uid
         
         var ref: DocumentReference? = nil
@@ -55,6 +56,7 @@ class FirebaseManager {
                                                                "description": description ,
 //                                                             "company": "/company/\(company)",
                                                                 "isActivated": isActivated,
+                                                                "candidatesList": candidateList,
                                                                 "name": name ,
                                                                 "numberOfVacancies": numberOfVacancies ,
                                                                 "region": region,
@@ -99,6 +101,7 @@ class FirebaseManager {
                     let isActivated = document.get("isActivated") as! Bool
                     let ID = document.documentID
                     let uid = document.get("UID") as! String
+                    let candidateList = document.get("candidatesList") as! [String]
                     
                     vacancy = Vacancy(name: name,
                                       company: company,
@@ -110,7 +113,8 @@ class FirebaseManager {
                                       salary: salary,
                                       region: region,
                                       typeOfWork: typeOfWork,
-                                      isActivated: isActivated)
+                                      isActivated: isActivated,
+                                      candidateList: candidateList)
                     vacancy.ID = ID
                     vacancy.UID = uid
                     

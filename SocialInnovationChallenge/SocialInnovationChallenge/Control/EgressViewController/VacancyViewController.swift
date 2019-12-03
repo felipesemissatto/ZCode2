@@ -35,8 +35,6 @@ class VacancyViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadVacancies()
 
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -62,6 +60,8 @@ class VacancyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        loadVacancies()
         
         self.tabBarController?.tabBar.isHidden = false
         
@@ -91,42 +91,54 @@ class VacancyViewController: UIViewController {
     }
 
     //MARK: Functions
-    private func loadVacancies(){
+    private func loadVacancies() {
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
+        VacancyServices.getAll { (error, vacancies) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error loading document: \(error.localizedDescription)")
             } else {
-                for document in snapshot!.documents {
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
-
-                    vacancy.name = document.get("name") as! String
-                    vacancy.company = self.company
-                    vacancy.region = document.get("region") as! String
-                    vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
-                    vacancy.workday = document.get("workday") as! String
-                    vacancy.typeOfWork = document.get("typeOfWork") as! String
-                    
-
-
-                    
-                    self.vacancies.append(vacancy)
+                self.vacancies  = vacancies!
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
+        
+//        db.collection("vacancy").getDocuments() { (snapshot,error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                for document in snapshot!.documents {
+//                    let vacancy = Vacancy(name: "Makoto",
+//                                          company: self.company,
+//                                          releaseTime: 0,
+//                                          description: "",
+//                                          workday: "",
+//                                          numberOfVacancies: "",
+//                                          benefits: "Rápido; Grande",
+//                                          salary: "")
+//
+//                    vacancy.name = document.get("name") as! String
+//                    vacancy.company = self.company
+//                    vacancy.region = document.get("region") as! String
+//                    vacancy.description = document.get("description") as! String
+//                    vacancy.benefits = document.get("benefits") as? String
+//                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
+//                    vacancy.salary = document.get("salary") as! String
+//                    vacancy.workday = document.get("workday") as! String
+//                    vacancy.typeOfWork = document.get("typeOfWork") as! String
+//
+//
+//
+//
+//                    self.vacancies.append(vacancy)
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     

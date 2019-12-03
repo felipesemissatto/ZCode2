@@ -127,6 +127,7 @@ class AnnounceViewController: UIViewController {
         if segue.identifier == "showDetailSegue",
             let vacancyDetails = segue.destination as? VacancyDetailsTableViewController2 {
             vacancyDetails.isHiddenSaveButton = true
+            vacancyDetails.segueIdentifier = "showDetailSegue"
             
         }
     }
