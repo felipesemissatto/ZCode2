@@ -115,7 +115,24 @@ class CompanyNotificationViewController: UIViewController {
                 cell.imageEgress?.contentMode = .scaleAspectFit
                 cell.imageEgress?.image = image
             }
-            cell.nameLabel.text = "O candidato \(egressSelected.name) possui interesse na vaga \(company.vancancies?[0].name)."
+            let normalText1 = "O candidato "
+            let attributedString1 = NSMutableAttributedString(string:normalText1)
+            
+            let boldText1  = "\(egressSelected.name)"
+            let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
+            let boldString1 = NSMutableAttributedString(string: boldText1, attributes:attrs)
+            attributedString1.append(boldString1)
+            
+            let normalText2 = " possui interesse na vaga "
+            let attributedString2 = NSMutableAttributedString(string:normalText2)
+            attributedString1.append(attributedString2)
+
+            let boldText2  = "\(String(describing: company.vancancies?[0].name))"
+            let boldString2 = NSMutableAttributedString(string: boldText2, attributes:attrs)
+            attributedString1.append(boldString2)
+            
+            cell.nameLabel.attributedText = attributedString1
+//            cell.nameLabel.text = "O candidato \(egressSelected.name) possui interesse na vaga \(company.vancancies?[0].name)."
             cell.nameRegion?.text = "\(company.vancancies?[0].releaseTime) d"
             
             // Add photo  profile

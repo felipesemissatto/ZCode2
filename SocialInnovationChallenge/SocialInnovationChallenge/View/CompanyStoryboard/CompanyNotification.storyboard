@@ -28,18 +28,18 @@
                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="85" id="8jn-nC-JBZ" customClass="CandidateTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44" width="414" height="85"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="114" id="8jn-nC-JBZ" customClass="CandidateTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8jn-nC-JBZ" id="Lb1-aq-K5d">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tuk-72-ypB" userLabel="View Card">
-                                                    <rect key="frame" x="20" y="4" width="374" height="77"/>
+                                                    <rect key="frame" x="20" y="4" width="374" height="106"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="4Ji-Mr-iBs">
-                                                            <rect key="frame" x="18" y="16" width="45" height="45"/>
+                                                            <rect key="frame" x="18" y="16" width="45" height="74"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="4Ji-Mr-iBs" secondAttribute="height" multiplier="1:1" id="4sZ-w5-wFT"/>
                                                                 <constraint firstAttribute="height" constant="45" id="NdL-ro-tDM"/>
@@ -47,13 +47,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ck-iS-5xw" userLabel="nameLabel">
-                                                            <rect key="frame" x="81" y="20" width="285" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <rect key="frame" x="81" y="20" width="285" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEF-sg-5lj" userLabel="regionLabel">
-                                                            <rect key="frame" x="81" y="42.5" width="285" height="13"/>
+                                                            <rect key="frame" x="81" y="39" width="285" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="13" id="FyW-cF-yfK"/>
                                                             </constraints>
@@ -139,7 +139,7 @@
                     <tabBarItem key="tabBarItem" title="" image="bellNotifications" id="sZe-Ue-U45"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Otr-yo-jiC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0039215686274509803" green="0.76862745098039209" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="largeTitleTextAttributes">
