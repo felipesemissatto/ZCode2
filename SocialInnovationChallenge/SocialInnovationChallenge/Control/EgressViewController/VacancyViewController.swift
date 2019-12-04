@@ -97,8 +97,10 @@ class VacancyViewController: UIViewController {
             
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
-            } else {
-                self.vacancies  = vacancies!
+            } else if let vacancies = vacancies {
+                self.vacancies = vacancies.filter({ (vacancy) -> Bool in
+                    return vacancy.isActivated
+                })
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                 }
