@@ -20,7 +20,7 @@ class VacancyViewController: UIViewController {
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: nil,
+                          photo: "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/pessoa001.png?alt=media&token=6fa74cf3-d7b9-4830-bd51-dbed69b36590",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",
@@ -106,41 +106,6 @@ class VacancyViewController: UIViewController {
                 }
             }
         }
-        
-//        db.collection("vacancy").getDocuments() { (snapshot,error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                for document in snapshot!.documents {
-//                    let vacancy = Vacancy(name: "Makoto",
-//                                          company: self.company,
-//                                          releaseTime: 0,
-//                                          description: "",
-//                                          workday: "",
-//                                          numberOfVacancies: "",
-//                                          benefits: "Rápido; Grande",
-//                                          salary: "")
-//
-//                    vacancy.name = document.get("name") as! String
-//                    vacancy.company = self.company
-//                    vacancy.region = document.get("region") as! String
-//                    vacancy.description = document.get("description") as! String
-//                    vacancy.benefits = document.get("benefits") as? String
-//                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-//                    vacancy.salary = document.get("salary") as! String
-//                    vacancy.workday = document.get("workday") as! String
-//                    vacancy.typeOfWork = document.get("typeOfWork") as! String
-//
-//
-//
-//
-//                    self.vacancies.append(vacancy)
-//                }
-//            }
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
     }
 
     
@@ -224,6 +189,25 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
         cell.workdayLabel.text = vacancy.workday
         cell.timeReleaseLabel.text = "há \(vacancy.releaseTime) dias atrás"
         
+        // Add photo  profile
+        if vacancy.company.photo != "" {
+            let imageUrl = vacancy.company.photo
+            let url = NSURL(string: imageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
+                        cell.imageCompany?.contentMode = .scaleAspectFit
+                        cell.imageCompany?.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
         
         return cell
     }
