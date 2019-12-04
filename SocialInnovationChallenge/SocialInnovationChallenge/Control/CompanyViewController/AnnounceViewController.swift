@@ -104,7 +104,7 @@ class AnnounceViewController: UIViewController {
                 self.vacancies  = vacancies!
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
-                }
+                    }
             }
         }
     }

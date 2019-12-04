@@ -32,4 +32,23 @@ class VacancyDAO: DAO {
             }
         }
     }
+    
+//    static func findNotification(_ uid: String, completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) throws {
+//        
+//        var listCandidate: [String] = []
+//        
+//        FirebaseManager.sharedInstance.readVacanciesFirebase { (error, vacancies) in
+//            if let err = error {
+//                completion(err, nil)
+//            } else {
+//                for vacancy in vacancies! {
+//                    if vacancy.UID == uid {
+//                        listCandidate = listCandidate + vacancy.candidateList
+//                    }
+//                }
+//                let newListCandidate = listCandidate.removingDuplicates()
+//                completion(nil, newListCandidate)
+//            }
+//        }
+//    }
 }
