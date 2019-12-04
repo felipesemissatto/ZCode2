@@ -227,7 +227,7 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
                 
                 DispatchQueue.global(qos: .background).async {
                     DispatchQueue.main.async {
-                        self.profileImage.image = UIImage(data: data!)
+//                        self.profileImage.image = UIImage(data: data!)
                     }
                 }
             }).resume()
