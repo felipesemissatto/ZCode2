@@ -197,10 +197,12 @@ class VacancyDetailsTableViewController2: UITableViewController {
         var rowHeight:CGFloat = 0.0
         
         if indexPath.row == 0 && screenBefore == true{
-            cell1.isHidden = true
+            self.saveButton.isEnabled = false
+            self.saveButton.title = ""
+            self.cell1.isHidden = true
             rowHeight = 0.0
         } else if indexPath.row == 1 && screenBefore == false{
-            cell2.isHidden = true
+            self.cell2.isHidden = true
             rowHeight = 0.0
         } else{
             rowHeight = UITableView.automaticDimension
