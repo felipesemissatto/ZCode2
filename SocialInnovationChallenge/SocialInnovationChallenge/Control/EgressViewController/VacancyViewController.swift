@@ -36,6 +36,8 @@ class VacancyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tabBarController?.tabBar.isHidden = true
+        
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -62,9 +64,7 @@ class VacancyViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadVacancies()
-        
-        self.tabBarController?.tabBar.isHidden = false
-        
+                
 //        VacancyServices.getAllVacancy { (error, vacancies) in
 //            self.vacancies  = vacancies!
 //            DispatchQueue.main.async {
