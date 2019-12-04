@@ -63,10 +63,10 @@ class VacancyDetailsTableViewController2: UITableViewController {
 //        nameCompanyLabel.text = vacancy?.company.name
         regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
-        releaseTimeLabel.text = "há \(vacancy?.releaseTime) dias atrás"
+        releaseTimeLabel.text = "há \(vacancy!.releaseTime) dias atrás"
         workdayLabel.text = vacancy?.workday
         benefitsLabel.text = vacancy?.benefits
-//        startWorkLabel.text = vacancy?.startWork
+        startWorkLabel.text = vacancy?.startWork
         descriptionLabel.text = vacancy?.description
         typeOfWorkLabel.text = vacancy?.typeOfWork
     }
