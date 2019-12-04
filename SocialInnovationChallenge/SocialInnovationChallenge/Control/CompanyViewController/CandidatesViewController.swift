@@ -29,6 +29,8 @@ class CandidatesViewController: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var shadowView: UIView!
     
     //MARK: Views
     
@@ -48,7 +50,7 @@ class CandidatesViewController: UIViewController {
         searchController.searchBar.searchTextField.backgroundColor = .white
         navigationItem.searchController = searchController
         definesPresentationContext = true
-            
+        
         
         //Changing status bar color
         if #available(iOS 13.0, *) {
@@ -63,11 +65,11 @@ class CandidatesViewController: UIViewController {
             UIApplication.shared.statusBarStyle = .lightContent
         }
     }
-
+    
     //MARK: Actions
     
     @IBAction func unwindToCandidates(segue : UIStoryboardSegue){}
-
+    
     
     //MARK: Search Controller's Methods
     func searchBarIsEmpty() -> Bool {
@@ -88,18 +90,22 @@ class CandidatesViewController: UIViewController {
     
     //MARK: Functions
     private func loadEgress(){
-
+        activityIndicator.startAnimating()
         EgressServices.getAll { (error, egress) in
             
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
                 self.egress = egress!
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.shadowView.isHidden = true
                 }
             }
         }
+        
     }
     
     // MARK: Navigation
@@ -146,8 +152,8 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
         
         // Downcast
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CandidateTableViewCell
-        else { //safely unwraps the optional
-            fatalError("The dequeued cell is not an instance of CandidateTableViewCell.")
+            else { //safely unwraps the optional
+                fatalError("The dequeued cell is not an instance of CandidateTableViewCell.")
         }
         
         
@@ -171,7 +177,7 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
             let profileImageUrl = egressSelected.photo
             let url = NSURL(string: profileImageUrl)
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-
+                
                 if error != nil {
                     print(error)
                     return
@@ -190,14 +196,14 @@ extension CandidatesViewController: UISearchResultsUpdating, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         // Fetches the appropriate living being for the data source layout.
         if isFiltering() {
             egressSelected = filteredEgress[indexPath.row]
         } else {
             egressSelected = egress[indexPath.row]
         }
-
+        
         self.performSegue(withIdentifier: "CandidateDetail", sender: egressSelected)
     }
 }

@@ -98,11 +98,34 @@
                                     <outlet property="delegate" destination="6M2-pQ-bCA" id="UMh-LQ-10P"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1H-xH-8H2">
+                                <rect key="frame" x="162" y="456" width="90" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="V1H-xH-8H2" secondAttribute="height" id="HbB-6C-qSf"/>
+                                    <constraint firstAttribute="width" constant="90" id="vc1-r9-DSQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-MX-bBc">
+                                <rect key="frame" x="197" y="491" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2NU-MX-bBc" secondAttribute="height" multiplier="1:1" id="3Fa-ja-SkV"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="2NU-MX-bBc" firstAttribute="centerY" secondItem="m2w-O3-iLL" secondAttribute="centerY" id="0OZ-jV-eyH"/>
                             <constraint firstItem="aww-WG-Spd" firstAttribute="bottom" secondItem="ugd-hr-uCi" secondAttribute="bottom" id="8Af-wO-Z68"/>
                             <constraint firstItem="ugd-hr-uCi" firstAttribute="leading" secondItem="aww-WG-Spd" secondAttribute="leading" id="9tx-Sl-zhB"/>
+                            <constraint firstItem="V1H-xH-8H2" firstAttribute="centerX" secondItem="m2w-O3-iLL" secondAttribute="centerX" id="P0R-vo-w8G"/>
+                            <constraint firstItem="2NU-MX-bBc" firstAttribute="centerX" secondItem="m2w-O3-iLL" secondAttribute="centerX" id="V9l-61-LfU"/>
+                            <constraint firstItem="V1H-xH-8H2" firstAttribute="centerY" secondItem="m2w-O3-iLL" secondAttribute="centerY" id="Y6P-kd-Itv"/>
                             <constraint firstItem="m2w-O3-iLL" firstAttribute="leading" secondItem="aww-WG-Spd" secondAttribute="leading" id="dIt-y8-ZVZ"/>
                             <constraint firstItem="ugd-hr-uCi" firstAttribute="top" secondItem="aww-WG-Spd" secondAttribute="top" id="fbp-kp-Ol1"/>
                             <constraint firstItem="aww-WG-Spd" firstAttribute="bottom" secondItem="m2w-O3-iLL" secondAttribute="bottom" id="kXy-k7-uOm"/>
@@ -114,6 +137,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Buscar" id="70v-xc-5rI"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="2NU-MX-bBc" id="YaL-gi-PIz"/>
+                        <outlet property="shadowView" destination="V1H-xH-8H2" id="j1N-Cg-Y4d"/>
                         <outlet property="tableView" destination="m2w-O3-iLL" id="niC-Uq-n4b"/>
                         <segue destination="1WQ-s7-cXI" kind="modal" identifier="CandidateDetail" id="XBT-26-Vto"/>
                     </connections>
@@ -139,7 +164,7 @@
                     <tabBarItem key="tabBarItem" title="" image="searchCandidates" id="SBA-a1-2hi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Mr6-5g-EsH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.78711587189999999" blue="0.33118408919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.0" green="0.78711587190628052" blue="0.33118408918380737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
