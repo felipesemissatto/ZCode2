@@ -11,6 +11,7 @@ class Vacancy {
     
     //MARK: Properties
     public var ID: String?
+    public var UID: String?
     public var name: String
     public var company: Company
     public var releaseTime: Int //days, weeks or months
@@ -22,6 +23,7 @@ class Vacancy {
     public var region: String
     public var typeOfWork: String
     public var isActivated: Bool
+    public var candidateList: [String]
     
     //MARK: Contructors
     init(name: String = "",
@@ -34,7 +36,8 @@ class Vacancy {
          salary: String =  "",
          region: String = "",
          typeOfWork: String = "",
-         isActivated: Bool = true){
+         isActivated: Bool = true,
+         candidateList: [String] = []){
             self.name = name
             self.company = company
             self.releaseTime = releaseTime
@@ -46,5 +49,6 @@ class Vacancy {
             self.region = region
             self.typeOfWork = typeOfWork
             self.isActivated = isActivated
+            self.candidateList = candidateList
     }
 }

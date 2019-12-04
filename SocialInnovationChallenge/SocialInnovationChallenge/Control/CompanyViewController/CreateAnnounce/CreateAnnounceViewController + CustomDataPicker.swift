@@ -42,4 +42,19 @@ extension CreateAnnounceViewController: UIPickerViewDelegate, UIPickerViewDataSo
         
         return label
     }
+    
+        func createToolBar() {
+            let toolBar = UIToolbar()
+            toolBar.sizeToFit()
+            
+    //        toolBar.barTintColor = .black
+    //        toolBar.tintColor = .red
+            
+            let doneButton = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(CreateAnnounceViewController.dismissKeyboard))
+            
+            toolBar.setItems([doneButton], animated: false)
+            toolBar.isUserInteractionEnabled = true
+            
+            workdayTextField.inputAccessoryView = toolBar
+        }
 }

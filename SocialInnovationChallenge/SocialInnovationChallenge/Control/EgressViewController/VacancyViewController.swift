@@ -35,8 +35,6 @@ class VacancyViewController: UIViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadVacancies()
 
         //Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -62,6 +60,8 @@ class VacancyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        loadVacancies()
         
         self.tabBarController?.tabBar.isHidden = false
         
@@ -91,41 +91,56 @@ class VacancyViewController: UIViewController {
     }
 
     //MARK: Functions
-    private func loadVacancies(){
+    private func loadVacancies() {
         
-        db.collection("vacancy").getDocuments() { (snapshot,error) in
+        VacancyServices.getAll { (error, vacancies) in
+            
             if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in snapshot!.documents {
-                    let vacancy = Vacancy(name: "Makoto",
-                                          company: self.company,
-                                          releaseTime: 0,
-                                          description: "",
-                                          workday: "",
-                                          numberOfVacancies: "",
-                                          benefits: "Rápido; Grande",
-                                          salary: "")
-
-                    vacancy.name = document.get("name") as! String
-                    vacancy.company = self.company
-                    vacancy.region = document.get("region") as! String
-                    vacancy.description = document.get("description") as! String
-                    vacancy.benefits = document.get("benefits") as? String
-                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
-                    vacancy.salary = document.get("salary") as! String
-                    vacancy.workday = document.get("workday") as! String
-                    
-
-
-                    
-                    self.vacancies.append(vacancy)
+                print("Error loading document: \(error.localizedDescription)")
+            } else if let vacancies = vacancies {
+                self.vacancies = vacancies.filter({ (vacancy) -> Bool in
+                    return vacancy.isActivated
+                })
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                 }
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
+        
+//        db.collection("vacancy").getDocuments() { (snapshot,error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                for document in snapshot!.documents {
+//                    let vacancy = Vacancy(name: "Makoto",
+//                                          company: self.company,
+//                                          releaseTime: 0,
+//                                          description: "",
+//                                          workday: "",
+//                                          numberOfVacancies: "",
+//                                          benefits: "Rápido; Grande",
+//                                          salary: "")
+//
+//                    vacancy.name = document.get("name") as! String
+//                    vacancy.company = self.company
+//                    vacancy.region = document.get("region") as! String
+//                    vacancy.description = document.get("description") as! String
+//                    vacancy.benefits = document.get("benefits") as? String
+//                    vacancy.numberOfVacancies = document.get("numberOfVacancies") as! String
+//                    vacancy.salary = document.get("salary") as! String
+//                    vacancy.workday = document.get("workday") as! String
+//                    vacancy.typeOfWork = document.get("typeOfWork") as! String
+//
+//
+//
+//
+//                    self.vacancies.append(vacancy)
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     
@@ -136,23 +151,24 @@ class VacancyViewController: UIViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        super.prepare(for: segue, sender: sender)
-//
-//        guard let selected =  sender as? Vacancy else {
-//            return
-//        }
-//
-//        guard let livingBeingDetailViewController = segue.destination as? DetailViewController else {
-//            fatalError("Unexpected destination: \(segue.destination)")
-//        }
-//
-//         livingBeingDetailViewController.vacancy = selected
-//
-//        if segue.identifier == "showDetailSegue",
-//            let vacancyDetails = segue.destination as? DetailViewController {
-//            vacancyDetails.titleSaveButton = ""
-//            vacancyDetails.isHiddenSaveButton = true
-//        }
+        super.prepare(for: segue, sender: sender)
+
+        guard let selected =  sender as? Vacancy else {
+            return
+        }
+
+        guard let livingBeingDetailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+
+        livingBeingDetailViewController.vacancy = selected
+        livingBeingDetailViewController.screenBefore = true
+
+        if segue.identifier == "segueDetailsVacancy",
+            let vacancyDetails = segue.destination as? DetailViewController {
+            vacancyDetails.titleSaveButton = ""
+            vacancyDetails.isHiddenSaveButton = true
+        }
     }
 
 }
@@ -214,16 +230,16 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        var vacancy: Vacancy
-//
-//        // Fetches the appropriate living being for the data source layout.
-//        if isFiltering() {
-//            vacancy = filteredVacancies[indexPath.row]
-//        } else {
-//            vacancy = vacancies[indexPath.row]
-//        }
-//
-//        self.performSegue(withIdentifier: "showDetailSegue", sender: vacancy)
+        var vacancy: Vacancy
+
+        // Fetches the appropriate living being for the data source layout.
+        if isFiltering() {
+            vacancy = filteredVacancies[indexPath.row]
+        } else {
+            vacancy = vacancies[indexPath.row]
+        }
+
+        self.performSegue(withIdentifier: "segueDetailsVacancy", sender: vacancy)
     }
 }
 
