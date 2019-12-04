@@ -23,6 +23,7 @@ class Egress{
     public var skills: [String]?
     public var desires: [String]
     public var contact: [String]
+    public var uid: String?
     
     //MARK: Constructors
     init(name: String = "",
