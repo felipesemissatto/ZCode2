@@ -17,14 +17,17 @@ class MainViewController: UIViewController {
     var password: String?
     var identifierSegue: String?
     var type: String?
+    @IBOutlet weak var egressButton: UIButton!
+    @IBOutlet weak var companyButton: UIButton!
     
     //MARK: Outlets
     @IBOutlet weak var segmentControlUser: UISegmentedControl!
     
     //MARK: Views
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if let option = defaults.object(forKey: "option") as? String {
             if option == "egress" {
                 performSegue(withIdentifier: "egressSegue", sender: self)
@@ -38,44 +41,80 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        segmentControl()
+//        if let option = defaults.object(forKey: "option") as? String {
+//            if option == "egress" {
+//                performSegue(withIdentifier:"egressSegue", sender: self)
+//            }
+//            else {
+//                performSegue(withIdentifier: "companySegue", sender: self)
+//            }
+//        }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        egressButton.layer.cornerRadius = 10
+        companyButton.layer.cornerRadius = 10
+    }
+    
     
     //MARK: Actions
-    @IBAction func tapEnter(_ sender: Any) {
+    
+    @IBAction func tapEgressButton(_ sender: Any) {
+        self.email = "egresso@gmail.com"
+        self.password = "egresso"
+        self.identifierSegue = "egressSegue"
+        self.type = "egress"
         
-        segmentControl()
-        
-        let emailAuth = self.email?.trimmingCharacters(in: .whitespacesAndNewlines)
-        let passwordAuth = self.password?.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        Auth.auth().signIn(withEmail: emailAuth!, password: passwordAuth!) { (result, error) in
-            if error != nil {
-                print("Senha incorreta")
-            } else {
-                self.defaults.set(self.type!, forKey: "option")
-                self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
-            }
-        }
+        self.defaults.set(self.type!, forKey: "option")
+        self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
     }
     
-    //Define informações do login e fluxo (egresso ou compania)
-    func segmentControl () {
-        switch segmentControlUser.selectedSegmentIndex{
-        case 0:
-            self.email = "egresso@gmail.com"
-            self.password = "egresso"
-            self.identifierSegue = "egressSegue"
-            self.type = "egress"
-        case 1:
-            self.email = "empresa@gmail.com"
-            self.password = "empresa"
-            self.identifierSegue = "companySegue"
-            self.type = "company"
-        default:
-            break;
-        }
+    
+    @IBAction func tapCompanyButton(_ sender: Any) {
+        self.email = "empresa@gmail.com"
+        self.password = "empresa"
+        self.identifierSegue = "companySegue"
+        self.type = "company"
+        
+        self.defaults.set(self.type!, forKey: "option")
+        self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
+        
     }
+    
+    //não sei se posso apagar essa parte
+//    @IBAction func tapEnter(_ sender: Any) {
+//
+//        segmentControl()
+//
+//        let emailAuth = self.email?.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let passwordAuth = self.password?.trimmingCharacters(in: .whitespacesAndNewlines)
+//
+//        Auth.auth().signIn(withEmail: emailAuth!, password: passwordAuth!) { (result, error) in
+//            if error != nil {
+//                print("Senha incorreta")
+//            } else {
+//                self.defaults.set(self.type!, forKey: "option")
+//                self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
+//            }
+//        }
+//    }
+    
+    //MARK: Functions
+    
+    func addGradientLayer(){
+        let layer = CAGradientLayer()
+        layer.frame = self.view.bounds
+        layer.colors = [UIColor.yellow.cgColor, UIColor.green.cgColor]
+        
+        layer.startPoint = CGPoint(x: 0,y: 0)
+        layer.endPoint = CGPoint(x: 1,y: 1)
+        
+        view.layer.addSublayer(layer)
+    }
+    
+
     
 //    let userID = Auth.auth().currentUser!.uid
 //    override func viewDidDisappear(_ animated: Bool) {

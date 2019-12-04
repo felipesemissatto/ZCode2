@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		235774612396F40B00E8DB72 /* SectionHeaderCandidateDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 235774602396F40B00E8DB72 /* SectionHeaderCandidateDetail.xib */; };
+		235774632396F90600E8DB72 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235774622396F90600E8DB72 /* SectionHeaderView.swift */; };
 		236242F72373263B00019C3D /* CompanyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236242F62373263B00019C3D /* CompanyProfileViewController.swift */; };
 		236242F92373265E00019C3D /* CompanyNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236242F82373265E00019C3D /* CompanyNotificationViewController.swift */; };
 		236242FB2373268500019C3D /* AnnounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236242FA2373268500019C3D /* AnnounceViewController.swift */; };
@@ -18,6 +20,8 @@
 		23826C47238D697A00A40C5F /* VacancyEgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23826C46238D697A00A40C5F /* VacancyEgressTableViewCell.swift */; };
 		23826C49238D99BB00A40C5F /* CandidateDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23826C48238D99BB00A40C5F /* CandidateDetail.storyboard */; };
 		23826C4B238D9F8D00A40C5F /* CandidateDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23826C4A238D9F8D00A40C5F /* CandidateDetailViewController.swift */; };
+		23D0CEBD23975BFE00CD17C4 /* ExperiencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23D0CEBC23975BFE00CD17C4 /* ExperiencesView.xib */; };
+		23D0CEC12397610100CD17C4 /* ExperiencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D0CEC02397610100CD17C4 /* ExperiencesView.swift */; };
 		2F29F4742375C3180055B2C8 /* VacancyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F29F4732375C3180055B2C8 /* VacancyDetailsViewController.swift */; };
 		2F29F4762375D9300055B2C8 /* VacancyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F29F4752375D9300055B2C8 /* VacancyTableViewCell.swift */; };
 		2FC5C08423705CA800520F18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5C08323705CA800520F18 /* AppDelegate.swift */; };
@@ -88,6 +92,8 @@
 /* Begin PBXFileReference section */
 		0C34DC07A5B4B87F7F4036F5 /* Pods-SocialInnovationChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialInnovationChallenge.debug.xcconfig"; path = "Target Support Files/Pods-SocialInnovationChallenge/Pods-SocialInnovationChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		1EF8836E8B9D15D63A9432BC /* Pods-SocialInnovationChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialInnovationChallenge.release.xcconfig"; path = "Target Support Files/Pods-SocialInnovationChallenge/Pods-SocialInnovationChallenge.release.xcconfig"; sourceTree = "<group>"; };
+		235774602396F40B00E8DB72 /* SectionHeaderCandidateDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCandidateDetail.xib; sourceTree = "<group>"; };
+		235774622396F90600E8DB72 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		236242F62373263B00019C3D /* CompanyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyProfileViewController.swift; sourceTree = "<group>"; };
 		236242F82373265E00019C3D /* CompanyNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNotificationViewController.swift; sourceTree = "<group>"; };
 		236242FA2373268500019C3D /* AnnounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +105,8 @@
 		23826C46238D697A00A40C5F /* VacancyEgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VacancyEgressTableViewCell.swift; sourceTree = "<group>"; };
 		23826C48238D99BB00A40C5F /* CandidateDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CandidateDetail.storyboard; sourceTree = "<group>"; };
 		23826C4A238D9F8D00A40C5F /* CandidateDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateDetailViewController.swift; sourceTree = "<group>"; };
+		23D0CEBC23975BFE00CD17C4 /* ExperiencesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExperiencesView.xib; sourceTree = "<group>"; };
+		23D0CEC02397610100CD17C4 /* ExperiencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesView.swift; sourceTree = "<group>"; };
 		2F29F4732375C3180055B2C8 /* VacancyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyDetailsViewController.swift; sourceTree = "<group>"; };
 		2F29F4752375D9300055B2C8 /* VacancyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyTableViewCell.swift; sourceTree = "<group>"; };
 		2FC5C08023705CA800520F18 /* SocialInnovationChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialInnovationChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +218,8 @@
 				2F29F4732375C3180055B2C8 /* VacancyDetailsViewController.swift */,
 				2F29F4752375D9300055B2C8 /* VacancyTableViewCell.swift */,
 				54DBEB462382DE440054391C /* DetailViewController.swift */,
+				235774622396F90600E8DB72 /* SectionHeaderView.swift */,
+				23D0CEC02397610100CD17C4 /* ExperiencesView.swift */,
 			);
 			path = CompanyViewController;
 			sourceTree = "<group>";
@@ -333,6 +343,8 @@
 				54850A01237480BB00B07E25 /* CreateAnnounce.storyboard */,
 				2FCB79FB23731769004E6DF6 /* Candidates.storyboard */,
 				23826C48238D99BB00A40C5F /* CandidateDetail.storyboard */,
+				235774602396F40B00E8DB72 /* SectionHeaderCandidateDetail.xib */,
+				23D0CEBC23975BFE00CD17C4 /* ExperiencesView.xib */,
 			);
 			path = CompanyStoryboard;
 			sourceTree = "<group>";
@@ -519,11 +531,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FC5C09323705CA900520F18 /* LaunchScreen.storyboard in Resources */,
+				23D0CEBD23975BFE00CD17C4 /* ExperiencesView.xib in Resources */,
 				2FCB79FE2373179F004E6DF6 /* Announce.storyboard in Resources */,
 				54A0E94C2372F0150028EB89 /* GoogleService-Info.plist in Resources */,
 				2FCB79F72373168F004E6DF6 /* EgressNotification.storyboard in Resources */,
 				2FCB79F523731651004E6DF6 /* Comunity.storyboard in Resources */,
 				5429FBDD23798C60001BD7CE /* SF-Pro-Display-Semibold.dataset in Resources */,
+				235774612396F40B00E8DB72 /* SectionHeaderCandidateDetail.xib in Resources */,
 				2FC5C09023705CA900520F18 /* Assets.xcassets in Resources */,
 				2FC5C08B23705CA800520F18 /* Main.storyboard in Resources */,
 				5429FBDB23798C60001BD7CE /* SF-Pro-Display-Bold.dataset in Resources */,
@@ -697,6 +711,7 @@
 				54B54B012386CDD500598292 /* VacancyDAO.swift in Sources */,
 				54BA966B2379A612000B918F /* CreateDataPicker.swift in Sources */,
 				54A552E52375CBF200F7B0F9 /* ViewController + HideKeyboard.swift in Sources */,
+				23D0CEC12397610100CD17C4 /* ExperiencesView.swift in Sources */,
 				54BA96652379A5AF000B918F /* Egress.swift in Sources */,
 				54DBEB472382DE440054391C /* DetailViewController.swift in Sources */,
 				2FF853942386D40E003A124F /* CandidateTableViewCell.swift in Sources */,
@@ -705,6 +720,7 @@
 				2FC5C08E23705CA800520F18 /* SocialInnovationChallenge.xcdatamodeld in Sources */,
 				54B54AFD2386CC7700598292 /* VacancyServices.swift in Sources */,
 				2FC5C08423705CA800520F18 /* AppDelegate.swift in Sources */,
+				235774632396F90600E8DB72 /* SectionHeaderView.swift in Sources */,
 				54F9C150239169520009D490 /* EgressServices.swift in Sources */,
 				54F9C14C2391671D0009D490 /* FirebaseManager.swift in Sources */,
 				23826C47238D697A00A40C5F /* VacancyEgressTableViewCell.swift in Sources */,

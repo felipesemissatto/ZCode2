@@ -15,43 +15,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oDy-ZK-74C">
-                                <rect key="frame" x="20" y="347" width="374" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vU-fI-WX6">
+                                <rect key="frame" x="32" y="244" width="330" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="oDy-ZK-74C" secondAttribute="height" multiplier="374:31" id="knF-y5-7EL"/>
+                                    <constraint firstAttribute="height" constant="200" id="517-gV-rNV"/>
+                                    <constraint firstAttribute="width" constant="330" id="U0a-KY-p8r"/>
                                 </constraints>
-                                <segments>
-                                    <segment title="Egresso"/>
-                                    <segment title="Empresa"/>
-                                </segments>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2x-fp-FMl">
-                                <rect key="frame" x="20" y="528.5" width="374" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="s2x-fp-FMl" secondAttribute="height" multiplier="187:15" id="eDV-HH-LRx"/>
-                                </constraints>
-                                <state key="normal" title="Entrar">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <string key="text">Bem-vindo ao
+nomeapp! :)
+Pensarei numa frase para colocar aqui.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgY-3H-xVa">
+                                <rect key="frame" x="52" y="698" width="310" height="44"/>
+                                <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="tintColor" red="0.03600261733" green="0.51614689830000005" blue="0.27446827289999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Estou oferecendo vagas">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="tapEnter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Goh-aZ-E8a"/>
+                                    <action selector="tapCompanyButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kuc-7B-uY8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-xx-8kK">
+                                <rect key="frame" x="52" y="654" width="310" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="6jt-qs-ppL"/>
+                                    <constraint firstAttribute="height" constant="44" id="vnu-Sw-lVH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Estou buscando emprego">
+                                    <color key="titleColor" red="0.03600261733" green="0.51614689830000005" blue="0.27446827289999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapEgressButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UyN-UG-jcQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFs-Yg-JaK">
+                                <rect key="frame" x="52" y="752" width="310" height="44"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Já tem uma conta? Entre agora!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.34546846149999999" green="0.75652498010000002" blue="0.39601182940000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="oDy-ZK-74C" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.8" id="65T-PB-es4"/>
-                            <constraint firstItem="oDy-ZK-74C" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="187:448" id="A8D-t8-jbw"/>
-                            <constraint firstItem="oDy-ZK-74C" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="BG6-Zj-nVC"/>
-                            <constraint firstItem="s2x-fp-FMl" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Sax-OV-8t9"/>
-                            <constraint firstItem="s2x-fp-FMl" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.2" id="ff4-W7-m0X"/>
-                            <constraint firstItem="s2x-fp-FMl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="187:448" id="pTY-Tl-dmy"/>
+                            <constraint firstItem="XFs-Yg-JaK" firstAttribute="width" secondItem="JgY-3H-xVa" secondAttribute="width" id="14d-Ou-jcR"/>
+                            <constraint firstItem="JgY-3H-xVa" firstAttribute="height" secondItem="fJO-xx-8kK" secondAttribute="height" id="2iV-V4-o0i"/>
+                            <constraint firstItem="fJO-xx-8kK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5m1-dk-I05"/>
+                            <constraint firstItem="JgY-3H-xVa" firstAttribute="width" secondItem="fJO-xx-8kK" secondAttribute="width" id="Bpr-Zr-GRg"/>
+                            <constraint firstItem="XFs-Yg-JaK" firstAttribute="height" secondItem="JgY-3H-xVa" secondAttribute="height" id="EcP-wi-rQb"/>
+                            <constraint firstItem="7vU-fI-WX6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Pv5-Is-Xuc"/>
+                            <constraint firstItem="XFs-Yg-JaK" firstAttribute="top" secondItem="JgY-3H-xVa" secondAttribute="bottom" constant="10" id="TVB-Ub-jXj"/>
+                            <constraint firstItem="XFs-Yg-JaK" firstAttribute="centerX" secondItem="JgY-3H-xVa" secondAttribute="centerX" id="Ubj-J3-PUa"/>
+                            <constraint firstItem="fJO-xx-8kK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="610" id="VaY-Wy-lhx"/>
+                            <constraint firstItem="JgY-3H-xVa" firstAttribute="top" secondItem="fJO-xx-8kK" secondAttribute="bottom" id="XWe-bu-YHe"/>
+                            <constraint firstItem="7vU-fI-WX6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="Y4l-1e-uSA"/>
+                            <constraint firstItem="JgY-3H-xVa" firstAttribute="centerX" secondItem="fJO-xx-8kK" secondAttribute="centerX" id="daX-ao-v9L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="segmentControlUser" destination="oDy-ZK-74C" id="1Ij-jN-VJf"/>
+                        <outlet property="companyButton" destination="JgY-3H-xVa" id="tNn-OZ-aMX"/>
+                        <outlet property="egressButton" destination="fJO-xx-8kK" id="JGC-t9-wfa"/>
                         <segue destination="8ai-ax-umS" kind="presentation" identifier="egressSegue" modalPresentationStyle="fullScreen" id="P5r-iV-DWO"/>
                         <segue destination="Cn8-Y4-3e1" kind="presentation" identifier="companySegue" modalPresentationStyle="fullScreen" id="kk3-YQ-d0k"/>
                     </connections>
