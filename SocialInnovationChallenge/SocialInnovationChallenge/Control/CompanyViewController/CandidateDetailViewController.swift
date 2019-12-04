@@ -68,27 +68,29 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     
     func createExperiencesField(experiences : [String]?){
         if let experiences = experiences{
-            var index : Int = 1
+            var index : Int = 0
             for experience in experiences{
-                createExperienceView(index : index, title: experience)
+                createExperienceView(index : index, title: experience, subtitle: egress!.experiencesDescription![index])
                 index += 1
             }
         }
     }
     
-    func createExperienceView(index : Int, title : String){
-        let contentView = ExperiencesView(frame: CGRect(x: 205 * CGFloat(index - 1), y: 0, width: 200, height: 145))
+    func createExperienceView(index : Int, title : String, subtitle: String){
+        let contentView = ExperiencesView(frame: CGRect(x: 205 * CGFloat(index), y: 0, width: 200, height: 145))
         
         //gambiarra pra ajustar o tamanho da view
-        if index == 1{
+        if index == 0{
             stackViewHeightConstraint.constant += 100
         }
         
-        if index > 2{
+        if index > 1{
             stackViewHeightConstraint.constant += 205
         }
         
-        contentView.subtitleLabel.text = title
+        contentView.titleLabel.text = title
+        contentView.subtitleLabel.text = subtitle
+
         
         stackView.addSubview(contentView)
     }

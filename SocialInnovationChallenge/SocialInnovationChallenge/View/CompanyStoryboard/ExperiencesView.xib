@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportadora" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXK-fN-8D9">
-                    <rect key="frame" x="15" y="64" width="118.5" height="21"/>
+                    <rect key="frame" x="15" y="84" width="118.5" height="21"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -27,11 +27,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carregador de caminhão. Responsável pela logística de produtos." lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hM-Ix-Ew0">
-                    <rect key="frame" x="15" y="100" width="170" height="50.5"/>
+                    <rect key="frame" x="15" y="115" width="170" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="P23-9M-fRz"/>
-                        <constraint firstAttribute="height" constant="50.5" id="anP-MR-LOC"/>
+                        <constraint firstAttribute="height" constant="40" id="anP-MR-LOC"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,8 +41,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8hM-Ix-Ew0" firstAttribute="leading" secondItem="kXK-fN-8D9" secondAttribute="leading" id="3s4-fu-NY9"/>
-                <constraint firstItem="kXK-fN-8D9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="K1b-j1-L3I"/>
-                <constraint firstItem="8hM-Ix-Ew0" firstAttribute="top" secondItem="kXK-fN-8D9" secondAttribute="bottom" constant="15" id="bjh-sy-xME"/>
+                <constraint firstItem="kXK-fN-8D9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="K1b-j1-L3I"/>
+                <constraint firstItem="8hM-Ix-Ew0" firstAttribute="top" secondItem="kXK-fN-8D9" secondAttribute="bottom" constant="10" id="bjh-sy-xME"/>
                 <constraint firstItem="kXK-fN-8D9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="udZ-ET-h67"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
