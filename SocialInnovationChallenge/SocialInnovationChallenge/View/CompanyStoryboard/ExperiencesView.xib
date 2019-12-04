@@ -19,13 +19,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transportadora" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXK-fN-8D9">
-                    <rect key="frame" x="15" y="14" width="118.5" height="21"/>
+                    <rect key="frame" x="15" y="54" width="118.5" height="21"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carregador de caminhão. Responsável pela logística de produtos" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hM-Ix-Ew0">
-                    <rect key="frame" x="15" y="50" width="199" height="51"/>
+                    <rect key="frame" x="15" y="90" width="199" height="50.5"/>
+                    <color key="backgroundColor" red="0.03600261733" green="0.51614689830000005" blue="0.27446827289999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="199" id="P23-9M-fRz"/>
                         <constraint firstAttribute="height" constant="50.5" id="anP-MR-LOC"/>
@@ -38,7 +40,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8hM-Ix-Ew0" firstAttribute="leading" secondItem="kXK-fN-8D9" secondAttribute="leading" id="3s4-fu-NY9"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="kXK-fN-8D9" secondAttribute="top" constant="30" id="K1b-j1-L3I"/>
+                <constraint firstItem="kXK-fN-8D9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="K1b-j1-L3I"/>
                 <constraint firstItem="8hM-Ix-Ew0" firstAttribute="top" secondItem="kXK-fN-8D9" secondAttribute="bottom" constant="15" id="bjh-sy-xME"/>
                 <constraint firstItem="kXK-fN-8D9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="udZ-ET-h67"/>
             </constraints>

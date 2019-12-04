@@ -27,28 +27,18 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if let option = defaults.object(forKey: "option") as? String {
-            if option == "egress" {
-                performSegue(withIdentifier: "egressSegue", sender: self)
-            } else {
-                performSegue(withIdentifier: "companySegue", sender: self)
-            }
-        }
-        // Do any additional setup after loading the view.
+        
+        //        if let option = defaults.object(forKey: "option") as? String {
+        //            if option == "egress" {
+        //                performSegue(withIdentifier: "egressSegue", sender: self)
+        //            } else {
+        //                performSegue(withIdentifier: "companySegue", sender: self)
+        //            }
+        //        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        if let option = defaults.object(forKey: "option") as? String {
-//            if option == "egress" {
-//                performSegue(withIdentifier:"egressSegue", sender: self)
-//            }
-//            else {
-//                performSegue(withIdentifier: "companySegue", sender: self)
-//            }
-//        }
     }
     
     override func viewDidLoad() {
@@ -56,6 +46,33 @@ class MainViewController: UIViewController {
         
         egressButton.layer.cornerRadius = 10
         companyButton.layer.cornerRadius = 10
+        
+        
+        if let option = defaults.object(forKey: "option") as? String {
+            
+            var vc : UIViewController? = nil
+            
+            if option == "egress" {
+                let storyboard = UIStoryboard(name: "RootEgress", bundle: nil)
+                
+                vc = storyboard.instantiateViewController(identifier: "HomeEgress")
+                
+            } else {
+                
+                let storyboard = UIStoryboard(name: "RootCompany", bundle: nil)
+                
+                vc = storyboard.instantiateViewController(identifier: "HomeCompany")
+                
+                
+            }
+            
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = vc
+                window.makeKeyAndVisible()
+            }
+        }
+        
+        
     }
     
     
@@ -84,22 +101,22 @@ class MainViewController: UIViewController {
     }
     
     //não sei se posso apagar essa parte
-//    @IBAction func tapEnter(_ sender: Any) {
-//
-//        segmentControl()
-//
-//        let emailAuth = self.email?.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let passwordAuth = self.password?.trimmingCharacters(in: .whitespacesAndNewlines)
-//
-//        Auth.auth().signIn(withEmail: emailAuth!, password: passwordAuth!) { (result, error) in
-//            if error != nil {
-//                print("Senha incorreta")
-//            } else {
-//                self.defaults.set(self.type!, forKey: "option")
-//                self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
-//            }
-//        }
-//    }
+    //    @IBAction func tapEnter(_ sender: Any) {
+    //
+    //        segmentControl()
+    //
+    //        let emailAuth = self.email?.trimmingCharacters(in: .whitespacesAndNewlines)
+    //        let passwordAuth = self.password?.trimmingCharacters(in: .whitespacesAndNewlines)
+    //
+    //        Auth.auth().signIn(withEmail: emailAuth!, password: passwordAuth!) { (result, error) in
+    //            if error != nil {
+    //                print("Senha incorreta")
+    //            } else {
+    //                self.defaults.set(self.type!, forKey: "option")
+    //                self.performSegue(withIdentifier: self.identifierSegue!, sender: self)
+    //            }
+    //        }
+    //    }
     
     //MARK: Functions
     
@@ -114,11 +131,11 @@ class MainViewController: UIViewController {
         view.layer.addSublayer(layer)
     }
     
-
     
-//    let userID = Auth.auth().currentUser!.uid
-//    override func viewDidDisappear(_ animated: Bool) {
-//        print("ID: \(userID)")
-//    }
+    
+    //    let userID = Auth.auth().currentUser!.uid
+    //    override func viewDidDisappear(_ animated: Bool) {
+    //        print("ID: \(userID)")
+    //    }
 }
 

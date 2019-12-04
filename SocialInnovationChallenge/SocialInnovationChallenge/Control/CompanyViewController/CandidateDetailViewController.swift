@@ -45,7 +45,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         let nib = UINib(nibName: "SectionHeaderView", bundle: nil)
         tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SectionHeaderView")
         
-            
+        
         downloadImage()
     }
     
@@ -161,14 +161,14 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = SectionHeaderView(frame: .zero)
-          
+        
         switch section {
-            case 0:
-                view.titleLabel.text = "Cursos"
-            case 1:
-                view.titleLabel.text = "Objetivos e Sonhos"
-            default:
-                title = ""
+        case 0:
+            view.titleLabel.text = "Cursos"
+        case 1:
+            view.titleLabel.text = "Objetivos e Sonhos"
+        default:
+            title = ""
         }
         return view
     }
@@ -219,19 +219,31 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
             let profileImageUrl = egress!.photo
             let url = NSURL(string: profileImageUrl)
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-
+                
                 if error != nil {
                     print(error)
                     return
                 }
                 
-                DispatchQueue.global(qos: .background).async {
-                    DispatchQueue.main.async {
-//                        self.profileImage.image = UIImage(data: data!)
+                if let httpResponse = response as? HTTPURLResponse {
+                    print (httpResponse.statusCode != 200)
+                    
+                    if httpResponse.statusCode == 200 {
+                        
+                        DispatchQueue.global(qos: .background).async {
+                            let image = UIImage(data: data!)
+                            
+                            DispatchQueue.main.async {
+                                if data != nil{
+                                    self.profileImage.image = image
+                                }
+                            }
+                        }
                     }
+
                 }
+                
             }).resume()
         }
     }
-//    link bom que ensina a criar alertas: https://medium.com/swift-india/uialertcontroller-in-swift-22f3c5b1dd68
 }
