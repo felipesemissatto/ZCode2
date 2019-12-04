@@ -28,7 +28,7 @@ class CandidateTableViewCell: UITableViewCell {
         self.viewCard.layer.cornerRadius = 10
         
         self.imageEgress.layer.shadowColor = shadowColor.cgColor
-        self.imageEgress.layer.masksToBounds = false
+        self.imageEgress.layer.masksToBounds = true
         self.imageEgress.layer.shadowOffset = CGSize(width: 2, height: 4)
         self.imageEgress.layer.shadowRadius = 4
         self.imageEgress.layer.shadowOpacity = 0.8

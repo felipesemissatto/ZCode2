@@ -21,6 +21,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -44,6 +45,8 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         let nib = UINib(nibName: "SectionHeaderView", bundle: nil)
         tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SectionHeaderView")
         
+            
+        downloadImage()
     }
     
     
@@ -210,5 +213,25 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
         
         return cell
     }
-    
+    func downloadImage() {
+        // Add photo  profile
+        if egress!.photo != "" {
+            let profileImageUrl = egress!.photo
+            let url = NSURL(string: profileImageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
+                        self.profileImage.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
+    }
+//    link bom que ensina a criar alertas: https://medium.com/swift-india/uialertcontroller-in-swift-22f3c5b1dd68
 }
