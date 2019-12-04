@@ -132,7 +132,6 @@ class CompanyNotificationViewController: UIViewController {
             attributedString1.append(boldString2)
             
             cell.nameLabel.attributedText = attributedString1
-//            cell.nameLabel.text = "O candidato \(egressSelected.name) possui interesse na vaga \(company.vancancies?[0].name)."
             cell.nameRegion?.text = "\(company.vancancies?[0].releaseTime) d"
             
             // Add photo  profile
