@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MD5-oh-FOn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MD5-oh-FOn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -209,6 +209,7 @@
                         <outlet property="tableView" destination="icA-87-TPm" id="o9w-DV-Yyz"/>
                         <outlet property="tableViewHeightConstraint" destination="6g8-mD-WpU" id="nKA-XN-uCN"/>
                         <segue destination="dii-Jz-Ake" kind="unwind" identifier="unwindToCandidates" unwindAction="unwindToCandidatesWithSegue:" id="QHD-cL-DRQ"/>
+                        <segue destination="dii-Jz-Ake" kind="unwind" identifier="unwindToNotications" unwindAction="unwindToNotificationWithSegue:" id="KmV-ju-Jmw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBG-bb-0KC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

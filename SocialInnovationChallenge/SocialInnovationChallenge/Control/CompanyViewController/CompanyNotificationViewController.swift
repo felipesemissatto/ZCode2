@@ -28,7 +28,8 @@ class CompanyNotificationViewController: UIViewController {
         
         //MARK: Outlets
         @IBOutlet weak var tableView: UITableView!
-        
+    @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
+    
         //MARK: Views
         
         override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +81,7 @@ class CompanyNotificationViewController: UIViewController {
                 
                 if egressSelected != nil{
                     candidateDetail.egress = egressSelected
+                    candidateDetail.segueIdentifier = "unwindToNotications"
                 }
             }
         }

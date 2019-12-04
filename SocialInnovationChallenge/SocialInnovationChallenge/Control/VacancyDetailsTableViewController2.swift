@@ -60,7 +60,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
 
 //        activatedSwitch
         nameVacancyLabel.text = vacancy?.name
-//        nameCompanyLabel.text = vacancy?.company.name
+        nameCompanyLabel.text = vacancy?.company.name
         regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
         releaseTimeLabel.text = "há \(vacancy!.releaseTime) dias atrás"

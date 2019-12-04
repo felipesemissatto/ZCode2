@@ -111,6 +111,7 @@ class CandidatesViewController: UIViewController {
             
             if egressSelected != nil{
                 candidateDetail.egress = egressSelected
+                candidateDetail.segueIdentifier = "unwindToCandidates"
             }
         }
     }
