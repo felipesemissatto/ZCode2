@@ -15,9 +15,12 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     
     
     //MARK: Properties
-    
     var egress : Egress?
+<<<<<<< HEAD
     
+=======
+    var segueIdentifier : String?
+>>>>>>> ConsertandoBugs
     
     //MARK: Outlets
     
@@ -60,7 +63,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     }
     
     @IBAction func backTapped(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToCandidates", sender: nil)
+        performSegue(withIdentifier: segueIdentifier!, sender: nil)
     }
     
     

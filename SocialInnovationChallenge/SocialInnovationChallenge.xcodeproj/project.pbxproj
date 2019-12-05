@@ -109,7 +109,7 @@
 		23D0CEC02397610100CD17C4 /* ExperiencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesView.swift; sourceTree = "<group>"; };
 		2F29F4732375C3180055B2C8 /* VacancyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyDetailsViewController.swift; sourceTree = "<group>"; };
 		2F29F4752375D9300055B2C8 /* VacancyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacancyTableViewCell.swift; sourceTree = "<group>"; };
-		2FC5C08023705CA800520F18 /* SocialInnovationChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialInnovationChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FC5C08023705CA800520F18 /* Humanuz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Humanuz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5C08323705CA800520F18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FC5C08523705CA800520F18 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2FC5C08723705CA800520F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 		2FC5C08123705CA800520F18 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FC5C08023705CA800520F18 /* SocialInnovationChallenge.app */,
+				2FC5C08023705CA800520F18 /* Humanuz.app */,
 				2FC5C09923705CA900520F18 /* SocialInnovationChallengeTests.xctest */,
 				2FC5C0A423705CA900520F18 /* SocialInnovationChallengeUITests.xctest */,
 			);
@@ -439,7 +439,7 @@
 			);
 			name = SocialInnovationChallenge;
 			productName = SocialInnovationChallenge;
-			productReference = 2FC5C08023705CA800520F18 /* SocialInnovationChallenge.app */;
+			productReference = 2FC5C08023705CA800520F18 /* Humanuz.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2FC5C09823705CA900520F18 /* SocialInnovationChallengeTests */ = {
@@ -914,7 +914,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = semissattofelipe.SocialInnovationChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Humanuz;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -934,7 +934,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = semissattofelipe.SocialInnovationChallenge;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Humanuz;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

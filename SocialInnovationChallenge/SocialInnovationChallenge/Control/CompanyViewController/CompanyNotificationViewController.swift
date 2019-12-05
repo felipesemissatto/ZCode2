@@ -39,25 +39,22 @@ class CompanyNotificationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        let company = Company(name: "PanoSocial",
+                              foundationDate: 2005,
+                              region: "Campinas, SP",
+                              photo: "",
+                              description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
+                              site: nil,
+                              sectors: "Costura; Corte; Limpeza",
+                              contact: "(019)3263-6537",
+                              vancancies: nil)
         loadEgress()
         
-    }
+        //MARK: Outlets
+        @IBOutlet weak var tableView: UITableView!
+    @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //Changing status bar color
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            UIApplication.shared.statusBarStyle = .lightContent
-        }
+        //MARK: Views
         
         myUID = Auth.auth().currentUser?.uid
     }
@@ -159,8 +156,13 @@ class CompanyNotificationViewController: UIViewController {
         if segue.identifier == "CandidateDetail"{
             let candidateDetail = segue.destination as! CandidateDetailViewController
             
-            if egressSelected != nil{
-                candidateDetail.egress = egressSelected
+            if segue.identifier == "CandidateDetail"{
+                let candidateDetail = segue.destination as! CandidateDetailViewController
+                
+                if egressSelected != nil{
+                    candidateDetail.egress = egressSelected
+                    candidateDetail.segueIdentifier = "unwindToNotications"
+                }
             }
         }
     }
