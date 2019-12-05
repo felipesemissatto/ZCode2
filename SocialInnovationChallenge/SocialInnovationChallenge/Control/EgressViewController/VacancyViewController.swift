@@ -31,6 +31,8 @@ class VacancyViewController: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var indicatorActivity: UIActivityIndicatorView!
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -92,7 +94,7 @@ class VacancyViewController: UIViewController {
 
     //MARK: Functions
     private func loadVacancies() {
-        
+        indicatorActivity.startAnimating()
         VacancyServices.getAll { (error, vacancies) in
             
             if let error = error {
@@ -103,6 +105,9 @@ class VacancyViewController: UIViewController {
                 })
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.indicatorActivity.stopAnimating()
+                        self.shadowView.isHidden = true
+                        self.indicatorActivity.isHidden = true
                 }
             }
         }

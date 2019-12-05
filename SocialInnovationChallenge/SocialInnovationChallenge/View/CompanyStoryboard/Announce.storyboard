@@ -10,7 +10,7 @@
         <!--Minhas vagas-->
         <scene sceneID="5ej-TX-3gd">
             <objects>
-                <viewController id="ubl-gL-2aV" customClass="AnnounceViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ubl-gL-2aV" customClass="AnnounceViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="03N-hZ-siM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-w3-fFH">
-                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="713.5"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="zrc-HP-aCT">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
@@ -29,7 +29,7 @@
                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="182" id="L6h-Lv-P4c" customClass="VacancyTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="182" id="L6h-Lv-P4c" customClass="VacancyTableViewCell" customModule="Humanuz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44" width="414" height="182"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L6h-Lv-P4c" id="Ad7-f9-9J7">
@@ -117,14 +117,34 @@
                                     <outlet property="delegate" destination="ubl-gL-2aV" id="8QV-fC-e97"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF3-7M-nhG">
+                                <rect key="frame" x="162" y="403" width="90" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="0js-kR-G6A"/>
+                                    <constraint firstAttribute="height" constant="90" id="geU-wC-oDc"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="q3I-Ol-MjJ">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tVc-51-OBs" firstAttribute="bottom" secondItem="qXV-w3-fFH" secondAttribute="bottom" id="5MO-T4-m52"/>
                             <constraint firstItem="tVc-51-OBs" firstAttribute="trailing" secondItem="qXV-w3-fFH" secondAttribute="trailing" id="5Ma-1S-mQz"/>
+                            <constraint firstItem="q3I-Ol-MjJ" firstAttribute="centerX" secondItem="03N-hZ-siM" secondAttribute="centerX" id="8FX-nM-gOn"/>
+                            <constraint firstItem="q3I-Ol-MjJ" firstAttribute="centerY" secondItem="03N-hZ-siM" secondAttribute="centerY" id="HHF-Sw-8r8"/>
+                            <constraint firstItem="lF3-7M-nhG" firstAttribute="centerY" secondItem="03N-hZ-siM" secondAttribute="centerY" id="IIR-yC-Ot9"/>
                             <constraint firstItem="qXV-w3-fFH" firstAttribute="top" secondItem="tVc-51-OBs" secondAttribute="top" id="KPO-QL-wsX"/>
                             <constraint firstItem="qXV-w3-fFH" firstAttribute="leading" secondItem="tVc-51-OBs" secondAttribute="leading" id="OyJ-c4-kt0"/>
+                            <constraint firstItem="lF3-7M-nhG" firstAttribute="centerX" secondItem="03N-hZ-siM" secondAttribute="centerX" id="Puz-ao-IEC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tVc-51-OBs"/>
                     </view>
@@ -138,6 +158,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="q3I-Ol-MjJ" id="2d7-UJ-SpB"/>
+                        <outlet property="shadowView" destination="lF3-7M-nhG" id="w50-xJ-jK8"/>
                         <outlet property="tableView" destination="qXV-w3-fFH" id="LDE-Vb-wYn"/>
                         <segue destination="QSH-GE-gM0" kind="show" identifier="createAnnounceSegue" id="y6q-xZ-eO4"/>
                         <segue destination="vhG-sN-p1C" kind="show" identifier="showDetailSegue" id="AXm-n8-KyW"/>

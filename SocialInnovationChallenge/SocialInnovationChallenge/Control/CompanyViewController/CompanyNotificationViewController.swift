@@ -34,7 +34,8 @@ class CompanyNotificationViewController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
-
+    @IBOutlet weak var acitivtyIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var shadowView: UIView!
     //MARK: Views
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +54,7 @@ class CompanyNotificationViewController: UIViewController {
         let db = Firestore.firestore()
         var egress:  Egress! = nil
         
+        acitivtyIndicator.startAnimating()
         canditates() { (error, listCandidate) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
@@ -93,6 +95,9 @@ class CompanyNotificationViewController: UIViewController {
                             self.egress.append(egress)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                self.acitivtyIndicator.stopAnimating()
+                                self.shadowView.isHidden = true
+                                self.acitivtyIndicator.isHidden = true
                             }
 //                            print("Document data: \(dataDescription)")
                         } else {
