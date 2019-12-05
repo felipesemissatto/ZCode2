@@ -20,7 +20,7 @@ class VacancyViewController: UIViewController {
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/pessoa001.png?alt=media&token=6fa74cf3-d7b9-4830-bd51-dbed69b36590",
+                          photo: "",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",

@@ -20,6 +20,7 @@ class CompanyNotificationViewController: UIViewController {
     var egressSelected: Egress?
     var filteredEgress = [Egress]()
     var myUID: String?
+    var listCandidates: [String] = []
     
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
@@ -140,8 +141,6 @@ class CompanyNotificationViewController: UIViewController {
     
     func canditates(completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) {
 
-        var listCandidates: [String] = []
-        
         loadVacancies() { (error, vacancies) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
@@ -149,10 +148,10 @@ class CompanyNotificationViewController: UIViewController {
             } else {
                 for vacancy in vacancies! {
                     if vacancy.UID == self.myUID {
-                        listCandidates = listCandidates + vacancy.candidateList
+                        self.listCandidates = self.listCandidates + vacancy.candidateList
                     }
                 }
-                completion(nil, listCandidates.removingDuplicates())
+                completion(nil, self.listCandidates.removingDuplicates())
             }
         }
     }

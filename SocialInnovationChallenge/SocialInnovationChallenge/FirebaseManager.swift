@@ -14,10 +14,10 @@ class FirebaseManager {
     
     var vacancies: [Vacancy] = []
     var egress: [Egress] = []
-    let company = Company(name: "PanoSocial",
+    let company = Company(name: "Pano Social",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: "",
+                          photo: "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/News%20Logo.png?alt=media&token=cb6d3dd4-c113-4b35-af93-2ab8847f451d",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",
@@ -64,7 +64,8 @@ class FirebaseManager {
                                                                 "salary": salary ,
                                                                 "typeOfWork": typeOfWork,
                                                                 "workday": workday,
-                                                                "UID": uid]) { err in
+                                                                "UID": uid,
+                                                                "startWork": "Imediato"]){ err in
                                                                     if let err = err {
                                                                         print("Error adding document: \(err)")
                                                                         completion(err, nil)
@@ -98,6 +99,7 @@ class FirebaseManager {
                     let salary = document.get("salary") as! String
                     let region = document.get("region") as! String
                     let typeOfWork = document.get("typeOfWork") as! String
+                    let startWork = document.get("startWork") as! String
                     let isActivated = document.get("isActivated") as! Bool
                     let ID = document.documentID
                     let uid = document.get("UID") as! String
@@ -114,7 +116,8 @@ class FirebaseManager {
                                       region: region,
                                       typeOfWork: typeOfWork,
                                       isActivated: isActivated,
-                                      candidateList: candidateList)
+                                      candidateList: candidateList,
+                                      startWork: startWork)
                     vacancy.ID = ID
                     vacancy.UID = uid
                     

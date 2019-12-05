@@ -114,7 +114,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
                             
                             DispatchQueue.main.async {
                                 if data != nil{
-//                                    self.profileImage.image = image
+                                    self.profileImage.image = image
                                 }
                             }
                         }

@@ -25,7 +25,7 @@ struct Company{
     init(name: String = "",
         foundationDate: Int = 0,
         region: String = "",
-        photo: String = "",
+        photo: String = "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/News%20Logo.png?alt=media&token=cb6d3dd4-c113-4b35-af93-2ab8847f451d",
         description: String = "",
         site: URL? = nil,
         sectors: String = "",

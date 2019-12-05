@@ -10,7 +10,7 @@
         <!--Candidate Detail View Controller-->
         <scene sceneID="r4h-Bm-BfK">
             <objects>
-                <viewController id="MD5-oh-FOn" customClass="CandidateDetailViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MD5-oh-FOn" customClass="CandidateDetailViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TOu-bF-gj7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,8 +21,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sg6-n6-smR" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="890"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cachorro1" translatesAutoresizingMaskIntoConstraints="NO" id="Edu-0Y-XdJ">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Edu-0Y-XdJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="245.5"/>
+                                                <color key="backgroundColor" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Olá! Meu nome é " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF6-j0-usU">
                                                 <rect key="frame" x="24" y="277.5" width="188" height="29"/>
@@ -204,6 +205,7 @@
                         <outlet property="descriptionTextView" destination="OeB-wQ-e30" id="EKT-Rz-TW7"/>
                         <outlet property="inviteButton" destination="EIp-Bv-KWL" id="xXW-ij-A4K"/>
                         <outlet property="nameLabel" destination="PjM-y3-A8u" id="DnJ-Sf-76B"/>
+                        <outlet property="profileImage" destination="Edu-0Y-XdJ" id="W3t-N2-PZ8"/>
                         <outlet property="stackView" destination="Bod-bG-d6W" id="BQH-QC-j5D"/>
                         <outlet property="stackViewHeightConstraint" destination="3rh-6a-UhB" id="HIB-uF-kBV"/>
                         <outlet property="tableView" destination="icA-87-TPm" id="o9w-DV-Yyz"/>
@@ -218,7 +220,4 @@
             <point key="canvasLocation" x="315.94202898550725" y="45.535714285714285"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="cachorro1" width="1920" height="1080"/>
-    </resources>
 </document>
