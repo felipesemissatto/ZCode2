@@ -169,8 +169,8 @@ class VacancyDetailsTableViewController2: UITableViewController {
     }
     
     func applayAlert() {
-        let alert = UIAlertController(title: "",
-                                      message: "Você se candidatou",
+        let alert = UIAlertController(title: "Parabéns!",
+                                      message: "Você acabou a se candaidatar a vaga. Agora é só aguardar o retorno.",
                                       preferredStyle: .alert)
         let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
             self.applyButton.setTitle("Você já se candidatou!",for: .normal)

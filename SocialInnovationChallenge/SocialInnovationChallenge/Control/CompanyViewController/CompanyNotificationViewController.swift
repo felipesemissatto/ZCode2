@@ -74,94 +74,50 @@ class CompanyNotificationViewController: UIViewController {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
                 listCandidateUID = listCandidate!
-
+                self.egress = []
                 for candidateUID in listCandidateUID {
-                    db.collection("egress").whereField("documentID", isEqualTo: candidateUID).getDocuments() {
-                        (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            print(candidateUID)
-                            print(querySnapshot?.documents)
-                            for document in querySnapshot!.documents {
-                                let name = document.get("name") as! String
-                                let region = document.get("region") as! String
-                                let description = document.get("description") as! String
-                                let contact = document.get("contact") as! [String]
-                                let desires = document.get("dreams") as! [String]
-                                let photo = document.get("photo") as! String
-                                let courses = document.get("courses") as! [String]
-                                let experiences = document.get("experiences") as! [String]
-
-                                egress = Egress(name: name,
-                                                dateOfBirth: "",
-                                                description: description,
-                                                region: region,
-                                                photo: photo,
-                                                video: nil,
-                                                courses: courses,
-                                                experiences: experiences,
-                                                skills: nil,
-                                                desires: desires,
-                                                contact: contact)
-
-                                self.egress.append(egress)
-                            }
+                    let docRef = db.collection("egress").document(candidateUID)
+                    
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+           
+                            let name = document.get("name") as! String
+                            let region = document.get("region") as! String
+                            let description = document.get("description") as! String
+                            let contact = document.get("contact") as! [String]
+                            let desires = document.get("dreams") as! [String]
+                            let photo = document.get("photo") as! String
+                            let courses = document.get("courses") as! [String]
+                            let experiences = document.get("experiences") as! [String]
+                            let experiencesDescription = document.get("experiencesDescription") as! [String]
+                            let uid = document.get("documentID") as! String
+                            
+                            egress = Egress(name: name,
+                                            dateOfBirth: "",
+                                            description: description,
+                                            region: region,
+                                            photo: photo,
+                                            video: nil,
+                                            courses: courses,
+                                            experiences: experiences,
+                                            experiencesDescription: experiencesDescription,
+                                            skills: nil,
+                                            desires: desires,
+                                            contact: contact)
+                            egress.uid = uid
+                            self.egress.append(egress)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
+                            print("Document data: \(dataDescription)")
+                        } else {
+                            print("Document does not exist")
                         }
                     }
                 }
             }
         }
-//        canditates() { (error, listCandidate) in
-//            if let error = error {
-//                print("Error loading document: \(error.localizedDescription)")
-//            } else {
-//                listCandidateUID = listCandidate!
-//                db.collection("egress").getDocuments() { (snapshot, err) in
-//                    if let error = err {
-//                        print("Error getting documents: \(error)")
-//                    } else {
-//                        for document in snapshot!.documents {
-//
-//                            let name = document.get("name") as! String
-//                            let region = document.get("region") as! String
-//                            let description = document.get("description") as! String
-//                            let contact = document.get("contact") as! [String]
-//                            let desires = document.get("dreams") as! [String]
-//                            let photo = document.get("photo") as! String
-//                            let courses = document.get("courses") as! [String]
-//                            let experiences = document.get("experiences") as! [String]
-//                            let uid = document.get("documentID") as! String
-//
-//                            egress = Egress(name: name,
-//                                            dateOfBirth: "",
-//                                            description: description,
-//                                            region: region,
-//                                            photo: photo,
-//                                            video: nil,
-//                                            courses: courses,
-//                                            experiences: experiences,
-//                                            skills: nil,
-//                                            desires: desires,
-//                                            contact: contact)
-//                            egress.uid = uid
-//                            self.oldEgress.append(egress)
-//                        }
-//
-//                        for egress in self.oldEgress {
-//                            for uid in listCandidateUID {
-//                                if uid == egress.uid{
-//                                    self.egress.append(egress)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
     
     func loadVacancies(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
@@ -191,7 +147,6 @@ class CompanyNotificationViewController: UIViewController {
                         listCandidates = listCandidates + vacancy.candidateList
                     }
                 }
-
                 completion(nil, listCandidates.removingDuplicates())
             }
         }

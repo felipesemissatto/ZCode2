@@ -148,6 +148,7 @@ class FirebaseManager {
                     let courses = document.get("courses") as! [String]
                     let experiences = document.get("experiences") as! [String]
                     let experiencesDescription = document.get("experiencesDescription") as! [String]
+                    let uid = document.get("documentID") as! String
                     
                     egress = Egress(name: name,
                                     dateOfBirth: "",
@@ -161,6 +162,7 @@ class FirebaseManager {
                                     skills: nil,
                                     desires: desires,
                                     contact: contact)
+                    egress.uid = uid
                     
                     self.egress.append(egress)
                 }
