@@ -461,6 +461,7 @@
                         <outlet property="activatedSwitch" destination="RaA-3D-YfI" id="OFh-If-rSg"/>
                         <outlet property="applyButton" destination="MYZ-lg-L8a" id="AcQ-Xq-MRK"/>
                         <outlet property="benefitsLabel" destination="aPm-Qv-mg9" id="cSQ-Ws-D5A"/>
+                        <outlet property="bottomConstraint" destination="0xK-15-IWg" id="Ypi-Js-Hgp"/>
                         <outlet property="buttonApplyNow" destination="MYZ-lg-L8a" id="ajA-xU-gh1"/>
                         <outlet property="cell1" destination="eDm-n2-y7e" id="XnV-2m-sId"/>
                         <outlet property="cell2" destination="L5r-AZ-xRC" id="oBH-n7-sIo"/>
@@ -472,6 +473,7 @@
                         <outlet property="salaryLabel" destination="LdW-Ud-WXe" id="3Lo-Gx-Mi6"/>
                         <outlet property="saveButton" destination="XGu-Lj-UV0" id="BKJ-bc-ByU"/>
                         <outlet property="startWorkLabel" destination="key-fQ-n0m" id="5wE-eG-WKs"/>
+                        <outlet property="topConstraint" destination="ugx-Fm-BdP" id="a1W-jk-sW7"/>
                         <outlet property="typeOfWorkLabel" destination="q64-35-HWa" id="2z5-7T-6kn"/>
                         <outlet property="viewLine" destination="naY-SV-5dG" id="6tP-ay-Lbd"/>
                         <outlet property="workdayLabel" destination="6ej-ig-SAx" id="8yk-XY-DmW"/>

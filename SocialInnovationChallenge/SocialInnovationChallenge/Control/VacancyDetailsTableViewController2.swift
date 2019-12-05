@@ -35,6 +35,8 @@ class VacancyDetailsTableViewController2: UITableViewController {
     @IBOutlet weak var buttonApplyNow: UIButton!
     @IBOutlet weak var viewLine: UIView!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     //cell3
     @IBOutlet weak var releaseTimeLabel: UILabel!
     @IBOutlet weak var workdayLabel: UILabel!
@@ -202,8 +204,11 @@ class VacancyDetailsTableViewController2: UITableViewController {
             self.cell1.isHidden = true
             rowHeight = 0.0
         } else if indexPath.row == 1 && screenBefore == false{
-            self.cell2.isHidden = true
-            rowHeight = 0.0
+            buttonApplyNow.isHidden = true
+            viewLine.isHidden = true
+            topConstraint.constant = 0
+            bottomConstraint.isActive = false
+            rowHeight = UITableView.automaticDimension
         } else{
             rowHeight = UITableView.automaticDimension
         }
