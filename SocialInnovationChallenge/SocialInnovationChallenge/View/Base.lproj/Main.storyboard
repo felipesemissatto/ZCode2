@@ -10,7 +10,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="r" id="BYZ-38-t0r" customClass="MainViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="r" id="BYZ-38-t0r" customClass="MainViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                     <constraint firstAttribute="width" constant="330" id="U0a-KY-p8r"/>
                                 </constraints>
                                 <string key="text">Bem-vindo ao
-nomeapp! :)
+Humanoz! :)
 Pensarei numa frase para colocar aqui.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

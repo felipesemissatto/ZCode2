@@ -16,11 +16,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     
     //MARK: Properties
     var egress : Egress?
-<<<<<<< HEAD
-    
-=======
     var segueIdentifier : String?
->>>>>>> ConsertandoBugs
     
     //MARK: Outlets
     
@@ -118,7 +114,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
                             
                             DispatchQueue.main.async {
                                 if data != nil{
-                                    self.profileImage.image = image
+//                                    self.profileImage.image = image
                                 }
                             }
                         }

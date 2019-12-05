@@ -9,7 +9,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="aPd-EJ-Axx">
             <objects>
-                <tabBarController hidesBottomBarWhenPushed="YES" id="vhB-aS-Fpy" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeEgress" hidesBottomBarWhenPushed="YES" id="vhB-aS-Fpy" sceneMemberID="viewController">
                     <tabBar key="tabBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vEn-7p-oJ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

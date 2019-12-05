@@ -24,7 +24,7 @@ class CompanyNotificationViewController: UIViewController {
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: nil,
+                          photo: "",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",
@@ -33,29 +33,16 @@ class CompanyNotificationViewController: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
+
     //MARK: Views
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let company = Company(name: "PanoSocial",
-                              foundationDate: 2005,
-                              region: "Campinas, SP",
-                              photo: "",
-                              description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-                              site: nil,
-                              sectors: "Costura; Corte; Limpeza",
-                              contact: "(019)3263-6537",
-                              vancancies: nil)
         loadEgress()
         
-        //MARK: Outlets
-        @IBOutlet weak var tableView: UITableView!
-    @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
-    
         //MARK: Views
-        
         myUID = Auth.auth().currentUser?.uid
     }
     
@@ -77,7 +64,7 @@ class CompanyNotificationViewController: UIViewController {
                     
                     docRef.getDocument { (document, error) in
                         if let document = document, document.exists {
-                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
            
                             let name = document.get("name") as! String
                             let region = document.get("region") as! String
@@ -107,7 +94,7 @@ class CompanyNotificationViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
-                            print("Document data: \(dataDescription)")
+//                            print("Document data: \(dataDescription)")
                         } else {
                             print("Document does not exist")
                         }
