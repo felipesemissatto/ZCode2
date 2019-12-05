@@ -45,6 +45,22 @@ class CompanyNotificationViewController: UIViewController {
         
         //MARK: Views
         myUID = Auth.auth().currentUser?.uid
+        
+        //Changing status bar color
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            UIApplication.shared.statusBarStyle = .lightContent
+        }
     }
     
     //MARK: Functions

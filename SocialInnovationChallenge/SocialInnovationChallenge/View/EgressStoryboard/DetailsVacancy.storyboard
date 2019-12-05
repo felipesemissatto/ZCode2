@@ -9,7 +9,7 @@
         <!--Detalhes da vaga-->
         <scene sceneID="cnv-q9-drr">
             <objects>
-                <tableViewController id="35T-CQ-0gn" customClass="VacancyDetailsTableViewController2" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="35T-CQ-0gn" customClass="VacancyDetailsTableViewController2" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oJP-3q-qgs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,7 +232,7 @@
                                                             <color key="textColor" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Grouppin" translatesAutoresizingMaskIntoConstraints="NO" id="ROG-bP-WvT">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vectortime" translatesAutoresizingMaskIntoConstraints="NO" id="ROG-bP-WvT">
                                                             <rect key="frame" x="152.5" y="0.5" width="11" height="11"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="11" id="E9J-Ie-eZy"/>
@@ -488,5 +488,6 @@
     </scenes>
     <resources>
         <image name="Grouppin" width="12" height="14"/>
+        <image name="Vectortime" width="12" height="12"/>
     </resources>
 </document>
