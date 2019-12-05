@@ -19,9 +19,11 @@ class Egress{
     public var video: URL?
     public var courses: [String]?
     public var experiences: [String]?
+    public var experiencesDescription: [String]?
     public var skills: [String]?
     public var desires: [String]
     public var contact: [String]
+    public var uid: String?
     
     //MARK: Constructors
     init(name: String = "",
@@ -32,6 +34,7 @@ class Egress{
         video: URL? = nil,
         courses: [String]? = nil,
         experiences: [String]? = nil,
+        experiencesDescription: [String]? = nil,
         skills: [String]? = nil,
         desires: [String] = ["", "", ""],
         contact: [String] = []){
@@ -44,6 +47,7 @@ class Egress{
             self.video = video
             self.courses = courses
             self.experiences = experiences
+            self.experiencesDescription = experiencesDescription
             self.skills = skills
             self.desires = desires
             self.contact = contact

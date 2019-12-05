@@ -23,7 +23,7 @@ class AnnounceViewController: UIViewController {
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: nil,
+                          photo: "",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",
@@ -32,6 +32,8 @@ class AnnounceViewController: UIViewController {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var shadowView: UIView!
     
     //MARK: LifeCycle
     override func viewDidLoad() {
@@ -95,7 +97,7 @@ class AnnounceViewController: UIViewController {
 
     //MARK: Functions
     private func loadVacancies() {
-        
+        activityIndicator.startAnimating()
         VacancyServices.getAll { (error, vacancies) in
             
             if let error = error {
@@ -104,7 +106,10 @@ class AnnounceViewController: UIViewController {
                 self.vacancies  = vacancies!
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
-                }
+                        self.activityIndicator.stopAnimating()
+                        self.shadowView.isHidden = true
+                        self.activityIndicator.isHidden = true
+                    }
             }
         }
     }

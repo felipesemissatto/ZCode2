@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="35T-CQ-0gn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="35T-CQ-0gn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Detalhes da vaga-->
         <scene sceneID="cnv-q9-drr">
             <objects>
-                <tableViewController id="35T-CQ-0gn" customClass="VacancyDetailsTableViewController2" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="35T-CQ-0gn" customClass="VacancyDetailsTableViewController2" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="oJP-3q-qgs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,7 +232,7 @@
                                                             <color key="textColor" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Grouppin" translatesAutoresizingMaskIntoConstraints="NO" id="ROG-bP-WvT">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vectortime" translatesAutoresizingMaskIntoConstraints="NO" id="ROG-bP-WvT">
                                                             <rect key="frame" x="152.5" y="0.5" width="11" height="11"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="11" id="E9J-Ie-eZy"/>
@@ -461,6 +461,7 @@
                         <outlet property="activatedSwitch" destination="RaA-3D-YfI" id="OFh-If-rSg"/>
                         <outlet property="applyButton" destination="MYZ-lg-L8a" id="AcQ-Xq-MRK"/>
                         <outlet property="benefitsLabel" destination="aPm-Qv-mg9" id="cSQ-Ws-D5A"/>
+                        <outlet property="bottomConstraint" destination="0xK-15-IWg" id="Ypi-Js-Hgp"/>
                         <outlet property="buttonApplyNow" destination="MYZ-lg-L8a" id="ajA-xU-gh1"/>
                         <outlet property="cell1" destination="eDm-n2-y7e" id="XnV-2m-sId"/>
                         <outlet property="cell2" destination="L5r-AZ-xRC" id="oBH-n7-sIo"/>
@@ -472,6 +473,7 @@
                         <outlet property="salaryLabel" destination="LdW-Ud-WXe" id="3Lo-Gx-Mi6"/>
                         <outlet property="saveButton" destination="XGu-Lj-UV0" id="BKJ-bc-ByU"/>
                         <outlet property="startWorkLabel" destination="key-fQ-n0m" id="5wE-eG-WKs"/>
+                        <outlet property="topConstraint" destination="ugx-Fm-BdP" id="a1W-jk-sW7"/>
                         <outlet property="typeOfWorkLabel" destination="q64-35-HWa" id="2z5-7T-6kn"/>
                         <outlet property="viewLine" destination="naY-SV-5dG" id="6tP-ay-Lbd"/>
                         <outlet property="workdayLabel" destination="6ej-ig-SAx" id="8yk-XY-DmW"/>
@@ -486,5 +488,6 @@
     </scenes>
     <resources>
         <image name="Grouppin" width="12" height="14"/>
+        <image name="Vectortime" width="12" height="12"/>
     </resources>
 </document>

@@ -14,7 +14,7 @@ struct Company{
     public var name: String
     public var foundationDate: Int
     public var region: String
-    public var photo: URL?
+    public var photo: String
     public var description: String
     public var site: URL?
     public var sectors: String
@@ -25,7 +25,7 @@ struct Company{
     init(name: String = "",
         foundationDate: Int = 0,
         region: String = "",
-        photo: URL? = nil,
+        photo: String = "",
         description: String = "",
         site: URL? = nil,
         sectors: String = "",

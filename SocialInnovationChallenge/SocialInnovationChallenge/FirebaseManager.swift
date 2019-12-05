@@ -17,7 +17,7 @@ class FirebaseManager {
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
                           region: "Campinas, SP",
-                          photo: nil,
+                          photo: "",
                           description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
                           site: nil,
                           sectors: "Costura; Corte; Limpeza",
@@ -147,6 +147,8 @@ class FirebaseManager {
                     let photo = document.get("photo") as! String
                     let courses = document.get("courses") as! [String]
                     let experiences = document.get("experiences") as! [String]
+                    let experiencesDescription = document.get("experiencesDescription") as! [String]
+                    let uid = document.get("documentID") as! String
                     
                     egress = Egress(name: name,
                                     dateOfBirth: "",
@@ -156,9 +158,11 @@ class FirebaseManager {
                                     video: nil,
                                     courses: courses,
                                     experiences: experiences,
+                                    experiencesDescription: experiencesDescription,
                                     skills: nil,
                                     desires: desires,
                                     contact: contact)
+                    egress.uid = uid
                     
                     self.egress.append(egress)
                 }

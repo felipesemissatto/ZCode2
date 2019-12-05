@@ -10,7 +10,7 @@
         <!--Notificações-->
         <scene sceneID="8K6-y8-L2w">
             <objects>
-                <viewController id="XDP-8M-XgS" customClass="CompanyNotificationViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XDP-8M-XgS" customClass="CompanyNotificationViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wae-HH-f3A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
                                     <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="114" id="8jn-nC-JBZ" customClass="CandidateTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="114" id="8jn-nC-JBZ" customClass="CandidateTableViewCell" customModule="Humanuz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44" width="414" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8jn-nC-JBZ" id="Lb1-aq-K5d">
@@ -98,14 +98,34 @@
                                     <outlet property="delegate" destination="XDP-8M-XgS" id="srF-ON-0jP"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cX-aB-Lrm">
+                                <rect key="frame" x="162" y="403" width="90" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="PHT-A5-1AN"/>
+                                    <constraint firstAttribute="width" constant="90" id="TFP-IG-CkB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="vjC-OK-WmD">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="O72-LA-2Ve" firstAttribute="trailing" secondItem="BV6-qo-1lW" secondAttribute="trailing" id="1R8-JC-zvD"/>
                             <constraint firstItem="BV6-qo-1lW" firstAttribute="leading" secondItem="O72-LA-2Ve" secondAttribute="leading" id="1wf-y6-DKJ"/>
+                            <constraint firstItem="8cX-aB-Lrm" firstAttribute="centerX" secondItem="wae-HH-f3A" secondAttribute="centerX" id="DpY-G8-sGD"/>
                             <constraint firstItem="jy4-wy-eez" firstAttribute="top" secondItem="O72-LA-2Ve" secondAttribute="top" id="KID-o1-dcu"/>
+                            <constraint firstItem="vjC-OK-WmD" firstAttribute="centerX" secondItem="wae-HH-f3A" secondAttribute="centerX" id="KXd-NW-nTE"/>
+                            <constraint firstItem="vjC-OK-WmD" firstAttribute="centerY" secondItem="wae-HH-f3A" secondAttribute="centerY" id="Np7-m7-cZq"/>
                             <constraint firstItem="BV6-qo-1lW" firstAttribute="top" secondItem="O72-LA-2Ve" secondAttribute="top" id="O7O-8p-hph"/>
                             <constraint firstItem="jy4-wy-eez" firstAttribute="leading" secondItem="O72-LA-2Ve" secondAttribute="leading" id="fH4-jU-7Uh"/>
+                            <constraint firstItem="8cX-aB-Lrm" firstAttribute="centerY" secondItem="wae-HH-f3A" secondAttribute="centerY" id="heJ-eQ-ntg"/>
                             <constraint firstItem="O72-LA-2Ve" firstAttribute="bottom" secondItem="BV6-qo-1lW" secondAttribute="bottom" id="nUV-Pu-Uu6"/>
                             <constraint firstItem="O72-LA-2Ve" firstAttribute="bottom" secondItem="jy4-wy-eez" secondAttribute="bottom" id="xVu-Kc-bRi"/>
                             <constraint firstItem="O72-LA-2Ve" firstAttribute="trailing" secondItem="jy4-wy-eez" secondAttribute="trailing" id="z43-RZ-iVQ"/>
@@ -114,6 +134,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Notificações" id="uGc-GG-MIm"/>
                     <connections>
+                        <outlet property="acitivtyIndicator" destination="vjC-OK-WmD" id="PHc-Iq-Evq"/>
+                        <outlet property="shadowView" destination="8cX-aB-Lrm" id="y92-d0-cxM"/>
                         <outlet property="tableView" destination="jy4-wy-eez" id="Qvw-AV-mFX"/>
                         <segue destination="gjF-bA-nxZ" kind="modal" identifier="CandidateDetail" id="zHI-mg-uaY"/>
                     </connections>

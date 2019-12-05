@@ -35,6 +35,8 @@ class VacancyDetailsTableViewController2: UITableViewController {
     @IBOutlet weak var buttonApplyNow: UIButton!
     @IBOutlet weak var viewLine: UIView!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     //cell3
     @IBOutlet weak var releaseTimeLabel: UILabel!
     @IBOutlet weak var workdayLabel: UILabel!
@@ -60,13 +62,13 @@ class VacancyDetailsTableViewController2: UITableViewController {
 
 //        activatedSwitch
         nameVacancyLabel.text = vacancy?.name
-//        nameCompanyLabel.text = vacancy?.company.name
+        nameCompanyLabel.text = vacancy?.company.name
         regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
-        releaseTimeLabel.text = "há \(vacancy?.releaseTime) dias atrás"
+        releaseTimeLabel.text = "há \(vacancy!.releaseTime) dias atrás"
         workdayLabel.text = vacancy?.workday
         benefitsLabel.text = vacancy?.benefits
-//        startWorkLabel.text = vacancy?.startWork
+        startWorkLabel.text = vacancy?.startWork
         descriptionLabel.text = vacancy?.description
         typeOfWorkLabel.text = vacancy?.typeOfWork
     }
@@ -169,8 +171,8 @@ class VacancyDetailsTableViewController2: UITableViewController {
     }
     
     func applayAlert() {
-        let alert = UIAlertController(title: "",
-                                      message: "Você se candidatou",
+        let alert = UIAlertController(title: "Parabéns!",
+                                      message: "Você acabou a se candidatar a vaga. Agora é só aguardar o retorno.",
                                       preferredStyle: .alert)
         let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
             self.applyButton.setTitle("Você já se candidatou!",for: .normal)
@@ -197,11 +199,16 @@ class VacancyDetailsTableViewController2: UITableViewController {
         var rowHeight:CGFloat = 0.0
         
         if indexPath.row == 0 && screenBefore == true{
-            cell1.isHidden = true
+            self.saveButton.isEnabled = false
+            self.saveButton.title = ""
+            self.cell1.isHidden = true
             rowHeight = 0.0
         } else if indexPath.row == 1 && screenBefore == false{
-            cell2.isHidden = true
-            rowHeight = 0.0
+            buttonApplyNow.isHidden = true
+            viewLine.isHidden = true
+            topConstraint.constant = 0
+            bottomConstraint.isActive = false
+            rowHeight = UITableView.automaticDimension
         } else{
             rowHeight = UITableView.automaticDimension
         }

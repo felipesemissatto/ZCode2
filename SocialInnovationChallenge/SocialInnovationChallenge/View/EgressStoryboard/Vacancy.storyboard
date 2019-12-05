@@ -7,42 +7,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Vagas-->
+        <!--Vagas disponíveis-->
         <scene sceneID="R9Q-Ss-78O">
             <objects>
-                <viewController id="7Wb-JH-OY6" customClass="VacancyViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="7Wb-JH-OY6" customClass="VacancyViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5pz-qm-Gtg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-PB-sq3">
-                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="713.5"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KHp-6c-r5Z">
-                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="713.5"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Mw6-Ja-40t">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suas candidaturas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmf-XV-EIg">
-                                            <rect key="frame" x="32" y="45" width="125" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                            <color key="textColor" red="0.0039215686269999999" green="0.75686274509803919" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Tmf-XV-EIg" secondAttribute="bottom" constant="20" id="7zm-el-c8r"/>
-                                        <constraint firstItem="Tmf-XV-EIg" firstAttribute="leading" secondItem="Mw6-Ja-40t" secondAttribute="leading" constant="32" id="nDM-Mt-zkK"/>
-                                    </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="148" id="GJI-Hc-LfO" customClass="VacancyEgressTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="110" width="414" height="148"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="148" id="GJI-Hc-LfO" customClass="VacancyEgressTableViewCell" customModule="Humanuz" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GJI-Hc-LfO" id="AHp-iI-iD1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
@@ -222,22 +210,44 @@
                                     <outlet property="delegate" destination="7Wb-JH-OY6" id="KS9-6Z-BBV"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHS-2C-2fk">
+                                <rect key="frame" x="162" y="403" width="90" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="FM8-en-gIf"/>
+                                    <constraint firstAttribute="width" constant="90" id="gRe-Nq-yTB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="IqC-5l-JWK">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KHp-6c-r5Z" firstAttribute="top" secondItem="YOa-JZ-2eg" secondAttribute="top" id="3Xd-Ps-3Yk"/>
                             <constraint firstItem="YOa-JZ-2eg" firstAttribute="trailing" secondItem="kjs-PB-sq3" secondAttribute="trailing" id="63Y-zz-OH2"/>
                             <constraint firstItem="kjs-PB-sq3" firstAttribute="top" secondItem="YOa-JZ-2eg" secondAttribute="top" id="CZH-eg-ELh"/>
+                            <constraint firstItem="IqC-5l-JWK" firstAttribute="centerX" secondItem="5pz-qm-Gtg" secondAttribute="centerX" id="Kmm-nc-Fnl"/>
+                            <constraint firstItem="qHS-2C-2fk" firstAttribute="centerX" secondItem="5pz-qm-Gtg" secondAttribute="centerX" id="Mfh-ql-myA"/>
+                            <constraint firstItem="IqC-5l-JWK" firstAttribute="centerY" secondItem="5pz-qm-Gtg" secondAttribute="centerY" id="VhW-X9-TXn"/>
                             <constraint firstItem="KHp-6c-r5Z" firstAttribute="leading" secondItem="YOa-JZ-2eg" secondAttribute="leading" id="Wob-Qq-xOA"/>
                             <constraint firstItem="YOa-JZ-2eg" firstAttribute="bottom" secondItem="kjs-PB-sq3" secondAttribute="bottom" id="iXO-71-NK5"/>
+                            <constraint firstItem="qHS-2C-2fk" firstAttribute="centerY" secondItem="5pz-qm-Gtg" secondAttribute="centerY" id="rxL-tG-Jw2"/>
                             <constraint firstItem="kjs-PB-sq3" firstAttribute="leading" secondItem="YOa-JZ-2eg" secondAttribute="leading" id="wWC-DO-Kek"/>
                             <constraint firstItem="YOa-JZ-2eg" firstAttribute="bottom" secondItem="KHp-6c-r5Z" secondAttribute="bottom" id="wwu-Od-fM1"/>
                             <constraint firstItem="YOa-JZ-2eg" firstAttribute="trailing" secondItem="KHp-6c-r5Z" secondAttribute="trailing" id="zEc-fH-6Zi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YOa-JZ-2eg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Vagas" largeTitleDisplayMode="always" id="Wps-hW-mC4"/>
+                    <navigationItem key="navigationItem" title="Vagas disponíveis" largeTitleDisplayMode="always" id="Wps-hW-mC4"/>
                     <connections>
+                        <outlet property="indicatorActivity" destination="IqC-5l-JWK" id="ZIM-cU-WFf"/>
+                        <outlet property="shadowView" destination="qHS-2C-2fk" id="lhH-3c-ha0"/>
                         <outlet property="tableView" destination="KHp-6c-r5Z" id="y0w-Dm-vkT"/>
                         <segue destination="pGg-56-ldb" kind="show" identifier="segueDetailsVacancy" id="PD0-Qr-pac"/>
                     </connections>
@@ -253,7 +263,7 @@
                     <tabBarItem key="tabBarItem" title="Vagas" id="zJy-7x-D8u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="7Kx-IF-xbH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0039215686274509803" green="0.76862745098039209" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

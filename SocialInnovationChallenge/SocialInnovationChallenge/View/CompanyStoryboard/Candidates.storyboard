@@ -10,17 +10,17 @@
         <!--Buscar-->
         <scene sceneID="75B-i2-x9o">
             <objects>
-                <viewController id="6M2-pQ-bCA" customClass="CandidatesViewController" customModule="SocialInnovationChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6M2-pQ-bCA" customClass="CandidatesViewController" customModule="Humanuz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GPC-ME-u6D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugd-hr-uCi">
-                                <rect key="frame" x="0.0" y="148.5" width="414" height="713.5"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m2w-O3-iLL">
-                                <rect key="frame" x="0.0" y="148.5" width="414" height="713.5"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ufG-i4-Cst">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
@@ -28,7 +28,7 @@
                                     <color key="backgroundColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="85" id="cLo-ml-CFU" customClass="CandidateTableViewCell" customModule="SocialInnovationChallenge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="85" id="cLo-ml-CFU" customClass="CandidateTableViewCell" customModule="Humanuz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cLo-ml-CFU" id="Dtk-Lo-1V5">
@@ -98,11 +98,34 @@
                                     <outlet property="delegate" destination="6M2-pQ-bCA" id="UMh-LQ-10P"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1H-xH-8H2">
+                                <rect key="frame" x="162" y="456" width="90" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="V1H-xH-8H2" secondAttribute="height" id="HbB-6C-qSf"/>
+                                    <constraint firstAttribute="width" constant="90" id="vc1-r9-DSQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="2NU-MX-bBc">
+                                <rect key="frame" x="197" y="491" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2NU-MX-bBc" secondAttribute="height" multiplier="1:1" id="3Fa-ja-SkV"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="2NU-MX-bBc" firstAttribute="centerY" secondItem="m2w-O3-iLL" secondAttribute="centerY" id="0OZ-jV-eyH"/>
                             <constraint firstItem="aww-WG-Spd" firstAttribute="bottom" secondItem="ugd-hr-uCi" secondAttribute="bottom" id="8Af-wO-Z68"/>
                             <constraint firstItem="ugd-hr-uCi" firstAttribute="leading" secondItem="aww-WG-Spd" secondAttribute="leading" id="9tx-Sl-zhB"/>
+                            <constraint firstItem="V1H-xH-8H2" firstAttribute="centerX" secondItem="m2w-O3-iLL" secondAttribute="centerX" id="P0R-vo-w8G"/>
+                            <constraint firstItem="2NU-MX-bBc" firstAttribute="centerX" secondItem="m2w-O3-iLL" secondAttribute="centerX" id="V9l-61-LfU"/>
+                            <constraint firstItem="V1H-xH-8H2" firstAttribute="centerY" secondItem="m2w-O3-iLL" secondAttribute="centerY" id="Y6P-kd-Itv"/>
                             <constraint firstItem="m2w-O3-iLL" firstAttribute="leading" secondItem="aww-WG-Spd" secondAttribute="leading" id="dIt-y8-ZVZ"/>
                             <constraint firstItem="ugd-hr-uCi" firstAttribute="top" secondItem="aww-WG-Spd" secondAttribute="top" id="fbp-kp-Ol1"/>
                             <constraint firstItem="aww-WG-Spd" firstAttribute="bottom" secondItem="m2w-O3-iLL" secondAttribute="bottom" id="kXy-k7-uOm"/>
@@ -114,6 +137,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Buscar" id="70v-xc-5rI"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="2NU-MX-bBc" id="YaL-gi-PIz"/>
+                        <outlet property="shadowView" destination="V1H-xH-8H2" id="j1N-Cg-Y4d"/>
                         <outlet property="tableView" destination="m2w-O3-iLL" id="niC-Uq-n4b"/>
                         <segue destination="1WQ-s7-cXI" kind="modal" identifier="CandidateDetail" id="XBT-26-Vto"/>
                     </connections>

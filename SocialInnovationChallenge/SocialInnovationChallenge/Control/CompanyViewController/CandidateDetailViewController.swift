@@ -12,31 +12,34 @@ import MessageUI
 import Contacts
 
 class CandidateDetailViewController : UIViewController, MFMailComposeViewControllerDelegate{
-    //MARK: Properties
     
+    
+    //MARK: Properties
     var egress : Egress?
+    var segueIdentifier : String?
+    
     //MARK: Outlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var stackView: UIStackView!
     
+    
     //MARK: Views
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         inviteButton.layer.cornerRadius = 4
         nameLabel.text = egress!.name
         descriptionTextView.text = egress!.description
-        createExperienceView(index : 1)
-        createExperienceView(index: 2)
+        createExperiencesField(experiences: egress!.experiences)
     }
     
     override func viewDidLoad() {
@@ -45,24 +48,91 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
         let nib = UINib(nibName: "SectionHeaderView", bundle: nil)
         tableView.register(nib, forHeaderFooterViewReuseIdentifier: "SectionHeaderView")
         
-            
         downloadImage()
     }
     
     
     //MARK: Actions
+    
     @IBAction func inviteTapped(_ sender: Any) {
         showSimpleActionSheet(controller: self)
     }
     
     @IBAction func backTapped(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToCandidates", sender: nil)
+        performSegue(withIdentifier: segueIdentifier!, sender: nil)
     }
     
     
     //MARK: Functions
+    
+    func createExperiencesField(experiences : [String]?){
+        if let experiences = experiences{
+            var index : Int = 0
+            for experience in experiences{
+                createExperienceView(index : index, title: experience, subtitle: egress!.experiencesDescription![index])
+                index += 1
+            }
+        }
+    }
+    
+    func createExperienceView(index : Int, title : String, subtitle: String){
+        let contentView = ExperiencesView(frame: CGRect(x: 205 * CGFloat(index), y: 0, width: 200, height: 145))
+        
+        //gambiarra pra ajustar o tamanho da view
+        if index == 0{
+            stackViewHeightConstraint.constant += 100
+        }
+        
+        if index > 1{
+            stackViewHeightConstraint.constant += 205
+        }
+        
+        contentView.titleLabel.text = title
+        contentView.subtitleLabel.text = subtitle
+
+        
+        stackView.addSubview(contentView)
+    }
+    
+    func downloadImage() {
+        // Add photo  profile
+        if egress!.photo != "" {
+            let profileImageUrl = egress!.photo
+            let url = NSURL(string: profileImageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 200 {
+                        
+                        DispatchQueue.global(qos: .background).async {
+                            let image = UIImage(data: data!)
+                            
+                            DispatchQueue.main.async {
+                                if data != nil{
+//                                    self.profileImage.image = image
+                                }
+                            }
+                        }
+                    }
+                }
+            }).resume()
+        }
+    }
+    
+    
+    //MARK: Invite functions
+    
     func sendAWhatsappMessage(number : String) {
-        if let url = URL(string: "https://api.whatsapp.com/send?phone=\(number)"),
+        let text = "Olá! Encontrei seu perfil pelo nomeapp e gostaria de te convidar para uma entrevista em nossa empresa!"
+        
+        let urlEcondedText = text.addingPercentEncoding(withAllowedCharacters: .letters)
+        
+        if let url = URL(string: "https://api.whatsapp.com/send?phone=\(number)&text=\(urlEcondedText!)"),
             UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler:nil)
         }
@@ -72,19 +142,6 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in }))
             self.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    func createExperienceView(index : Int){
-        let contentView = ExperiencesView(frame: CGRect(x: 235 * CGFloat(index - 1), y: 0, width: 230, height: 145))
-        
-        if index > 1{
-            stackViewHeightConstraint.constant += 235
-        }
-        
-        contentView.subtitleLabel.text = "nanananana"
-        
-        
-        stackView.addSubview(contentView)
     }
     
     func call(number : String){
@@ -151,8 +208,8 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
 }
 
 
+//MARK: TableView Functions
 
-//MARK: Invite actions
 extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -161,14 +218,14 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = SectionHeaderView(frame: .zero)
-          
+        
         switch section {
-            case 0:
-                view.titleLabel.text = "Cursos"
-            case 1:
-                view.titleLabel.text = "Objetivos e Sonhos"
-            default:
-                title = ""
+        case 0:
+            view.titleLabel.text = "Cursos"
+        case 1:
+            view.titleLabel.text = "Objetivos e Sonhos"
+        default:
+            title = ""
         }
         return view
     }
@@ -213,25 +270,4 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
         
         return cell
     }
-    func downloadImage() {
-        // Add photo  profile
-        if egress!.photo != "" {
-            let profileImageUrl = egress!.photo
-            let url = NSURL(string: profileImageUrl)
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-
-                if error != nil {
-                    print(error)
-                    return
-                }
-                
-                DispatchQueue.global(qos: .background).async {
-                    DispatchQueue.main.async {
-//                        self.profileImage.image = UIImage(data: data!)
-                    }
-                }
-            }).resume()
-        }
-    }
-//    link bom que ensina a criar alertas: https://medium.com/swift-india/uialertcontroller-in-swift-22f3c5b1dd68
 }

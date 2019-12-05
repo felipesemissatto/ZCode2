@@ -46,8 +46,6 @@ class VacancyDetailsViewController: UITableViewController {
         benefitsLabel.text = vacancy?.benefits
         
         tableView.estimatedRowHeight = 150
-        
-       // cellDescription.frame.size.height = descriptionLabel.frame.size.height + 16
     }
     
     override func viewWillAppear(_ animated: Bool) {
