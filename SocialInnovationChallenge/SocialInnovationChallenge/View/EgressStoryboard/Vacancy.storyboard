@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T0W-bE-wSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T0W-bE-wSI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -244,7 +244,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YOa-JZ-2eg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Vagas disponíveis" largeTitleDisplayMode="always" id="Wps-hW-mC4"/>
+                    <navigationItem key="navigationItem" title="Vagas disponíveis" largeTitleDisplayMode="always" id="Wps-hW-mC4">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Yt6-gU-K0x"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="indicatorActivity" destination="IqC-5l-JWK" id="ZIM-cU-WFf"/>
                         <outlet property="shadowView" destination="qHS-2C-2fk" id="lhH-3c-ha0"/>
@@ -263,7 +265,7 @@
                     <tabBarItem key="tabBarItem" title="Vagas" id="zJy-7x-D8u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="7Kx-IF-xbH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0039215686274509803" green="0.76862745098039209" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

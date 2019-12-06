@@ -228,7 +228,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
         attributedString1.append(boldString2)
         
         cell.nameLabel.attributedText = attributedString1
-        cell.nameRegion?.text = "\(company.vancancies?[0].releaseTime) d"
+        cell.nameRegion?.text = "" //(company.vancancies?[0].releaseTime) d
         
         // Add photo  profile
         if egressSelected.photo != "" {

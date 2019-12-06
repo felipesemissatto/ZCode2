@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="35T-CQ-0gn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="35T-CQ-0gn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -449,7 +449,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Detalhes da vaga" id="ene-at-KAf">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="Lg4-1M-u5F"/>
+                        <barButtonItem key="backBarButtonItem" id="Lg4-1M-u5F"/>
                         <barButtonItem key="rightBarButtonItem" title="Publicar" id="XGu-Lj-UV0">
                             <connections>
                                 <action selector="writeFirebase:" destination="35T-CQ-0gn" id="i42-x0-QAi"/>
