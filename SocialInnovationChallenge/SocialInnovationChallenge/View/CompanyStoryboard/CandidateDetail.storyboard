@@ -37,7 +37,7 @@
                                                 <color key="textColor" red="0.34546846149999999" green="0.75652498010000002" blue="0.39601182940000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-wQ-e30">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-wQ-e30">
                                                 <rect key="frame" x="24" y="329.5" width="366" height="98"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Busco uma oportunidade para recomeçar minha vida. Sou casado, tenho 2 filhos e meu maior sonho é ser um exemplo para eles e dar a educação que eu não tive.</string>
@@ -67,9 +67,9 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6j-l4-IE7">
-                                                <rect key="frame" x="16" y="18" width="48" height="30"/>
+                                                <rect key="frame" x="13" y="18" width="54" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="&lt; Back">
+                                                <state key="normal" title="&lt; Voltar">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
