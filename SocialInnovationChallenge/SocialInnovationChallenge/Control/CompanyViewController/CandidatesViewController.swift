@@ -121,8 +121,6 @@ class CandidatesViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 //MARK: Extension

@@ -21,6 +21,7 @@ class CompanyNotificationViewController: UIViewController {
     var filteredEgress = [Egress]()
     var myUID: String?
     var listCandidates: [String] = []
+    var listVacancy: [String] = []
     
     let company = Company(name: "PanoSocial",
                           foundationDate: 2005,
@@ -70,14 +71,14 @@ class CompanyNotificationViewController: UIViewController {
         var listCandidateUID = [String]()
         let db = Firestore.firestore()
         var egress:  Egress! = nil
-        
+    
         acitivtyIndicator.startAnimating()
         canditates() { (error, listCandidate) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
-                listCandidateUID = listCandidate!
                 self.egress = []
+                listCandidateUID = listCandidate!
                 for candidateUID in listCandidateUID {
                     let docRef = db.collection("egress").document(candidateUID)
                     
@@ -140,22 +141,26 @@ class CompanyNotificationViewController: UIViewController {
     }
     
     func canditates(completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) {
-
+        
         loadVacancies() { (error, vacancies) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
                 completion(error, nil)
             } else {
+                self.listCandidates = []
+                self.listVacancy = []
                 for vacancy in vacancies! {
                     if vacancy.UID == self.myUID {
-                        self.listCandidates = self.listCandidates + vacancy.candidateList
+                        for candidate in vacancy.candidateList {
+                            self.listCandidates.append(candidate)
+                            self.listVacancy.append(vacancy.name)
+                        }
                     }
                 }
-                completion(nil, self.listCandidates.removingDuplicates())
+                completion(nil, self.listCandidates)
             }
         }
     }
-    
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -184,6 +189,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         //            tableView.register(CandidateTableViewCell.self, forCellReuseIdentifier: "Cell")
         
         // Table view cells are reused and should be dequeued using a cell identifier.
@@ -217,12 +223,12 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
         let attributedString2 = NSMutableAttributedString(string:normalText2)
         attributedString1.append(attributedString2)
         
-        let boldText2  = "\(String(describing: company.vancancies?[0].name))"
+        let boldText2  = "\(String(describing: self.listVacancy[indexPath.row]))"
         let boldString2 = NSMutableAttributedString(string: boldText2, attributes:attrs)
         attributedString1.append(boldString2)
         
         cell.nameLabel.attributedText = attributedString1
-        cell.nameRegion?.text = "\(company.vancancies?[0].releaseTime) d"
+        cell.nameRegion?.text = "" //(company.vancancies?[0].releaseTime) d
         
         // Add photo  profile
         if egressSelected.photo != "" {
@@ -256,16 +262,16 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     }
 }
 
-extension Array where Element: Hashable {
-    func removingDuplicates() -> [Element] {
-        var addedDict = [Element: Bool]()
-
-        return filter {
-            addedDict.updateValue(true, forKey: $0) == nil
-        }
-    }
-
-    mutating func removeDuplicates() {
-        self = self.removingDuplicates()
-    }
-}
+//extension Array where Element: Hashable {
+//    func removingDuplicates() -> [Element] {
+//        var addedDict = [Element: Bool]()
+//
+//        return filter {
+//            addedDict.updateValue(true, forKey: $0) == nil
+//        }
+//    }
+//
+//    mutating func removeDuplicates() {
+//        self = self.removingDuplicates()
+//    }
+//}

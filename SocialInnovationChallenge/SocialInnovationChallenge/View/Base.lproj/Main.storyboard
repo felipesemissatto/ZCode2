@@ -23,13 +23,13 @@
                                 </constraints>
                                 <string key="text">Bem-vindo ao
 Humanoz! :)
-Pensarei numa frase para colocar aqui.</string>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgY-3H-xVa">
-                                <rect key="frame" x="52" y="698" width="310" height="44"/>
+                                <rect key="frame" x="52" y="706" width="310" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="tintColor" red="0.03600261733" green="0.51614689830000005" blue="0.27446827289999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -56,7 +56,7 @@ Pensarei numa frase para colocar aqui.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFs-Yg-JaK">
-                                <rect key="frame" x="52" y="752" width="310" height="44"/>
+                                <rect key="frame" x="52" y="760" width="310" height="44"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="Já tem uma conta? Entre agora!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,7 +74,7 @@ Pensarei numa frase para colocar aqui.</string>
                             <constraint firstItem="XFs-Yg-JaK" firstAttribute="top" secondItem="JgY-3H-xVa" secondAttribute="bottom" constant="10" id="TVB-Ub-jXj"/>
                             <constraint firstItem="XFs-Yg-JaK" firstAttribute="centerX" secondItem="JgY-3H-xVa" secondAttribute="centerX" id="Ubj-J3-PUa"/>
                             <constraint firstItem="fJO-xx-8kK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="610" id="VaY-Wy-lhx"/>
-                            <constraint firstItem="JgY-3H-xVa" firstAttribute="top" secondItem="fJO-xx-8kK" secondAttribute="bottom" id="XWe-bu-YHe"/>
+                            <constraint firstItem="JgY-3H-xVa" firstAttribute="top" secondItem="fJO-xx-8kK" secondAttribute="bottom" constant="8" id="XWe-bu-YHe"/>
                             <constraint firstItem="7vU-fI-WX6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="Y4l-1e-uSA"/>
                             <constraint firstItem="JgY-3H-xVa" firstAttribute="centerX" secondItem="fJO-xx-8kK" secondAttribute="centerX" id="daX-ao-v9L"/>
                         </constraints>

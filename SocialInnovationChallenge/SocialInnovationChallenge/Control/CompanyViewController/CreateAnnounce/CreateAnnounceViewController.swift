@@ -38,6 +38,7 @@ class CreateAnnounceViewController: UIViewController {
     @IBOutlet weak var workdayTextField: UITextField!
     @IBOutlet weak var benefitsTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var startWorkTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -50,6 +51,7 @@ class CreateAnnounceViewController: UIViewController {
         self.salaryTextField.customTextField()
         self.workdayTextField.customTextField()
         self.benefitsTextField.customTextField()
+        self.startWorkTextField.customTextField()
         
          //Changing status bar color
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -107,8 +109,10 @@ class CreateAnnounceViewController: UIViewController {
            self.typeOfWorkTextField.text?.isEmpty ?? false ||
            self.salaryTextField.text?.isEmpty ?? false ||
            self.workdayTextField.text?.isEmpty ?? false ||
-           self.benefitsTextField.text?.isEmpty ?? false {
-        
+           self.benefitsTextField.text?.isEmpty ?? false ||
+           self.startWorkTextField.text?.isEmpty ?? false {
+            
+            
            fillAlert()
         } else {
             
@@ -121,6 +125,7 @@ class CreateAnnounceViewController: UIViewController {
             self.vacancy?.salary = self.salaryTextField.text!
             self.vacancy?.workday = self.workdayTextField.text!
             self.vacancy?.benefits = self.benefitsTextField.text!
+            self.vacancy?.startWork = self.startWorkTextField.text!
             
             self.performSegue(withIdentifier: "visualizeDetailSegue", sender: self.vacancy)
         }
@@ -137,7 +142,8 @@ class CreateAnnounceViewController: UIViewController {
            self.typeOfWorkTextField.text == "" &&
            self.salaryTextField.text == "" &&
            self.workdayTextField.text == "" &&
-           self.benefitsTextField.text == "" {
+           self.benefitsTextField.text == "" &&
+           self.startWorkTextField.text == "" {
         
            self.performSegue(withIdentifier: "unwindSegueToAnnounce", sender: self)
         } else {

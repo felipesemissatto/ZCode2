@@ -56,7 +56,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
     //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //Button corner radius
         self.buttonApplyNow.layer.cornerRadius = 6
 
