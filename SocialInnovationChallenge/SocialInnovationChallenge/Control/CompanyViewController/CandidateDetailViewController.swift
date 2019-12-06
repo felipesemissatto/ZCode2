@@ -128,7 +128,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     //MARK: Invite functions
     
     func sendAWhatsappMessage(number : String) {
-        let text = "Olá! Encontrei seu perfil pelo nomeapp e gostaria de te convidar para uma entrevista em nossa empresa!"
+        let text = "Olá! Encontrei seu perfil pelo Humanoz e gostaria de te convidar para uma entrevista em nossa empresa!"
         
         let urlEcondedText = text.addingPercentEncoding(withAllowedCharacters: .letters)
         
@@ -256,12 +256,12 @@ extension CandidateDetailViewController : UITableViewDelegate, UITableViewDataSo
         switch indexPath.section {
         case 0:
             if egress!.courses != nil{
-                cell.textLabel!.text = egress!.courses![indexPath.row]
+                cell.textLabel!.text = " " + egress!.courses![indexPath.row]
                 tableViewHeightConstraint.constant += 30
                 contentViewHeightConstraint.constant += 30
             }
         case 1:
-            cell.textLabel!.text = egress!.desires[indexPath.row]
+            cell.textLabel!.text = " " + egress!.desires[indexPath.row]
             tableViewHeightConstraint.constant += 30
             contentViewHeightConstraint.constant += 30
         default:

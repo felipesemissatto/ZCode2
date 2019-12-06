@@ -49,6 +49,7 @@ class FirebaseManager {
         let isActivated = vacancy.isActivated
         let candidateList = vacancy.candidateList
         let uid = Auth.auth().currentUser!.uid
+        let startWork = vacancy.startWork
         
         var ref: DocumentReference? = nil
         
@@ -65,7 +66,7 @@ class FirebaseManager {
                                                                 "typeOfWork": typeOfWork,
                                                                 "workday": workday,
                                                                 "UID": uid,
-                                                                "startWork": "Imediato"]){ err in
+                                                                "startWork": startWork]){ err in
                                                                     if let err = err {
                                                                         print("Error adding document: \(err)")
                                                                         completion(err, nil)
