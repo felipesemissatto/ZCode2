@@ -55,7 +55,6 @@ class FirebaseManager {
         
         ref = self.db.collection("vacancy").addDocument(data: ["benefits": benefits,
                                                                "description": description ,
-//                                                             "company": "/company/\(company)",
                                                                 "isActivated": isActivated,
                                                                 "candidatesList": candidateList,
                                                                 "name": name ,
@@ -77,6 +76,7 @@ class FirebaseManager {
         }
     }
     
+    //Read all vacancies of firebase
     func readVacanciesFirebase(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
         var vacancy: Vacancy! = nil
         
@@ -129,6 +129,7 @@ class FirebaseManager {
         }
     }
     
+    //Read one candidate of firebase
     func readOneEgressFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
         var egress:  Egress! = nil
         let docRef = self.db.collection("egress").document(documentId)
@@ -169,6 +170,7 @@ class FirebaseManager {
         }
     }
     
+    //Read all candidates of firebase
     func readEgressFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
         var egress:  Egress! = nil
         
@@ -213,6 +215,17 @@ class FirebaseManager {
             }
         }
     }
+    
+    func readCurrentUserIdFirebase(completion: @escaping (_ currentUserId: String?) -> (Void)) {
+        var currentUserUid: String?
+        
+        if Auth.auth().currentUser == nil {
+            print("Not found current user id")
+            completion(nil)
+        } else {
+            currentUserUid = Auth.auth().currentUser?.uid
+            completion(currentUserUid)
+        }
+    }
 }
-
 

@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
-//import FirebaseFirestore
 
 class CompanyNotificationViewController: UIViewController {
     
@@ -19,7 +17,7 @@ class CompanyNotificationViewController: UIViewController {
     var oldEgress = [Egress]()
     var egressSelected: Egress?
     var filteredEgress = [Egress]()
-    var myUID: String?
+    var currentUserUid: String?
     var listCandidates: [String] = []
     var listVacancy: [String] = []
     
@@ -46,7 +44,7 @@ class CompanyNotificationViewController: UIViewController {
         loadEgress()
         
         //MARK: Views
-        myUID = Auth.auth().currentUser?.uid
+//        currentUserUid = Auth.auth().currentUser?.uid
         
         //Changing status bar color
         
@@ -112,6 +110,14 @@ class CompanyNotificationViewController: UIViewController {
     
     func canditates(completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) {
         
+        getCurrentUserId() { (currentUserId) in
+            if currentUserId == nil {
+                print("Not found current user id")
+            } else {
+                self.currentUserUid = currentUserId
+            }
+        }
+        
         loadVacancies() { (error, vacancies) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
@@ -120,7 +126,7 @@ class CompanyNotificationViewController: UIViewController {
                 self.listCandidates = []
                 self.listVacancy = []
                 for vacancy in vacancies! {
-                    if vacancy.UID == self.myUID {
+                    if vacancy.UID == self.currentUserUid {
                         for candidate in vacancy.candidateList {
                             self.listCandidates.append(candidate)
                             self.listVacancy.append(vacancy.name)
@@ -131,6 +137,19 @@ class CompanyNotificationViewController: UIViewController {
             }
         }
     }
+    
+    func getCurrentUserId(completion: @escaping (_ currentUserId: String?) -> (Void)) {
+        
+        UserServices.getCurrentUserId { (currentUserId) in
+            if currentUserId == nil {
+                print("Not found current user id")
+                completion(nil)
+            } else {
+                completion(currentUserId)
+            }
+        }
+    }
+    
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
