@@ -134,7 +134,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Notificações" id="uGc-GG-MIm"/>
                     <connections>
-                        <outlet property="acitivtyIndicator" destination="vjC-OK-WmD" id="PHc-Iq-Evq"/>
+                        <outlet property="activityIndicator" destination="vjC-OK-WmD" id="PHc-Iq-Evq"/>
                         <outlet property="shadowView" destination="8cX-aB-Lrm" id="y92-d0-cxM"/>
                         <outlet property="tableView" destination="jy4-wy-eez" id="Qvw-AV-mFX"/>
                         <segue destination="gjF-bA-nxZ" kind="modal" identifier="CandidateDetail" id="zHI-mg-uaY"/>

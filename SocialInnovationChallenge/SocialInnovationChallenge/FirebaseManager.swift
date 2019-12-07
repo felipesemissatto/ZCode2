@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class FirebaseManager {
     
+    let db = Firestore.firestore()
+    
     var vacancies: [Vacancy] = []
     var egress: [Egress] = []
     let company = Company(name: "Pano Social",
@@ -32,10 +34,8 @@ class FirebaseManager {
     // Database manager singleton
     static let sharedInstance = FirebaseManager()
     
-    
     //Write in firebase if all textFiels filled
     func writeFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
-        let db = Firestore.firestore()
         
         let name = vacancy.name
         let region = vacancy.region
@@ -53,7 +53,7 @@ class FirebaseManager {
         
         var ref: DocumentReference? = nil
         
-        ref = db.collection("vacancy").addDocument(data: ["benefits": benefits,
+        ref = self.db.collection("vacancy").addDocument(data: ["benefits": benefits,
                                                                "description": description ,
 //                                                             "company": "/company/\(company)",
                                                                 "isActivated": isActivated,
@@ -78,10 +78,9 @@ class FirebaseManager {
     }
     
     func readVacanciesFirebase(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
-        let db = Firestore.firestore()
         var vacancy: Vacancy! = nil
         
-        db.collection("vacancy").getDocuments() { (snapshot, err) in
+        self.db.collection("vacancy").getDocuments() { (snapshot, err) in
             if let error = err {
                 print("Error getting documents: \(error)")
                 completion(error, nil)
@@ -130,11 +129,50 @@ class FirebaseManager {
         }
     }
     
+    func readOneEgressFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
+        var egress:  Egress! = nil
+        let docRef = self.db.collection("egress").document(documentId)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let name = document.get("name") as! String
+                let region = document.get("region") as! String
+                let description = document.get("description") as! String
+                let contact = document.get("contact") as! [String]
+                let desires = document.get("dreams") as! [String]
+                let photo = document.get("photo") as! String
+                let courses = document.get("courses") as! [String]
+                let experiences = document.get("experiences") as! [String]
+                let experiencesDescription = document.get("experiencesDescription") as! [String]
+                let uid = document.get("documentID") as! String
+                
+                egress = Egress(name: name,
+                                dateOfBirth: "",
+                                description: description,
+                                region: region,
+                                photo: photo,
+                                video: nil,
+                                courses: courses,
+                                experiences: experiences,
+                                experiencesDescription: experiencesDescription,
+                                skills: nil,
+                                desires: desires,
+                                contact: contact)
+                egress.uid = uid
+                
+                completion(nil, egress)
+            } else {
+                let error = error 
+                print("Erro na func readOneEgressFirebase: \(String(describing: error))")
+                completion(error, nil)
+            }
+        }
+    }
+    
     func readEgressFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
-        let db = Firestore.firestore()
         var egress:  Egress! = nil
         
-        db.collection("egress").getDocuments() { (snapshot, err) in
+        self.db.collection("egress").getDocuments() { (snapshot, err) in
             if let error = err {
                 print("Error getting documents: \(error)")
                 completion(error, nil)

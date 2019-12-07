@@ -20,4 +20,15 @@ class EgressDAO: DAO {
             }
         }
     }
+    
+    static func findOne(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.readOneEgressFirebase(documentId) { (error, egress) in
+            if let err = error {
+                completion(err, nil)
+            } else {
+                completion(nil, egress)
+            }
+        }
+    }
 }

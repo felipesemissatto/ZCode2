@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
+//import FirebaseFirestore
 
 class CompanyNotificationViewController: UIViewController {
     
@@ -36,7 +36,7 @@ class CompanyNotificationViewController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
-    @IBOutlet weak var acitivtyIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var shadowView: UIView!
     //MARK: Views
     
@@ -69,63 +69,33 @@ class CompanyNotificationViewController: UIViewController {
     private func loadEgress(){
         
         var listCandidateUID = [String]()
-        let db = Firestore.firestore()
-        var egress:  Egress! = nil
-    
-        acitivtyIndicator.startAnimating()
+
         canditates() { (error, listCandidate) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
                 self.egress = []
                 listCandidateUID = listCandidate!
+                self.activityIndicator.startAnimating()
                 for candidateUID in listCandidateUID {
-                    let docRef = db.collection("egress").document(candidateUID)
-                    
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-//                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-           
-                            let name = document.get("name") as! String
-                            let region = document.get("region") as! String
-                            let description = document.get("description") as! String
-                            let contact = document.get("contact") as! [String]
-                            let desires = document.get("dreams") as! [String]
-                            let photo = document.get("photo") as! String
-                            let courses = document.get("courses") as! [String]
-                            let experiences = document.get("experiences") as! [String]
-                            let experiencesDescription = document.get("experiencesDescription") as! [String]
-                            let uid = document.get("documentID") as! String
-                            
-                            egress = Egress(name: name,
-                                            dateOfBirth: "",
-                                            description: description,
-                                            region: region,
-                                            photo: photo,
-                                            video: nil,
-                                            courses: courses,
-                                            experiences: experiences,
-                                            experiencesDescription: experiencesDescription,
-                                            skills: nil,
-                                            desires: desires,
-                                            contact: contact)
-                            egress.uid = uid
-                            self.egress.append(egress)
+                    EgressServices.getOne(candidateUID) { (error, egress) in
+                        if let error = error {
+                            print("Error loading document: \(error.localizedDescription)")
+                        } else {
+                            self.egress.append(egress!)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
-                                self.acitivtyIndicator.stopAnimating()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                                 self.shadowView.isHidden = true
-                                self.acitivtyIndicator.isHidden = true
                             }
-//                            print("Document data: \(dataDescription)")
-                        } else {
-                            print("Document does not exist")
                         }
                     }
                 }
             }
         }
     }
+    
     
     func loadVacancies(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
         
@@ -168,13 +138,9 @@ class CompanyNotificationViewController: UIViewController {
         if segue.identifier == "CandidateDetail"{
             let candidateDetail = segue.destination as! CandidateDetailViewController
             
-            if segue.identifier == "CandidateDetail"{
-                let candidateDetail = segue.destination as! CandidateDetailViewController
-                
-                if egressSelected != nil{
-                    candidateDetail.egress = egressSelected
-                    candidateDetail.segueIdentifier = "unwindToNotications"
-                }
+            if egressSelected != nil{
+                candidateDetail.egress = egressSelected
+                candidateDetail.segueIdentifier = "unwindToNotications"
             }
         }
     }
@@ -237,7 +203,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print(error)
+                    print("Erro carregmento foto notificacao: \(String(describing: error))")
                     return
                 }
                 
