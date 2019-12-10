@@ -128,7 +128,7 @@ class CandidateDetailViewController : UIViewController, MFMailComposeViewControl
     //MARK: Invite functions
     
     func sendAWhatsappMessage(number : String) {
-        let text = "Olá! Encontrei seu perfil pelo Humanoz e gostaria de te convidar para uma entrevista em nossa empresa!"
+        let text = "Olá! Encontrei seu perfil pelo Humanuz e gostaria de te convidar para uma entrevista em nossa empresa!"
         
         let urlEcondedText = text.addingPercentEncoding(withAllowedCharacters: .letters)
         
