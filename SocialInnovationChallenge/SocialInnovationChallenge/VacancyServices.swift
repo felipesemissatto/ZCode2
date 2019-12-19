@@ -45,23 +45,5 @@ class VacancyServices {
             print(error)
         }
     }
-    
-//    static func getNotification(uid: String, _ completion: @escaping ((_ error: Error?, _ listCandidate: [String]?) -> Void)) {
-//        
-//        do {
-//            // save information
-//            try VacancyDAO.findNotification(uid) { (error, listCandidate) in
-//                
-//                if let error = error {
-//                    completion(error, nil)
-//                } else {
-//                    completion(nil, listCandidate)
-//                }
-//            }
-//        }
-//        catch let error {
-//            print(error)
-//        }
-//    }
 }
 
