@@ -112,7 +112,7 @@ class CompanyNotificationViewController: UIViewController {
         
         getCurrentUserId() { (currentUserId) in
             if currentUserId == nil {
-                print("Not found current user id")
+                print("Func candidates: Not found current user id")
             } else {
                 self.currentUserUid = currentUserId
             }
@@ -142,7 +142,7 @@ class CompanyNotificationViewController: UIViewController {
         
         UserServices.getCurrentUserId { (currentUserId) in
             if currentUserId == nil {
-                print("Not found current user id")
+                print("Func getCurrentUserId: Not found current user id")
                 completion(nil)
             } else {
                 completion(currentUserId)

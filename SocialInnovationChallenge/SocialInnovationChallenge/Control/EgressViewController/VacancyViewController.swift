@@ -66,13 +66,6 @@ class VacancyViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadVacancies()
-                
-//        VacancyServices.getAllVacancy { (error, vacancies) in
-//            self.vacancies  = vacancies!
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
     }
     
     //MARK: Search Controller's Methods

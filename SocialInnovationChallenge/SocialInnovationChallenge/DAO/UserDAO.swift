@@ -14,7 +14,7 @@ class UserDAO: DAO {
         
         FirebaseManager.sharedInstance.readCurrentUserIdFirebase { (currentUserId) in
             if currentUserId == nil {
-                print("Not found current user id")
+                print("Func findId: Not found current user id")
                 completion(nil)
             } else {
                 completion(currentUserId)

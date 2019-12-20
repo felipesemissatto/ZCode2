@@ -145,21 +145,21 @@ class FirebaseManager {
                 let courses = document.get("courses") as! [String]
                 let experiences = document.get("experiences") as! [String]
                 let experiencesDescription = document.get("experiencesDescription") as! [String]
-                let uid = document.get("documentID") as! String
+//                let uid = document.get("documentID") as! String
+                let id = document.documentID
                 
-                egress = Egress(name: name,
+                egress = Egress(contact: contact,
+                                courses: courses,
                                 dateOfBirth: "",
                                 description: description,
-                                region: region,
-                                photo: photo,
-                                video: nil,
-                                courses: courses,
+                                desires: desires,
                                 experiences: experiences,
                                 experiencesDescription: experiencesDescription,
-                                skills: nil,
-                                desires: desires,
-                                contact: contact)
-                egress.uid = uid
+                                name: name,
+                                photo: photo,
+                                region: region,
+                                video: nil)
+                egress.id = id
                 
                 completion(nil, egress)
             } else {
@@ -192,21 +192,20 @@ class FirebaseManager {
                     let courses = document.get("courses") as! [String]
                     let experiences = document.get("experiences") as! [String]
                     let experiencesDescription = document.get("experiencesDescription") as! [String]
-                    let uid = document.get("documentID") as! String
+                    let id = document.documentID
                     
-                    egress = Egress(name: name,
+                    egress = Egress(contact: contact,
+                                    courses: courses,
                                     dateOfBirth: "",
                                     description: description,
-                                    region: region,
-                                    photo: photo,
-                                    video: nil,
-                                    courses: courses,
+                                    desires: desires,
                                     experiences: experiences,
                                     experiencesDescription: experiencesDescription,
-                                    skills: nil,
-                                    desires: desires,
-                                    contact: contact)
-                    egress.uid = uid
+                                    name: name,
+                                    photo: photo,
+                                    region: region,
+                                    video: nil)
+                    egress.id = id
                     
                     self.egress.append(egress)
                 }
@@ -220,7 +219,7 @@ class FirebaseManager {
         var currentUserUid: String?
         
         if Auth.auth().currentUser == nil {
-            print("Not found current user id")
+            print("Func readCurrentUserIdFirebase: Not found current user id")
             completion(nil)
         } else {
             currentUserUid = Auth.auth().currentUser?.uid

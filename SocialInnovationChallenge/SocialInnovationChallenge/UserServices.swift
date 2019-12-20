@@ -14,7 +14,7 @@ class UserServices {
         
         UserDAO.findId() { (currentUserId) in
             if currentUserId == nil {
-                print("Not found current user id")
+                print("Func getCurrentUserId: Not found current user id")
                 completion(nil)
             } else {
                 completion(currentUserId)
