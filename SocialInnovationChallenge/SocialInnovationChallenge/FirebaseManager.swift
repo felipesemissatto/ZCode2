@@ -130,9 +130,9 @@ class FirebaseManager {
     }
     
     //Read one candidate of firebase
-    func readOneEgressFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
+    func readOneCandidateFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
         var egress:  Egress! = nil
-        let docRef = self.db.collection("egress").document(documentId)
+        let docRef = self.db.collection("candidates").document(documentId)
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -140,7 +140,7 @@ class FirebaseManager {
                 let region = document.get("region") as! String
                 let description = document.get("description") as! String
                 let contact = document.get("contact") as! [String]
-                let desires = document.get("dreams") as! [String]
+                let desires = document.get("desires") as! [String]
                 let photo = document.get("photo") as! String
                 let courses = document.get("courses") as! [String]
                 let experiences = document.get("experiences") as! [String]
@@ -171,10 +171,10 @@ class FirebaseManager {
     }
     
     //Read all candidates of firebase
-    func readEgressFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
+    func readCandidatesFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
         var egress:  Egress! = nil
         
-        self.db.collection("egress").getDocuments() { (snapshot, err) in
+        self.db.collection("candidates").getDocuments() { (snapshot, err) in
             if let error = err {
                 print("Error getting documents: \(error)")
                 completion(error, nil)
@@ -187,7 +187,7 @@ class FirebaseManager {
                     let region = document.get("region") as! String
                     let description = document.get("description") as! String
                     let contact = document.get("contact") as! [String]
-                    let desires = document.get("dreams") as! [String]
+                    let desires = document.get("desires") as! [String]
                     let photo = document.get("photo") as! String
                     let courses = document.get("courses") as! [String]
                     let experiences = document.get("experiences") as! [String]

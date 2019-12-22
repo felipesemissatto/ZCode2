@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     var type: String?
-    
+    var json: Json = Json()
     
     //MARK: Outlets
     
@@ -58,11 +58,20 @@ class MainViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        json.writeJsonFirebase()
+    }
     
     //MARK: Actions
     
     @IBAction func tapEgressButton(_ sender: Any) {
+        let email = "candidate@candicate.com"
+        let password = "123456"
         self.type = "egress"
+        
+        Auth.auth().signIn(withEmail: email, password: password)
         
         self.defaults.set(self.type!, forKey: "option")
         self.performSegue(withIdentifier: "egressSegue", sender: self)
@@ -70,11 +79,15 @@ class MainViewController: UIViewController {
     
     
     @IBAction func tapCompanyButton(_ sender: Any) {
+        let email = "company@company.com"
+        let password = "123456"
+        
         self.type = "company"
         
+        Auth.auth().signIn(withEmail: email, password: password)
         self.defaults.set(self.type!, forKey: "option")
         self.performSegue(withIdentifier: "companySegue", sender: self)
-        
+
     }
     
     //MARK: Functions
