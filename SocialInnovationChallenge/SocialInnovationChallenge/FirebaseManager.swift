@@ -35,7 +35,7 @@ class FirebaseManager {
     static let sharedInstance = FirebaseManager()
     
     //Write in firebase if all textFiels filled
-    func writeFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
+    func writeVacancyFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
         
         let name = vacancy.name
         let region = vacancy.region
@@ -129,28 +129,42 @@ class FirebaseManager {
         }
     }
     
+    func deleteVacancyFirebase(_ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        db.collection("vacancy").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
     //Read one candidate of firebase
     func readOneCandidateFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
+        
         var egress:  Egress! = nil
         let docRef = self.db.collection("candidates").document(documentId)
         
         docRef.getDocument { (document, error) in
+            
             if let document = document, document.exists {
-                let name = document.get("name") as! String
-                let region = document.get("region") as! String
-                let description = document.get("description") as! String
+                
                 let contact = document.get("contact") as! [String]
-                let desires = document.get("desires") as! [String]
-                let photo = document.get("photo") as! String
                 let courses = document.get("courses") as! [String]
+                let dateOfBirth = document.get("dateOfBirth") as! String
+                let description = document.get("description") as! String
+                let desires = document.get("desires") as! [String]
                 let experiences = document.get("experiences") as! [String]
                 let experiencesDescription = document.get("experiencesDescription") as! [String]
-//                let uid = document.get("documentID") as! String
+                let name = document.get("name") as! String
+                let photo = document.get("photo") as! String
+                let region = document.get("region") as! String
                 let id = document.documentID
                 
                 egress = Egress(contact: contact,
                                 courses: courses,
-                                dateOfBirth: "",
+                                dateOfBirth: dateOfBirth,
                                 description: description,
                                 desires: desires,
                                 experiences: experiences,
@@ -183,20 +197,21 @@ class FirebaseManager {
                 
                 for document in snapshot!.documents {
                     
-                    let name = document.get("name") as! String
-                    let region = document.get("region") as! String
-                    let description = document.get("description") as! String
                     let contact = document.get("contact") as! [String]
-                    let desires = document.get("desires") as! [String]
-                    let photo = document.get("photo") as! String
                     let courses = document.get("courses") as! [String]
+                    let dateOfBirth = document.get("dateOfBirth") as! String
+                    let description = document.get("description") as! String
+                    let desires = document.get("desires") as! [String]
                     let experiences = document.get("experiences") as! [String]
                     let experiencesDescription = document.get("experiencesDescription") as! [String]
+                    let name = document.get("name") as! String
+                    let photo = document.get("photo") as! String
+                    let region = document.get("region") as! String
                     let id = document.documentID
-                    
+
                     egress = Egress(contact: contact,
                                     courses: courses,
-                                    dateOfBirth: "",
+                                    dateOfBirth: dateOfBirth,
                                     description: description,
                                     desires: desires,
                                     experiences: experiences,

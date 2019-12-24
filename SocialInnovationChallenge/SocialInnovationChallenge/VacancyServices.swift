@@ -45,5 +45,23 @@ class VacancyServices {
             print(error)
         }
     }
+    
+    static func delete(_ documentID: String, _ completion: @escaping ((_ error: Error?) -> Void)) {
+        
+        do {
+            
+            try VacancyDAO.delete(documentID) { (error) in
+                
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+        catch let error {
+            print("Error func delete: ", error)
+        }
+    }
 }
 

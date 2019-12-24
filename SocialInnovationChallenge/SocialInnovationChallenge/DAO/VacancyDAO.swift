@@ -12,7 +12,7 @@ class VacancyDAO: DAO {
     
     static func create(_ objectToBeSaved: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) throws {
         
-        FirebaseManager.sharedInstance.writeFirebase(objectToBeSaved) { (error, documentID) in
+        FirebaseManager.sharedInstance.writeVacancyFirebase(objectToBeSaved) { (error, documentID) in
             if let err = error {
                 completion(err, nil)
             } else {
@@ -29,6 +29,17 @@ class VacancyDAO: DAO {
                 completion(err, nil)
             } else {
                 completion(nil, vacancies)
+            }
+        }
+    }
+    
+    static func delete(_ documentID: String, completion: @escaping (_ error: Error?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.deleteVacancyFirebase(documentID) { (error) in
+            if let err = error {
+                completion(err)
+            } else {
+                completion(nil)
             }
         }
     }
