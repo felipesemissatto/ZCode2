@@ -105,12 +105,6 @@ class VacancyViewController: UIViewController {
             }
         }
     }
-
-    
-    
-    private func loadSampleVacancies(){
-//        let vacancy1 = Vacancy(name: "Operador de Máquinas")
-    }
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -120,18 +114,12 @@ class VacancyViewController: UIViewController {
             return
         }
 
-        guard let livingBeingDetailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
+        guard let detailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
 
-        livingBeingDetailViewController.vacancy = selected
-        livingBeingDetailViewController.screenBefore = true
-
-        if segue.identifier == "segueDetailsVacancy",
-            let vacancyDetails = segue.destination as? DetailViewController {
-            vacancyDetails.titleSaveButton = ""
-            vacancyDetails.isHiddenSaveButton = true
-        }
+        detailViewController.vacancy = selected
+        detailViewController.screenBefore = true
     }
 
 }
