@@ -49,7 +49,6 @@ class CompanyNotificationViewController: UIViewController {
         //Changing status bar color
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        UIApplication.shared.statusBarStyle = .lightContent
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
@@ -246,17 +245,3 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
         self.performSegue(withIdentifier: "CandidateDetail", sender: egressSelected)
     }
 }
-
-//extension Array where Element: Hashable {
-//    func removingDuplicates() -> [Element] {
-//        var addedDict = [Element: Bool]()
-//
-//        return filter {
-//            addedDict.updateValue(true, forKey: $0) == nil
-//        }
-//    }
-//
-//    mutating func removeDuplicates() {
-//        self = self.removingDuplicates()
-//    }
-//}

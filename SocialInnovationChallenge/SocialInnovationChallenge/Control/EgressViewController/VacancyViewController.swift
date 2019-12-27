@@ -5,10 +5,7 @@
 //  Created by Isabela Modesto on 06/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
-import Foundation
 import UIKit
-import FirebaseFirestore
 
 class VacancyViewController: UIViewController {
     
@@ -27,7 +24,7 @@ class VacancyViewController: UIViewController {
                           contact: "(019)3263-6537",
                           vancancies: nil)
     
-    let db = Firestore.firestore()
+//    let db = Firestore.firestore()
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -182,7 +179,7 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
 
                 if error != nil {
-                    print(error)
+                    print(error!)
                     return
                 }
                 

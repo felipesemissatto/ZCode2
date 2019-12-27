@@ -63,5 +63,22 @@ class VacancyServices {
             print("Error func delete: ", error)
         }
     }
+    
+    static func isActivated(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        do {
+            
+            try VacancyDAO.isActivated(isActivated, documentId) { (error) in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+        catch let error {
+            print("Error func isActivated: ", error)
+        }
+    }
 }
 

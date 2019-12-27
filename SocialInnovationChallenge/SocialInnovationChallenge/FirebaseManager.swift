@@ -5,7 +5,7 @@
 //  Created by Rodrigo Takumi on 21/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
+//  Funcao que ativa ou desativa a vaca funciona, mas está mal estruturada
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
@@ -136,6 +136,27 @@ class FirebaseManager {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
+            }
+        }
+    }
+    
+    func activate(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        if isActivated {
+            db.collection("vacancy").document(documentId).updateData(["isActivated": true]) { err in
+                if let err = err {
+                    print("Error button activated: \(err)")
+                } else {
+                    // Enviar notificaçao para avisar o usuario que ela foi ativada com sucesso?
+                }
+            }
+        } else {
+            db.collection("vacancy").document(documentId).updateData(["isActivated": false]) { err in
+                if let err = err {
+                    print("Error button activated: \(err)")
+                } else {
+                    // Enviar notificaçao para avisar o usuario que ela foi desadivada com sucesso?
+                }
             }
         }
     }

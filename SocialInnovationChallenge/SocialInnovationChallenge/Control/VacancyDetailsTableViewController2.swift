@@ -98,9 +98,9 @@ class VacancyDetailsTableViewController2: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if segueIdentifier == "showDetailSegue"{
-            activated()
-        }
+//        if segueIdentifier == "showDetailSegue"{
+//            activated()
+//        }
     }
     
     func settingApplyButton() {
@@ -184,17 +184,40 @@ class VacancyDetailsTableViewController2: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     //MARK: Functions
-    func activated() {
-        let db = Firestore.firestore()
+//    func activated() {
+//        let db = Firestore.firestore()
+//
+//        if self.activatedSwitch.isOn {
+//            // Adicionar um completion
+//            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": true])
+//        } else {
+//            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": false])
+//        }
+//    }
+    
+    @IBAction func isActivatedVacancy(_ sender: Any) {
         
-        if self.activatedSwitch.isOn {
-            // Adicionar um completion
-            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": true])
+        let isActivated = self.activatedSwitch.isOn
+        let documentId = self.vacancy!.ID!
+        
+        if isActivated {
+            VacancyServices.isActivated(isActivated, documentId) { (error) in
+                    if let err = error {
+                        print("Error adding document: \(err.localizedDescription)")
+                    } else {
+                        print("Sucesso")
+                    }
+            }
         } else {
-            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": false])
+            VacancyServices.isActivated(isActivated, self.vacancy!.ID!) { (error) in
+                    if let err = error {
+                        print("Error adding document: \(err.localizedDescription)")
+                    } else {
+                        print("Sucesso")
+                    }
+            }
         }
     }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight:CGFloat = 0.0
         

@@ -60,7 +60,6 @@ class AnnounceViewController: UIViewController {
         //Changing status bar color
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        UIApplication.shared.statusBarStyle = .lightContent
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()

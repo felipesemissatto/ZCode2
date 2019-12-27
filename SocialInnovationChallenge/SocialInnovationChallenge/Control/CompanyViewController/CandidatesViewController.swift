@@ -32,6 +32,7 @@ class CandidatesViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var shadowView: UIView!
     
+    
     //MARK: Views
     
     override func viewWillAppear(_ animated: Bool) {
