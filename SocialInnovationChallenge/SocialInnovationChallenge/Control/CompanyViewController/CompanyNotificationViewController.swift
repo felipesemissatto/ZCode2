@@ -5,11 +5,15 @@
 //  Created by Isabela Modesto on 06/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
-import Foundation
+//  Problema com sincronia dos dados obtidos para pegar a lista de candidatos que se candidataram a alguma vaga a minha emrpesa
 import UIKit
+import FirebaseFirestore
 
 class CompanyNotificationViewController: UIViewController {
+    
+    var testeVacancies = [Vacancy]()
+    var testeListCandidates: [String] = []
+    var testeListVacancy: [String] = []
     
     //MARK: Properties
     var vacancies = [Vacancy]()
@@ -42,11 +46,6 @@ class CompanyNotificationViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadEgress()
-        
-        //MARK: Views
-//        currentUserUid = Auth.auth().currentUser?.uid
-        
-        //Changing status bar color
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -96,13 +95,64 @@ class CompanyNotificationViewController: UIViewController {
     
     func loadVacancies(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
         
+        var vacancy: Vacancy! = nil
+        let db = Firestore.firestore()
+        
         VacancyServices.getAll { (error, vacancies) in
-            
+
             if let error = error {
                 completion(error, nil)
                 print("Error loading document: \(error.localizedDescription)")
             } else {
-                completion(nil, vacancies)
+//                completion(nil, vacancies)
+                
+                db.collection("vacancy").whereField("UID", isEqualTo: "EewYKz1BY9YB4n1wWnZVZL4u5nL2")
+                    .getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                            self.testeVacancies = []
+                            
+                            for document in querySnapshot!.documents {
+                                print("\(document.documentID) => \(document.data())")
+                                let name = document.get("name") as! String
+                                let company = self.company
+                                let releaseTime = document.get("releaseTime") as! Int
+                                let description = document.get("description") as! String
+                                let workday = document.get("workday") as! String
+                                let numberOfVacancies = document.get("numberOfVacancies") as! String
+                                let benefits = document.get("benefits") as? String
+                                let salary = document.get("salary") as! String
+                                let region = document.get("region") as! String
+                                let typeOfWork = document.get("typeOfWork") as! String
+                                let startWork = document.get("startWork") as! String
+                                let isActivated = document.get("isActivated") as! Bool
+                                let ID = document.documentID
+                                let uid = document.get("UID") as! String
+                                let candidateList = document.get("candidatesList") as! [String]
+                                
+                                vacancy = Vacancy(name: name,
+                                                  company: company,
+                                                  releaseTime: releaseTime,
+                                                  description: description,
+                                                  workday: workday,
+                                                  numberOfVacancies: numberOfVacancies,
+                                                  benefits: benefits,
+                                                  salary: salary,
+                                                  region: region,
+                                                  typeOfWork: typeOfWork,
+                                                  isActivated: isActivated,
+                                                  candidateList: candidateList,
+                                                  startWork: startWork)
+                                vacancy.ID = ID
+                                vacancy.UID = uid
+                                
+                                self.testeVacancies.append(vacancy)
+                            }
+                            completion(nil, self.testeVacancies)
+                            print(self.testeVacancies)
+                        }
+                }
             }
         }
     }
@@ -116,7 +166,7 @@ class CompanyNotificationViewController: UIViewController {
                 self.currentUserUid = currentUserId
             }
         }
-        
+
         loadVacancies() { (error, vacancies) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
@@ -132,7 +182,21 @@ class CompanyNotificationViewController: UIViewController {
                         }
                     }
                 }
-                completion(nil, self.listCandidates)
+//                completion(nil, self.listCandidates)
+                self.testeListCandidates = []
+                self.testeListVacancy = []
+                
+                if self.testeVacancies.isEmpty == false {
+                    for vacancy in self.testeVacancies {
+                        if vacancy.candidateList.isEmpty == false {
+                            for candidate in vacancy.candidateList {
+                                self.testeListCandidates.append(candidate)
+                                self.testeListVacancy.append(vacancy.name)
+                            }
+                        }
+                    }
+                }
+                completion(nil, self.testeListCandidates)
             }
         }
     }

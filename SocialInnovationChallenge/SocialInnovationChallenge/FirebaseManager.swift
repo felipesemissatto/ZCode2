@@ -129,6 +129,55 @@ class FirebaseManager {
         }
     }
     
+    func readCandidatesApplyMyVacancies(_ userID: String, completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
+        var vacancy: Vacancy! = nil
+        
+        db.collection("vacancy").whereField("UID", isEqualTo: "EewYKz1BY9YB4n1wWnZVZL4u5nL2")
+        .getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                completion(err, nil)
+            } else {
+                for document in querySnapshot!.documents {
+                    let name = document.get("name") as! String
+                    let company = self.company
+                    let releaseTime = document.get("releaseTime") as! Int
+                    let description = document.get("description") as! String
+                    let workday = document.get("workday") as! String
+                    let numberOfVacancies = document.get("numberOfVacancies") as! String
+                    let benefits = document.get("benefits") as? String
+                    let salary = document.get("salary") as! String
+                    let region = document.get("region") as! String
+                    let typeOfWork = document.get("typeOfWork") as! String
+                    let startWork = document.get("startWork") as! String
+                    let isActivated = document.get("isActivated") as! Bool
+                    let ID = document.documentID
+                    let uid = document.get("UID") as! String
+                    let candidateList = document.get("candidatesList") as! [String]
+                    
+                    vacancy = Vacancy(name: name,
+                                      company: company,
+                                      releaseTime: releaseTime,
+                                      description: description,
+                                      workday: workday,
+                                      numberOfVacancies: numberOfVacancies,
+                                      benefits: benefits,
+                                      salary: salary,
+                                      region: region,
+                                      typeOfWork: typeOfWork,
+                                      isActivated: isActivated,
+                                      candidateList: candidateList,
+                                      startWork: startWork)
+                    vacancy.ID = ID
+                    vacancy.UID = uid
+                    
+                    self.vacancies.append(vacancy)
+                }
+                completion(nil, self.vacancies)
+            }
+        }
+    }
+    
     func deleteVacancyFirebase(_ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
         
         db.collection("vacancy").document(documentId).delete() { err in
@@ -229,7 +278,7 @@ class FirebaseManager {
                     let photo = document.get("photo") as! String
                     let region = document.get("region") as! String
                     let id = document.documentID
-
+                    
                     egress = Egress(contact: contact,
                                     courses: courses,
                                     dateOfBirth: dateOfBirth,

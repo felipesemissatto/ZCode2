@@ -152,9 +152,9 @@ class VacancyDetailsTableViewController2: UITableViewController {
         let alert = UIAlertController(title: nil,
                                       message: "Desculpa, não foi possível cadastrar.",
                                       preferredStyle: .alert)
-        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) { (action) in
+        let buttonAdd = UIAlertAction(title: "OK", style: .cancel) //{ (action) in
 
-        }
+       // }
         alert.addAction(buttonAdd)
         present(alert, animated: true, completion: nil)
     }
