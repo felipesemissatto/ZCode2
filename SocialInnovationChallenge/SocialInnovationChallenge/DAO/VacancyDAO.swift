@@ -55,22 +55,14 @@ class VacancyDAO: DAO {
         }
     }
     
-//    static func findNotification(_ uid: String, completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) throws {
-//        
-//        var listCandidate: [String] = []
-//        
-//        FirebaseManager.sharedInstance.readVacanciesFirebase { (error, vacancies) in
-//            if let err = error {
-//                completion(err, nil)
-//            } else {
-//                for vacancy in vacancies! {
-//                    if vacancy.UID == uid {
-//                        listCandidate = listCandidate + vacancy.candidateList
-//                    }
-//                }
-//                let newListCandidate = listCandidate.removingDuplicates()
-//                completion(nil, newListCandidate)
-//            }
-//        }
-//    }
+    static func readWhereField(_ field: String, _ value: String, completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.readWhereFieldFirebase(field, value) { (error, candidatesList, nameList) in
+            if let error = error {
+                completion(error, nil, nil)
+            } else {
+                completion(nil, candidatesList, nameList)
+            }
+        }
+    }
 }

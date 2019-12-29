@@ -80,5 +80,21 @@ class VacancyServices {
             print("Error func isActivated: ", error)
         }
     }
+    
+    static func readWhereField(_ field: String, _ value: String, completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) {
+        
+        do {
+            try VacancyDAO.readWhereField(field, value) { (error, candidatesList, nameList) in
+                if let error = error {
+                    completion(error, nil, nil)
+                } else {
+                    completion(nil, candidatesList, nameList)
+                }
+            }
+        }
+        catch let error {
+            print("Error func readWhereField: ", error)
+        }
+    }
 }
 

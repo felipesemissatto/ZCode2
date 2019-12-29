@@ -7,7 +7,6 @@
 //
 //  Problema com sincronia dos dados obtidos para pegar a lista de candidatos que se candidataram a alguma vaga a minha emrpesa
 import UIKit
-import FirebaseFirestore
 
 class CompanyNotificationViewController: UIViewController {
     
@@ -17,7 +16,7 @@ class CompanyNotificationViewController: UIViewController {
     
     //MARK: Properties
     var vacancies = [Vacancy]()
-    var egress = [Egress]()
+    var candidates = [Egress]()
     var oldEgress = [Egress]()
     var egressSelected: Egress?
     var filteredEgress = [Egress]()
@@ -45,7 +44,7 @@ class CompanyNotificationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadEgress()
+        loadCandidates()
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -62,23 +61,27 @@ class CompanyNotificationViewController: UIViewController {
     }
     
     //MARK: Functions
-    private func loadEgress(){
+    private func loadCandidates(){
         
         var listCandidateUID = [String]()
-
-        canditates() { (error, listCandidate) in
+        
+        candidatesApply() { (error, candidatesList, nameList) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
-                self.egress = []
-                listCandidateUID = listCandidate!
+                self.candidates = []
+                self.listVacancy = []
+                
+                listCandidateUID = candidatesList!
+                self.listVacancy = nameList!
+                
                 self.activityIndicator.startAnimating()
                 for candidateUID in listCandidateUID {
                     EgressServices.getOne(candidateUID) { (error, egress) in
                         if let error = error {
                             print("Error loading document: \(error.localizedDescription)")
                         } else {
-                            self.egress.append(egress!)
+                            self.candidates.append(egress!)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                                 self.activityIndicator.stopAnimating()
@@ -93,71 +96,7 @@ class CompanyNotificationViewController: UIViewController {
     }
     
     
-    func loadVacancies(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
-        
-        var vacancy: Vacancy! = nil
-        let db = Firestore.firestore()
-        
-        VacancyServices.getAll { (error, vacancies) in
-
-            if let error = error {
-                completion(error, nil)
-                print("Error loading document: \(error.localizedDescription)")
-            } else {
-//                completion(nil, vacancies)
-                
-                db.collection("vacancy").whereField("UID", isEqualTo: "EewYKz1BY9YB4n1wWnZVZL4u5nL2")
-                    .getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            self.testeVacancies = []
-                            
-                            for document in querySnapshot!.documents {
-                                print("\(document.documentID) => \(document.data())")
-                                let name = document.get("name") as! String
-                                let company = self.company
-                                let releaseTime = document.get("releaseTime") as! Int
-                                let description = document.get("description") as! String
-                                let workday = document.get("workday") as! String
-                                let numberOfVacancies = document.get("numberOfVacancies") as! String
-                                let benefits = document.get("benefits") as? String
-                                let salary = document.get("salary") as! String
-                                let region = document.get("region") as! String
-                                let typeOfWork = document.get("typeOfWork") as! String
-                                let startWork = document.get("startWork") as! String
-                                let isActivated = document.get("isActivated") as! Bool
-                                let ID = document.documentID
-                                let uid = document.get("UID") as! String
-                                let candidateList = document.get("candidatesList") as! [String]
-                                
-                                vacancy = Vacancy(name: name,
-                                                  company: company,
-                                                  releaseTime: releaseTime,
-                                                  description: description,
-                                                  workday: workday,
-                                                  numberOfVacancies: numberOfVacancies,
-                                                  benefits: benefits,
-                                                  salary: salary,
-                                                  region: region,
-                                                  typeOfWork: typeOfWork,
-                                                  isActivated: isActivated,
-                                                  candidateList: candidateList,
-                                                  startWork: startWork)
-                                vacancy.ID = ID
-                                vacancy.UID = uid
-                                
-                                self.testeVacancies.append(vacancy)
-                            }
-                            completion(nil, self.testeVacancies)
-                            print(self.testeVacancies)
-                        }
-                }
-            }
-        }
-    }
-    
-    func canditates(completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) {
+    func candidatesApply(completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) {
         
         getCurrentUserId() { (currentUserId) in
             if currentUserId == nil {
@@ -166,37 +105,13 @@ class CompanyNotificationViewController: UIViewController {
                 self.currentUserUid = currentUserId
             }
         }
-
-        loadVacancies() { (error, vacancies) in
+        
+        VacancyServices.readWhereField("UID", self.currentUserUid!) { (error, candidatesList, nameList) in
             if let error = error {
-                print("Error loading document: \(error.localizedDescription)")
-                completion(error, nil)
+                print("Func readWhereField: ", error)
+                completion(error, nil, nil)
             } else {
-                self.listCandidates = []
-                self.listVacancy = []
-                for vacancy in vacancies! {
-                    if vacancy.UID == self.currentUserUid {
-                        for candidate in vacancy.candidateList {
-                            self.listCandidates.append(candidate)
-                            self.listVacancy.append(vacancy.name)
-                        }
-                    }
-                }
-//                completion(nil, self.listCandidates)
-                self.testeListCandidates = []
-                self.testeListVacancy = []
-                
-                if self.testeVacancies.isEmpty == false {
-                    for vacancy in self.testeVacancies {
-                        if vacancy.candidateList.isEmpty == false {
-                            for candidate in vacancy.candidateList {
-                                self.testeListCandidates.append(candidate)
-                                self.testeListVacancy.append(vacancy.name)
-                            }
-                        }
-                    }
-                }
-                completion(nil, self.testeListCandidates)
+                completion(nil, candidatesList, nameList)
             }
         }
     }
@@ -233,7 +148,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     
     // MARK: Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return egress.count
+        return candidates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -252,7 +167,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
         
         
         // Fetches the appropriate living being for the data source layout.
-        egressSelected = egress[indexPath.row]
+        egressSelected = candidates[indexPath.row]
         
         // configuring the cell -> sets each of the views in the table view cell to display the corresponding data
         if let filePath = Bundle.main.path(forResource: "imageName", ofType: "jpg"), let image = UIImage(contentsOfFile: filePath) {
@@ -304,7 +219,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Fetches the appropriate living being for the data source layout.
-        egressSelected = egress[indexPath.row]
+        egressSelected = candidates[indexPath.row]
         
         self.performSegue(withIdentifier: "CandidateDetail", sender: egressSelected)
     }

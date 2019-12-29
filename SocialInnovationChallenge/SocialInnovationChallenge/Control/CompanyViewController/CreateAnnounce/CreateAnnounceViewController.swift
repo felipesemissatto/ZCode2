@@ -112,7 +112,6 @@ class CreateAnnounceViewController: UIViewController {
            self.benefitsTextField.text?.isEmpty ?? false ||
            self.startWorkTextField.text?.isEmpty ?? false {
             
-            
            fillAlert()
         } else {
             
