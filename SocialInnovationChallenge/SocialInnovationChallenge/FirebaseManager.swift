@@ -168,7 +168,7 @@ class FirebaseManager {
         }
     }
     
-    func activate(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+    func activateVacancyFirebase(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
         
         if isActivated {
             db.collection("vacancy").document(documentId).updateData(["isActivated": true]) { err in
@@ -185,6 +185,22 @@ class FirebaseManager {
                 } else {
                     // Enviar notificaçao para avisar o usuario que ela foi desadivada com sucesso?
                 }
+            }
+        }
+    }
+    
+    func candidateApplyFirebase(_ vacancyDocumentID: String, _ candidateUserID: [String], completion: @escaping (_ error: Error?, _ applySuccess: Bool?) -> (Void)){
+        
+        db.collection("vacancy").document(vacancyDocumentID).updateData(["candidatesList": candidateUserID]) { error in
+            let applySuccess: Bool
+            
+            if let error = error {
+                print("Error func candidateApplyFirebase: \(error)")
+                applySuccess = false
+                completion(error, applySuccess)
+            } else {
+                applySuccess = true
+                completion(nil, applySuccess)
             }
         }
     }

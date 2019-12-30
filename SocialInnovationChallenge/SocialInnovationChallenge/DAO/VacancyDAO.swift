@@ -46,7 +46,7 @@ class VacancyDAO: DAO {
     
     static func isActivated(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) throws {
         
-        FirebaseManager.sharedInstance.activate(isActivated, documentId) { (error) in
+        FirebaseManager.sharedInstance.activateVacancyFirebase(isActivated, documentId) { (error) in
             if let err = error {
                 completion(err)
             } else {

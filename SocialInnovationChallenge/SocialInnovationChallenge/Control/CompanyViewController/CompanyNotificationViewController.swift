@@ -77,7 +77,7 @@ class CompanyNotificationViewController: UIViewController {
                 
                 self.activityIndicator.startAnimating()
                 for candidateUID in listCandidateUID {
-                    EgressServices.getOne(candidateUID) { (error, egress) in
+                    CandidateServices.getOne(candidateUID) { (error, egress) in
                         if let error = error {
                             print("Error loading document: \(error.localizedDescription)")
                         } else {

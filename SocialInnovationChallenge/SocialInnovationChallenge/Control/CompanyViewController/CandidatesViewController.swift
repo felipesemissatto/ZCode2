@@ -92,7 +92,7 @@ class CandidatesViewController: UIViewController {
     //MARK: Functions
     private func loadEgress(){
         activityIndicator.startAnimating()
-        EgressServices.getAll { (error, egress) in
+        CandidateServices.getAll { (error, egress) in
             
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")

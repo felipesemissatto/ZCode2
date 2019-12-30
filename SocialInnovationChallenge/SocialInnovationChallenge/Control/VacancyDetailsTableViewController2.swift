@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
 
 class VacancyDetailsTableViewController2: UITableViewController {
 
@@ -17,6 +15,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
     var screenBefore: Bool? // true -> Vacancy; false -> Company
     var segueIdentifier: String?
     var isHiddenSaveButton: Bool = false
+//    var currentUserID: String?
     
     //MARK: Outlets
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -95,16 +94,16 @@ class VacancyDetailsTableViewController2: UITableViewController {
         settingApplyButton()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-//        if segueIdentifier == "showDetailSegue"{
-//            activated()
-//        }
-    }
-    
     func settingApplyButton() {
-        let candidate = Auth.auth().currentUser?.uid
+        var candidate: String?
+        
+        getCurrentUserId() { (currentUserID) in
+            if currentUserID == nil {
+                print("Func candidates: Not found current user id")
+            } else {
+                candidate = currentUserID!
+            }
+        }
         
         for item in self.vacancy!.candidateList {
             if candidate == item {
@@ -121,16 +120,37 @@ class VacancyDetailsTableViewController2: UITableViewController {
         }
     }
     
+    func getCurrentUserId(completion: @escaping (_ currentUserId: String?) -> (Void)) {
+        
+        UserServices.getCurrentUserId { (currentUserId) in
+            if currentUserId == nil {
+                print("Func getCurrentUserId: Not found current user id")
+                completion(nil)
+            } else {
+                completion(currentUserId)
+            }
+        }
+    }
+    
     //MARK: Actions
     @IBAction func tapApplyNow(_ sender: Any) {
         
-        let db = Firestore.firestore()
-        let candidate = Auth.auth().currentUser?.uid
+        getCurrentUserId() { (currentUserID) in
+            if currentUserID == nil {
+                print("Func candidates: Not found current user id")
+            } else {
+                self.vacancy?.candidateList.append(currentUserID!)
+            }
+        }
         
-        self.vacancy?.candidateList.append(candidate!)
-        
-        db.collection("vacancy").document(self.vacancy!.ID!).updateData(["candidatesList": self.vacancy?.candidateList])
-        applayAlert()
+        CandidateServices.apply(self.vacancy!.ID!, self.vacancy!.candidateList) { (error, applySuccess) in
+            if applySuccess == false {
+                print("Func tapApplyNow")
+                self.errorAlert()
+            } else {
+                self.applyAlert()
+            }
+        }
     }
     
     @IBAction func writeFirebase(_ sender: Any) {
@@ -143,6 +163,30 @@ class VacancyDetailsTableViewController2: UITableViewController {
                 self.vacancy = vacancy
                 print("Sucesso")
                 self.successAlert()
+            }
+        }
+    }
+    
+    @IBAction func isActivatedVacancy(_ sender: Any) {
+        
+        let isActivated = self.activatedSwitch.isOn
+        let documentId = self.vacancy!.ID!
+        
+        if isActivated {
+            VacancyServices.isActivated(isActivated, documentId) { (error) in
+                    if let err = error {
+                        print("Error adding document: \(err.localizedDescription)")
+                    } else {
+                        print("Sucesso")
+                    }
+            }
+        } else {
+            VacancyServices.isActivated(isActivated, self.vacancy!.ID!) { (error) in
+                    if let err = error {
+                        print("Error adding document: \(err.localizedDescription)")
+                    } else {
+                        print("Sucesso")
+                    }
             }
         }
     }
@@ -170,7 +214,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func applayAlert() {
+    func applyAlert() {
         let alert = UIAlertController(title: "Parabéns!",
                                       message: "Você acabou a se candidatar a vaga. Agora é só aguardar o retorno.",
                                       preferredStyle: .alert)
@@ -183,41 +227,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
         alert.addAction(buttonAdd)
         present(alert, animated: true, completion: nil)
     }
-    //MARK: Functions
-//    func activated() {
-//        let db = Firestore.firestore()
-//
-//        if self.activatedSwitch.isOn {
-//            // Adicionar um completion
-//            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": true])
-//        } else {
-//            db.collection("vacancy").document(self.vacancy!.ID!).updateData(["isActivated": false])
-//        }
-//    }
     
-    @IBAction func isActivatedVacancy(_ sender: Any) {
-        
-        let isActivated = self.activatedSwitch.isOn
-        let documentId = self.vacancy!.ID!
-        
-        if isActivated {
-            VacancyServices.isActivated(isActivated, documentId) { (error) in
-                    if let err = error {
-                        print("Error adding document: \(err.localizedDescription)")
-                    } else {
-                        print("Sucesso")
-                    }
-            }
-        } else {
-            VacancyServices.isActivated(isActivated, self.vacancy!.ID!) { (error) in
-                    if let err = error {
-                        print("Error adding document: \(err.localizedDescription)")
-                    } else {
-                        print("Sucesso")
-                    }
-            }
-        }
-    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var rowHeight:CGFloat = 0.0
         

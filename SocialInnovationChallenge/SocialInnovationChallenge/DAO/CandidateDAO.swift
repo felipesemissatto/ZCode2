@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EgressDAO: DAO {
+class CandidateDAO: DAO {
     
     static func findAll(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) throws {
         
@@ -28,6 +28,17 @@ class EgressDAO: DAO {
                 completion(err, nil)
             } else {
                 completion(nil, egress)
+            }
+        }
+    }
+    
+    static func candidateApply(_ vacancyDocumentID: String, _ candidateUserID: [String], completion: @escaping (_ error: Error?, _ applySuccess: Bool?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.candidateApplyFirebase(vacancyDocumentID, candidateUserID) { (error, applySuccess) in
+            if let error = error {
+                completion(error, nil)
+            } else {
+                completion(nil, applySuccess)
             }
         }
     }

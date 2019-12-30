@@ -8,13 +8,13 @@
 
 import UIKit
 
-class EgressServices {
+class CandidateServices {
     
     static func getAll(_ completion: @escaping ((_ error: Error?, _ egress: [Egress]?) -> Void)) {
         
         do {
             // save information
-            try EgressDAO.findAll() { (error, egress) in
+            try CandidateDAO.findAll() { (error, egress) in
                 
                 if let error = error {
                     completion(error, nil)
@@ -32,7 +32,7 @@ class EgressServices {
         
         do {
             // save information
-            try EgressDAO.findOne(documentId) { (error, egress) in
+            try CandidateDAO.findOne(documentId) { (error, egress) in
                 
                 if let error = error {
                     completion(error, nil)
@@ -43,6 +43,24 @@ class EgressServices {
         }
         catch let error {
             print("Erro func getone: \(error)")
+        }
+    }
+    
+    static func apply(_ vacancyDocumentID: String, _ candidateUserID: [String], completion: @escaping (_ error: Error?, _ applySuccess: Bool?) -> (Void)) {
+        
+        do {
+            
+            try CandidateDAO.candidateApply(vacancyDocumentID, candidateUserID) { (error, applySuccess) in
+                
+                if let error = error {
+                    completion(error, nil)
+                } else {
+                    completion(nil, applySuccess)
+                }
+            }
+        }
+        catch let error {
+            print("Erro func apply: \(error)")
         }
     }
 }
