@@ -46,22 +46,55 @@ class VacancyServices {
         }
     }
     
-//    static func getNotification(uid: String, _ completion: @escaping ((_ error: Error?, _ listCandidate: [String]?) -> Void)) {
-//        
-//        do {
-//            // save information
-//            try VacancyDAO.findNotification(uid) { (error, listCandidate) in
-//                
-//                if let error = error {
-//                    completion(error, nil)
-//                } else {
-//                    completion(nil, listCandidate)
-//                }
-//            }
-//        }
-//        catch let error {
-//            print(error)
-//        }
-//    }
+    static func delete(_ documentID: String, _ completion: @escaping ((_ error: Error?) -> Void)) {
+        
+        do {
+            
+            try VacancyDAO.delete(documentID) { (error) in
+                
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+        catch let error {
+            print("Error func delete: ", error)
+        }
+    }
+    
+    static func isActivated(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        do {
+            
+            try VacancyDAO.isActivated(isActivated, documentId) { (error) in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+        catch let error {
+            print("Error func isActivated: ", error)
+        }
+    }
+    
+    static func readWhereField(_ field: String, _ value: String, completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) {
+        
+        do {
+            try VacancyDAO.readWhereField(field, value) { (error, candidatesList, nameList) in
+                if let error = error {
+                    completion(error, nil, nil)
+                } else {
+                    completion(nil, candidatesList, nameList)
+                }
+            }
+        }
+        catch let error {
+            print("Error func readWhereField: ", error)
+        }
+    }
 }
 

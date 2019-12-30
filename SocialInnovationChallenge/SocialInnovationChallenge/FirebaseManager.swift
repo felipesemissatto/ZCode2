@@ -5,13 +5,16 @@
 //  Created by Rodrigo Takumi on 21/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
+//  Funcao que ativa ou desativa a vaca funciona, mas está mal estruturada
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
 class FirebaseManager {
     
+    let db = Firestore.firestore()
+    
+    var candidatesList: [String] = []
     var vacancies: [Vacancy] = []
     var egress: [Egress] = []
     let company = Company(name: "Pano Social",
@@ -32,10 +35,8 @@ class FirebaseManager {
     // Database manager singleton
     static let sharedInstance = FirebaseManager()
     
-    
     //Write in firebase if all textFiels filled
-    func writeFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
-        let db = Firestore.firestore()
+    func writeVacancyFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
         
         let name = vacancy.name
         let region = vacancy.region
@@ -53,9 +54,8 @@ class FirebaseManager {
         
         var ref: DocumentReference? = nil
         
-        ref = db.collection("vacancy").addDocument(data: ["benefits": benefits,
+        ref = self.db.collection("vacancy").addDocument(data: ["benefits": benefits,
                                                                "description": description ,
-//                                                             "company": "/company/\(company)",
                                                                 "isActivated": isActivated,
                                                                 "candidatesList": candidateList,
                                                                 "name": name ,
@@ -77,11 +77,11 @@ class FirebaseManager {
         }
     }
     
+    //Read all vacancies of firebase
     func readVacanciesFirebase(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
-        let db = Firestore.firestore()
         var vacancy: Vacancy! = nil
         
-        db.collection("vacancy").getDocuments() { (snapshot, err) in
+        self.db.collection("vacancy").getDocuments() { (snapshot, err) in
             if let error = err {
                 print("Error getting documents: \(error)")
                 completion(error, nil)
@@ -130,11 +130,114 @@ class FirebaseManager {
         }
     }
     
-    func readEgressFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
-        let db = Firestore.firestore()
+    func readWhereFieldFirebase(_ field: String, _ value: String, completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ name: [String]?) -> (Void)) {
+        
+        var nameList: [String] = []
+        
+        db.collection("vacancy").whereField(field, isEqualTo: value).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting candidates list: \(err)")
+                completion(err, nil, nil)
+            } else {
+                self.candidatesList = []
+                
+                for document in querySnapshot!.documents {
+                    let name = document.get("name") as! String
+                    let candidatesList = document.get("candidatesList") as! [String]
+                    
+                    if candidatesList.isEmpty == false {
+                        for candidate in candidatesList {
+                            nameList.append(name)
+                            self.candidatesList.append(candidate)
+                        }
+                    }
+                }
+                completion(nil, self.candidatesList, nameList)
+            }
+        }
+    }
+    
+    func deleteVacancyFirebase(_ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        db.collection("vacancy").document(documentId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
+    func activate(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) {
+        
+        if isActivated {
+            db.collection("vacancy").document(documentId).updateData(["isActivated": true]) { err in
+                if let err = err {
+                    print("Error button activated: \(err)")
+                } else {
+                    // Enviar notificaçao para avisar o usuario que ela foi ativada com sucesso?
+                }
+            }
+        } else {
+            db.collection("vacancy").document(documentId).updateData(["isActivated": false]) { err in
+                if let err = err {
+                    print("Error button activated: \(err)")
+                } else {
+                    // Enviar notificaçao para avisar o usuario que ela foi desadivada com sucesso?
+                }
+            }
+        }
+    }
+    
+    //Read one candidate of firebase
+    func readOneCandidateFirebase(_ documentId: String, completion: @escaping (_ error: Error?, _ egress: Egress?) -> (Void)) {
+        
+        var egress:  Egress! = nil
+        let docRef = self.db.collection("candidates").document(documentId)
+        
+        docRef.getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                
+                let contact = document.get("contact") as! [String]
+                let courses = document.get("courses") as! [String]
+                let dateOfBirth = document.get("dateOfBirth") as! String
+                let description = document.get("description") as! String
+                let desires = document.get("desires") as! [String]
+                let experiences = document.get("experiences") as! [String]
+                let experiencesDescription = document.get("experiencesDescription") as! [String]
+                let name = document.get("name") as! String
+                let photo = document.get("photo") as! String
+                let region = document.get("region") as! String
+                let id = document.documentID
+                
+                egress = Egress(contact: contact,
+                                courses: courses,
+                                dateOfBirth: dateOfBirth,
+                                description: description,
+                                desires: desires,
+                                experiences: experiences,
+                                experiencesDescription: experiencesDescription,
+                                name: name,
+                                photo: photo,
+                                region: region,
+                                video: nil)
+                egress.id = id
+                
+                completion(nil, egress)
+            } else {
+                let error = error 
+                print("Erro na func readOneEgressFirebase: \(String(describing: error))")
+                completion(error, nil)
+            }
+        }
+    }
+    
+    //Read all candidates of firebase
+    func readCandidatesFirebase(completion: @escaping (_ error: Error?, _ egress: [Egress]?) -> (Void)) {
         var egress:  Egress! = nil
         
-        db.collection("egress").getDocuments() { (snapshot, err) in
+        self.db.collection("candidates").getDocuments() { (snapshot, err) in
             if let error = err {
                 print("Error getting documents: \(error)")
                 completion(error, nil)
@@ -143,30 +246,30 @@ class FirebaseManager {
                 
                 for document in snapshot!.documents {
                     
-                    let name = document.get("name") as! String
-                    let region = document.get("region") as! String
-                    let description = document.get("description") as! String
                     let contact = document.get("contact") as! [String]
-                    let desires = document.get("dreams") as! [String]
-                    let photo = document.get("photo") as! String
                     let courses = document.get("courses") as! [String]
+                    let dateOfBirth = document.get("dateOfBirth") as! String
+                    let description = document.get("description") as! String
+                    let desires = document.get("desires") as! [String]
                     let experiences = document.get("experiences") as! [String]
                     let experiencesDescription = document.get("experiencesDescription") as! [String]
-                    let uid = document.get("documentID") as! String
+                    let name = document.get("name") as! String
+                    let photo = document.get("photo") as! String
+                    let region = document.get("region") as! String
+                    let id = document.documentID
                     
-                    egress = Egress(name: name,
-                                    dateOfBirth: "",
-                                    description: description,
-                                    region: region,
-                                    photo: photo,
-                                    video: nil,
+                    egress = Egress(contact: contact,
                                     courses: courses,
+                                    dateOfBirth: dateOfBirth,
+                                    description: description,
+                                    desires: desires,
                                     experiences: experiences,
                                     experiencesDescription: experiencesDescription,
-                                    skills: nil,
-                                    desires: desires,
-                                    contact: contact)
-                    egress.uid = uid
+                                    name: name,
+                                    photo: photo,
+                                    region: region,
+                                    video: nil)
+                    egress.id = id
                     
                     self.egress.append(egress)
                 }
@@ -175,6 +278,17 @@ class FirebaseManager {
             }
         }
     }
+    
+    func readCurrentUserIdFirebase(completion: @escaping (_ currentUserId: String?) -> (Void)) {
+        var currentUserUid: String?
+        
+        if Auth.auth().currentUser == nil {
+            print("Func readCurrentUserIdFirebase: Not found current user id")
+            completion(nil)
+        } else {
+            currentUserUid = Auth.auth().currentUser?.uid
+            completion(currentUserUid)
+        }
+    }
 }
-
 

@@ -5,10 +5,7 @@
 //  Created by Isabela Modesto on 06/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
-import Foundation
 import UIKit
-import FirebaseFirestore
 
 class VacancyViewController: UIViewController {
     
@@ -27,7 +24,7 @@ class VacancyViewController: UIViewController {
                           contact: "(019)3263-6537",
                           vancancies: nil)
     
-    let db = Firestore.firestore()
+//    let db = Firestore.firestore()
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -66,13 +63,6 @@ class VacancyViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadVacancies()
-                
-//        VacancyServices.getAllVacancy { (error, vacancies) in
-//            self.vacancies  = vacancies!
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
     }
     
     //MARK: Search Controller's Methods
@@ -112,12 +102,6 @@ class VacancyViewController: UIViewController {
             }
         }
     }
-
-    
-    
-    private func loadSampleVacancies(){
-//        let vacancy1 = Vacancy(name: "Operador de Máquinas")
-    }
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -127,18 +111,12 @@ class VacancyViewController: UIViewController {
             return
         }
 
-        guard let livingBeingDetailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
+        guard let detailViewController = segue.destination as? VacancyDetailsTableViewController2 else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
 
-        livingBeingDetailViewController.vacancy = selected
-        livingBeingDetailViewController.screenBefore = true
-
-        if segue.identifier == "segueDetailsVacancy",
-            let vacancyDetails = segue.destination as? DetailViewController {
-            vacancyDetails.titleSaveButton = ""
-            vacancyDetails.isHiddenSaveButton = true
-        }
+        detailViewController.vacancy = selected
+        detailViewController.screenBefore = true
     }
 
 }
@@ -201,7 +179,7 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
 
                 if error != nil {
-                    print(error)
+                    print(error!)
                     return
                 }
                 

@@ -55,7 +55,6 @@ class CreateAnnounceViewController: UIViewController {
         
          //Changing status bar color
         navigationController?.navigationBar.prefersLargeTitles = false
-        UIApplication.shared.statusBarStyle = .darkContent
 
         if #available(iOS 13.0, *) {
             
@@ -64,6 +63,7 @@ class CreateAnnounceViewController: UIViewController {
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            UIApplication.shared.statusBarStyle = .darkContent
         }
     }
     
@@ -111,7 +111,6 @@ class CreateAnnounceViewController: UIViewController {
            self.workdayTextField.text?.isEmpty ?? false ||
            self.benefitsTextField.text?.isEmpty ?? false ||
            self.startWorkTextField.text?.isEmpty ?? false {
-            
             
            fillAlert()
         } else {

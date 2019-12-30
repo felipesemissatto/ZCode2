@@ -11,33 +11,31 @@ import Foundation
 class Egress{
     
     //MARK: Properties
-    public var name: String
+    public var contact: [String]
+    public var courses: [String]?
     public var dateOfBirth: String
     public var description: String
-    public var region: String
-    public var photo: String
-    public var video: URL?
-    public var courses: [String]?
+    public var desires: [String]
     public var experiences: [String]?
     public var experiencesDescription: [String]?
-    public var skills: [String]?
-    public var desires: [String]
-    public var contact: [String]
-    public var uid: String?
+    public var name: String
+    public var photo: String
+    public var region: String
+    public var video: URL?
+    public var id: String?
     
     //MARK: Constructors
-    init(name: String = "",
-        dateOfBirth: String = "",
-        description: String = "",
-        region: String = "",
-        photo: String = "",
-        video: URL? = nil,
-        courses: [String]? = nil,
-        experiences: [String]? = nil,
-        experiencesDescription: [String]? = nil,
-        skills: [String]? = nil,
-        desires: [String] = ["", "", ""],
-        contact: [String] = []){
+    init(contact: [String] = [],
+         courses: [String]? = nil,
+         dateOfBirth: String = "",
+         description: String = "",
+         desires: [String] = ["", "", ""],
+         experiences: [String]? = nil,
+         experiencesDescription: [String]? = nil,
+         name: String = "",
+         photo: String = "",
+         region: String = "",
+         video: URL? = nil) {
         
             self.name = name
             self.dateOfBirth = dateOfBirth
@@ -48,7 +46,6 @@ class Egress{
             self.courses = courses
             self.experiences = experiences
             self.experiencesDescription = experiencesDescription
-            self.skills = skills
             self.desires = desires
             self.contact = contact
     }

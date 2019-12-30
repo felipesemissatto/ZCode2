@@ -5,16 +5,17 @@
 //  Created by Isabela Modesto on 06/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
+//
+//  Erro quando deleto celula da table view (comentado no codigo onde esta o erro)
+
 
 import Foundation
 import UIKit
-import FirebaseFirestore
 
 class AnnounceViewController: UIViewController {
     
 
-    //MARK: Properties
-    let db = Firestore.firestore()
+//    //MARK: Properties
     
     var vacancies = [Vacancy]()
     var filteredVacancies = [Vacancy]()
@@ -59,7 +60,6 @@ class AnnounceViewController: UIViewController {
         //Changing status bar color
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        UIApplication.shared.statusBarStyle = .lightContent
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
@@ -214,17 +214,23 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            db.collection("vacancy").document(vacancies[indexPath.row].ID!).delete() { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
+
+            VacancyServices.delete(vacancies[indexPath.row].ID!) { (error) in
+
+                if let error = error {
+                    print("Error loading document: \(error.localizedDescription)")
                 } else {
-                    print("Document successfully removed!")
+                    // Erro: deveria remover aqui, mas nunca entra
+                    self.vacancies.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
                 }
             }
-            
-            vacancies.remove(at: indexPath.row)
+            // Erro: esta removendo aqui, mas nao deveria
+            self.vacancies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+
         }
     }
 }

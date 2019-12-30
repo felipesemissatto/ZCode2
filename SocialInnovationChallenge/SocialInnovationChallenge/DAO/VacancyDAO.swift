@@ -12,7 +12,7 @@ class VacancyDAO: DAO {
     
     static func create(_ objectToBeSaved: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) throws {
         
-        FirebaseManager.sharedInstance.writeFirebase(objectToBeSaved) { (error, documentID) in
+        FirebaseManager.sharedInstance.writeVacancyFirebase(objectToBeSaved) { (error, documentID) in
             if let err = error {
                 completion(err, nil)
             } else {
@@ -33,22 +33,36 @@ class VacancyDAO: DAO {
         }
     }
     
-//    static func findNotification(_ uid: String, completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) throws {
-//        
-//        var listCandidate: [String] = []
-//        
-//        FirebaseManager.sharedInstance.readVacanciesFirebase { (error, vacancies) in
-//            if let err = error {
-//                completion(err, nil)
-//            } else {
-//                for vacancy in vacancies! {
-//                    if vacancy.UID == uid {
-//                        listCandidate = listCandidate + vacancy.candidateList
-//                    }
-//                }
-//                let newListCandidate = listCandidate.removingDuplicates()
-//                completion(nil, newListCandidate)
-//            }
-//        }
-//    }
+    static func delete(_ documentID: String, completion: @escaping (_ error: Error?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.deleteVacancyFirebase(documentID) { (error) in
+            if let err = error {
+                completion(err)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    static func isActivated(_ isActivated: Bool, _ documentId: String, completion: @escaping (_ error: Error?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.activate(isActivated, documentId) { (error) in
+            if let err = error {
+                completion(err)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    static func readWhereField(_ field: String, _ value: String, completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) throws {
+        
+        FirebaseManager.sharedInstance.readWhereFieldFirebase(field, value) { (error, candidatesList, nameList) in
+            if let error = error {
+                completion(error, nil, nil)
+            } else {
+                completion(nil, candidatesList, nameList)
+            }
+        }
+    }
 }

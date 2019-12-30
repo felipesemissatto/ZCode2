@@ -5,21 +5,22 @@
 //  Created by Isabela Modesto on 06/11/19.
 //  Copyright © 2019 Felipe Semissatto. All rights reserved.
 //
-
-import Foundation
+//  Problema com sincronia dos dados obtidos para pegar a lista de candidatos que se candidataram a alguma vaga a minha emrpesa
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class CompanyNotificationViewController: UIViewController {
     
+    var testeVacancies = [Vacancy]()
+    var testeListCandidates: [String] = []
+    var testeListVacancy: [String] = []
+    
     //MARK: Properties
     var vacancies = [Vacancy]()
-    var egress = [Egress]()
+    var candidates = [Egress]()
     var oldEgress = [Egress]()
     var egressSelected: Egress?
     var filteredEgress = [Egress]()
-    var myUID: String?
+    var currentUserUid: String?
     var listCandidates: [String] = []
     var listVacancy: [String] = []
     
@@ -36,22 +37,16 @@ class CompanyNotificationViewController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBAction func unwindToNotification(segue: UIStoryboardSegue){}
-    @IBOutlet weak var acitivtyIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var shadowView: UIView!
     //MARK: Views
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadEgress()
-        
-        //MARK: Views
-        myUID = Auth.auth().currentUser?.uid
-        
-        //Changing status bar color
+        loadCandidates()
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        UIApplication.shared.statusBarStyle = .lightContent
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
@@ -66,60 +61,33 @@ class CompanyNotificationViewController: UIViewController {
     }
     
     //MARK: Functions
-    private func loadEgress(){
+    private func loadCandidates(){
         
         var listCandidateUID = [String]()
-        let db = Firestore.firestore()
-        var egress:  Egress! = nil
-    
-        acitivtyIndicator.startAnimating()
-        canditates() { (error, listCandidate) in
+        
+        candidatesApply() { (error, candidatesList, nameList) in
             if let error = error {
                 print("Error loading document: \(error.localizedDescription)")
             } else {
-                self.egress = []
-                listCandidateUID = listCandidate!
+                self.candidates = []
+                self.listVacancy = []
+                
+                listCandidateUID = candidatesList!
+                self.listVacancy = nameList!
+                
+                self.activityIndicator.startAnimating()
                 for candidateUID in listCandidateUID {
-                    let docRef = db.collection("egress").document(candidateUID)
-                    
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-//                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-           
-                            let name = document.get("name") as! String
-                            let region = document.get("region") as! String
-                            let description = document.get("description") as! String
-                            let contact = document.get("contact") as! [String]
-                            let desires = document.get("dreams") as! [String]
-                            let photo = document.get("photo") as! String
-                            let courses = document.get("courses") as! [String]
-                            let experiences = document.get("experiences") as! [String]
-                            let experiencesDescription = document.get("experiencesDescription") as! [String]
-                            let uid = document.get("documentID") as! String
-                            
-                            egress = Egress(name: name,
-                                            dateOfBirth: "",
-                                            description: description,
-                                            region: region,
-                                            photo: photo,
-                                            video: nil,
-                                            courses: courses,
-                                            experiences: experiences,
-                                            experiencesDescription: experiencesDescription,
-                                            skills: nil,
-                                            desires: desires,
-                                            contact: contact)
-                            egress.uid = uid
-                            self.egress.append(egress)
+                    EgressServices.getOne(candidateUID) { (error, egress) in
+                        if let error = error {
+                            print("Error loading document: \(error.localizedDescription)")
+                        } else {
+                            self.candidates.append(egress!)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
-                                self.acitivtyIndicator.stopAnimating()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                                 self.shadowView.isHidden = true
-                                self.acitivtyIndicator.isHidden = true
                             }
-//                            print("Document data: \(dataDescription)")
-                        } else {
-                            print("Document does not exist")
                         }
                     }
                 }
@@ -127,40 +95,39 @@ class CompanyNotificationViewController: UIViewController {
         }
     }
     
-    func loadVacancies(completion: @escaping (_ error: Error?, _ vacancies: [Vacancy]?) -> (Void)) {
+    
+    func candidatesApply(completion: @escaping (_ error: Error?, _ candidatesList: [String]?, _ nameList: [String]?) -> (Void)) {
         
-        VacancyServices.getAll { (error, vacancies) in
-            
-            if let error = error {
-                completion(error, nil)
-                print("Error loading document: \(error.localizedDescription)")
+        getCurrentUserId() { (currentUserId) in
+            if currentUserId == nil {
+                print("Func candidates: Not found current user id")
             } else {
-                completion(nil, vacancies)
+                self.currentUserUid = currentUserId
+            }
+        }
+        
+        VacancyServices.readWhereField("UID", self.currentUserUid!) { (error, candidatesList, nameList) in
+            if let error = error {
+                print("Func readWhereField: ", error)
+                completion(error, nil, nil)
+            } else {
+                completion(nil, candidatesList, nameList)
             }
         }
     }
     
-    func canditates(completion: @escaping (_ error: Error?, _ listCandidate: [String]?) -> (Void)) {
+    func getCurrentUserId(completion: @escaping (_ currentUserId: String?) -> (Void)) {
         
-        loadVacancies() { (error, vacancies) in
-            if let error = error {
-                print("Error loading document: \(error.localizedDescription)")
-                completion(error, nil)
+        UserServices.getCurrentUserId { (currentUserId) in
+            if currentUserId == nil {
+                print("Func getCurrentUserId: Not found current user id")
+                completion(nil)
             } else {
-                self.listCandidates = []
-                self.listVacancy = []
-                for vacancy in vacancies! {
-                    if vacancy.UID == self.myUID {
-                        for candidate in vacancy.candidateList {
-                            self.listCandidates.append(candidate)
-                            self.listVacancy.append(vacancy.name)
-                        }
-                    }
-                }
-                completion(nil, self.listCandidates)
+                completion(currentUserId)
             }
         }
     }
+    
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -168,13 +135,9 @@ class CompanyNotificationViewController: UIViewController {
         if segue.identifier == "CandidateDetail"{
             let candidateDetail = segue.destination as! CandidateDetailViewController
             
-            if segue.identifier == "CandidateDetail"{
-                let candidateDetail = segue.destination as! CandidateDetailViewController
-                
-                if egressSelected != nil{
-                    candidateDetail.egress = egressSelected
-                    candidateDetail.segueIdentifier = "unwindToNotications"
-                }
+            if egressSelected != nil{
+                candidateDetail.egress = egressSelected
+                candidateDetail.segueIdentifier = "unwindToNotications"
             }
         }
     }
@@ -185,7 +148,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     
     // MARK: Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return egress.count
+        return candidates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -204,7 +167,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
         
         
         // Fetches the appropriate living being for the data source layout.
-        egressSelected = egress[indexPath.row]
+        egressSelected = candidates[indexPath.row]
         
         // configuring the cell -> sets each of the views in the table view cell to display the corresponding data
         if let filePath = Bundle.main.path(forResource: "imageName", ofType: "jpg"), let image = UIImage(contentsOfFile: filePath) {
@@ -237,7 +200,7 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print(error)
+                    print("Erro carregmento foto notificacao: \(String(describing: error))")
                     return
                 }
                 
@@ -256,22 +219,8 @@ extension CompanyNotificationViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Fetches the appropriate living being for the data source layout.
-        egressSelected = egress[indexPath.row]
+        egressSelected = candidates[indexPath.row]
         
         self.performSegue(withIdentifier: "CandidateDetail", sender: egressSelected)
     }
 }
-
-//extension Array where Element: Hashable {
-//    func removingDuplicates() -> [Element] {
-//        var addedDict = [Element: Bool]()
-//
-//        return filter {
-//            addedDict.updateValue(true, forKey: $0) == nil
-//        }
-//    }
-//
-//    mutating func removeDuplicates() {
-//        self = self.removingDuplicates()
-//    }
-//}
