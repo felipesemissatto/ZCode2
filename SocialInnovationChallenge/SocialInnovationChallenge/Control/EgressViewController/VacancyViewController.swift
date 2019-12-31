@@ -14,18 +14,6 @@ class VacancyViewController: UIViewController {
     var filteredVacancies = [Vacancy]()
     let searchController = UISearchController(searchResultsController: nil)
     
-    let company = Company(name: "PanoSocial",
-                          foundationDate: 2005,
-                          region: "Campinas, SP",
-                          photo: "",
-                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-                          site: nil,
-                          sectors: "Costura; Corte; Limpeza",
-                          contact: "(019)3263-6537",
-                          vancancies: nil)
-    
-//    let db = Firestore.firestore()
-    
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
@@ -167,30 +155,30 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
             cell.imageCompany.image = image
         }
         cell.nameVacancyLabel.text = vacancy.name
-        cell.nameCompanyLabel.text = vacancy.company.name
+        cell.nameCompanyLabel.text = vacancy.companyName
         cell.regionLabel.text = vacancy.region
         cell.workdayLabel.text = vacancy.workday
         cell.timeReleaseLabel.text = "há \(vacancy.releaseTime) dias atrás"
         
         // Add photo  profile
-        if vacancy.company.photo != "" {
-            let imageUrl = vacancy.company.photo
-            let url = NSURL(string: imageUrl)
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                DispatchQueue.global(qos: .background).async {
-                    DispatchQueue.main.async {
-                        cell.imageCompany?.contentMode = .scaleAspectFit
-                        cell.imageCompany?.image = UIImage(data: data!)
-                    }
-                }
-            }).resume()
-        }
+//        if vacancy.company.photo != "" {
+//            let imageUrl = vacancy.company.photo
+//            let url = NSURL(string: imageUrl)
+//            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+//
+//                if error != nil {
+//                    print(error!)
+//                    return
+//                }
+//                
+//                DispatchQueue.global(qos: .background).async {
+//                    DispatchQueue.main.async {
+//                        cell.imageCompany?.contentMode = .scaleAspectFit
+//                        cell.imageCompany?.image = UIImage(data: data!)
+//                    }
+//                }
+//            }).resume()
+//        }
         
         return cell
     }

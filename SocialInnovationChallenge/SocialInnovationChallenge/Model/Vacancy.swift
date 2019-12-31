@@ -10,10 +10,10 @@ import Foundation
 class Vacancy {
     
     //MARK: Properties
-    public var ID: String?
-    public var UID: String?
+    public var documentID: String?
+    public var campanyID: String?
+    public var companyName: String
     public var name: String
-    public var company: Company
     public var releaseTime: Int //days, weeks or months
     public var description: String
     public var workday: String
@@ -28,7 +28,7 @@ class Vacancy {
     
     //MARK: Contructors
     init(name: String = "",
-         company: Company,
+         companyName: String = "",
          releaseTime: Int = 0,
          description: String =  "",
          workday: String =  "",
@@ -41,7 +41,7 @@ class Vacancy {
          candidateList: [String] = [],
          startWork: String = ""){
             self.name = name
-            self.company = company
+            self.companyName = companyName
             self.releaseTime = releaseTime
             self.description = description
             self.workday = workday

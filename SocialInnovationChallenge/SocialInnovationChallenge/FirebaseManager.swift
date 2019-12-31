@@ -17,15 +17,15 @@ class FirebaseManager {
     var candidatesList: [String] = []
     var vacancies: [Vacancy] = []
     var egress: [Egress] = []
-    let company = Company(name: "Pano Social",
-                          foundationDate: 2005,
-                          region: "Campinas, SP",
-                          photo: "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/News%20Logo.png?alt=media&token=cb6d3dd4-c113-4b35-af93-2ab8847f451d",
-                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-                          site: nil,
-                          sectors: "Costura; Corte; Limpeza",
-                          contact: "(019)3263-6537",
-                          vancancies: nil)
+//    let company = Company(name: "Pano Social",
+//                          foundationDate: 2005,
+//                          region: "Campinas, SP",
+//                          photo: "https://firebasestorage.googleapis.com/v0/b/zcode-348d6.appspot.com/o/News%20Logo.png?alt=media&token=cb6d3dd4-c113-4b35-af93-2ab8847f451d",
+//                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
+//                          site: nil,
+//                          sectors: "Costura; Corte; Limpeza",
+//                          contact: "(019)3263-6537",
+//                          vancancies: nil)
     
     //Empty initializer to avoid external instantiation
     private init() {
@@ -38,6 +38,7 @@ class FirebaseManager {
     //Write in firebase if all textFiels filled
     func writeVacancyFirebase (_ vacancy: Vacancy, completion: @escaping (_ error: Error?, _ documentId: String?) -> (Void)) {
         
+        var companyName = vacancy.companyName
         let name = vacancy.name
         let region = vacancy.region
         let releaseTime = vacancy.releaseTime
@@ -49,8 +50,21 @@ class FirebaseManager {
         let typeOfWork: String = vacancy.typeOfWork
         let isActivated = vacancy.isActivated
         let candidateList = vacancy.candidateList
-        let uid = Auth.auth().currentUser!.uid
+        let userID = Auth.auth().currentUser!.uid
         let startWork = vacancy.startWork
+        
+        //Get company name
+        let docRefCompany = self.db.collection("company").document(userID)
+        
+        docRefCompany.getDocument { (document, error) in
+
+            if let document = document, document.exists {
+                companyName = document.get("name") as! String
+            } else {
+                let error = error
+                print("Nao foi possivel escrever o nome da empresa no documento da vaga/n Error: ", error!)
+            }
+        }
         
         var ref: DocumentReference? = nil
         
@@ -58,6 +72,7 @@ class FirebaseManager {
                                                                "description": description ,
                                                                 "isActivated": isActivated,
                                                                 "candidatesList": candidateList,
+                                                                "companyName": companyName,
                                                                 "name": name ,
                                                                 "numberOfVacancies": numberOfVacancies ,
                                                                 "region": region,
@@ -65,8 +80,8 @@ class FirebaseManager {
                                                                 "salary": salary ,
                                                                 "typeOfWork": typeOfWork,
                                                                 "workday": workday,
-                                                                "UID": uid,
-                                                                "startWork": startWork]){ err in
+                                                                "UID": userID,
+                                                                "startWork": startWork]) { err in
                                                                     if let err = err {
                                                                         print("Error adding document: \(err)")
                                                                         completion(err, nil)
@@ -91,7 +106,7 @@ class FirebaseManager {
                 for document in snapshot!.documents {
                     
                     let name = document.get("name") as! String
-                    let company = self.company
+                    let companyName = document.get("companyName") as! String
                     let releaseTime = document.get("releaseTime") as! Int
                     let description = document.get("description") as! String
                     let workday = document.get("workday") as! String
@@ -102,12 +117,12 @@ class FirebaseManager {
                     let typeOfWork = document.get("typeOfWork") as! String
                     let startWork = document.get("startWork") as! String
                     let isActivated = document.get("isActivated") as! Bool
-                    let ID = document.documentID
-                    let uid = document.get("UID") as! String
+                    let documentID = document.documentID
+                    let companyID = document.get("UID") as! String
                     let candidateList = document.get("candidatesList") as! [String]
                     
                     vacancy = Vacancy(name: name,
-                                      company: company,
+                                      companyName: companyName,
                                       releaseTime: releaseTime,
                                       description: description,
                                       workday: workday,
@@ -119,8 +134,8 @@ class FirebaseManager {
                                       isActivated: isActivated,
                                       candidateList: candidateList,
                                       startWork: startWork)
-                    vacancy.ID = ID
-                    vacancy.UID = uid
+                    vacancy.documentID = documentID
+                    vacancy.campanyID = companyID
                     
                     self.vacancies.append(vacancy)
                 }

@@ -12,24 +12,12 @@
 import Foundation
 import UIKit
 
-class AnnounceViewController: UIViewController {
-    
+class AnnounceViewController: UIViewController {    
 
-//    //MARK: Properties
-    
+    //MARK: Properties
     var vacancies = [Vacancy]()
     var filteredVacancies = [Vacancy]()
     let searchController = UISearchController(searchResultsController: nil)
-    
-    let company = Company(name: "PanoSocial",
-                          foundationDate: 2005,
-                          region: "Campinas, SP",
-                          photo: "",
-                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-                          site: nil,
-                          sectors: "Costura; Corte; Limpeza",
-                          contact: "(019)3263-6537",
-                          vancancies: nil)
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -217,7 +205,7 @@ extension AnnounceViewController: UISearchResultsUpdating, UITableViewDelegate, 
         
         if editingStyle == UITableViewCell.EditingStyle.delete {
 
-            VacancyServices.delete(vacancies[indexPath.row].ID!) { (error) in
+            VacancyServices.delete(vacancies[indexPath.row].documentID!) { (error) in
 
                 if let error = error {
                     print("Error loading document: \(error.localizedDescription)")

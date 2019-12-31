@@ -18,7 +18,7 @@ class VacancyServices {
                 if let err = error {
                     completion(err, nil)
                 } else {
-                    vacancy.ID = documentID
+                    vacancy.documentID = documentID
                     completion(nil, vacancy)
                 }
                 

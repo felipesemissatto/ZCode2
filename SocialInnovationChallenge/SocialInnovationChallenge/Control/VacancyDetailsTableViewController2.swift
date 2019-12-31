@@ -61,7 +61,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
 
 //        activatedSwitch
         nameVacancyLabel.text = vacancy?.name
-        nameCompanyLabel.text = vacancy?.company.name
+        nameCompanyLabel.text = vacancy?.companyName
         regionLabel.text = vacancy?.region
         salaryLabel.text = vacancy?.salary
         releaseTimeLabel.text = "há \(vacancy!.releaseTime) dias atrás"
@@ -143,7 +143,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
             }
         }
         
-        CandidateServices.apply(self.vacancy!.ID!, self.vacancy!.candidateList) { (error, applySuccess) in
+        CandidateServices.apply(self.vacancy!.documentID!, self.vacancy!.candidateList) { (error, applySuccess) in
             if applySuccess == false {
                 print("Func tapApplyNow")
                 self.errorAlert()
@@ -170,7 +170,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
     @IBAction func isActivatedVacancy(_ sender: Any) {
         
         let isActivated = self.activatedSwitch.isOn
-        let documentId = self.vacancy!.ID!
+        let documentId = self.vacancy!.documentID!
         
         if isActivated {
             VacancyServices.isActivated(isActivated, documentId) { (error) in
@@ -181,7 +181,7 @@ class VacancyDetailsTableViewController2: UITableViewController {
                     }
             }
         } else {
-            VacancyServices.isActivated(isActivated, self.vacancy!.ID!) { (error) in
+            VacancyServices.isActivated(isActivated, self.vacancy!.documentID!) { (error) in
                     if let err = error {
                         print("Error adding document: \(err.localizedDescription)")
                     } else {
