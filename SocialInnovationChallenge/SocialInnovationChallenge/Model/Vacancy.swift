@@ -10,25 +10,27 @@ import Foundation
 class Vacancy {
     
     //MARK: Properties
-    public var documentID: String?
-    public var campanyID: String?
-    public var companyName: String
-    public var name: String
-    public var releaseTime: Int //days, weeks or months
-    public var description: String
-    public var workday: String
-    public var numberOfVacancies: String
     public var benefits: String?
-    public var salary: String
-    public var region: String
-    public var typeOfWork: String
-    public var isActivated: Bool
+    public var campanyID: String?
     public var candidateList: [String]
+    public var companyName: String
+    public var companyPhoto: String
+    public var description: String
+    public var documentID: String?
+    public var isActivated: Bool
+    public var name: String
+    public var numberOfVacancies: String
+    public var region: String
+    public var releaseTime: Int //days, weeks or months
+    public var salary: String
     public var startWork: String
-    
+    public var typeOfWork: String
+    public var workday: String
+
     //MARK: Contructors
     init(name: String = "",
          companyName: String = "",
+         companyPhoto: String = "",
          releaseTime: Int = 0,
          description: String =  "",
          workday: String =  "",
@@ -42,6 +44,7 @@ class Vacancy {
          startWork: String = ""){
             self.name = name
             self.companyName = companyName
+            self.companyPhoto = companyPhoto
             self.releaseTime = releaseTime
             self.description = description
             self.workday = workday

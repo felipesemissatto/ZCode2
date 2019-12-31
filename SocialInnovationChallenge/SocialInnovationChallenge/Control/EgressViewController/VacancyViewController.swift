@@ -161,24 +161,24 @@ extension VacancyViewController: UISearchResultsUpdating, UITableViewDelegate, U
         cell.timeReleaseLabel.text = "há \(vacancy.releaseTime) dias atrás"
         
         // Add photo  profile
-//        if vacancy.company.photo != "" {
-//            let imageUrl = vacancy.company.photo
-//            let url = NSURL(string: imageUrl)
-//            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-//
-//                if error != nil {
-//                    print(error!)
-//                    return
-//                }
-//                
-//                DispatchQueue.global(qos: .background).async {
-//                    DispatchQueue.main.async {
-//                        cell.imageCompany?.contentMode = .scaleAspectFit
-//                        cell.imageCompany?.image = UIImage(data: data!)
-//                    }
-//                }
-//            }).resume()
-//        }
+        if vacancy.companyPhoto != "" {
+            let imageUrl = vacancy.companyPhoto
+            let url = NSURL(string: imageUrl)
+            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.main.async {
+                        cell.imageCompany?.contentMode = .scaleAspectFit
+                        cell.imageCompany?.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
         
         return cell
     }
