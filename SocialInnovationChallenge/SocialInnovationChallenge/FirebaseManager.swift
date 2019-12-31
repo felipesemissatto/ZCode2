@@ -53,36 +53,36 @@ class FirebaseManager {
             if let document = document, document.exists {
                 companyName = document.get("name") as! String
                 companyPhoto = document.get("logoURL") as! String
+                
+                var ref: DocumentReference? = nil
+                
+                ref = self.db.collection("vacancy").addDocument(data: ["benefits": benefits,
+                                                                       "description": description ,
+                                                                        "isActivated": isActivated,
+                                                                        "candidatesList": candidateList,
+                                                                        "companyName": companyName,
+                                                                        "logoURL": companyPhoto,
+                                                                        "name": name ,
+                                                                        "numberOfVacancies": numberOfVacancies ,
+                                                                        "region": region,
+                                                                        "releaseTime": releaseTime,
+                                                                        "salary": salary ,
+                                                                        "typeOfWork": typeOfWork,
+                                                                        "workday": workday,
+                                                                        "UID": userID,
+                                                                        "startWork": startWork]) { err in
+                                                                            if let err = err {
+                                                                                print("Error adding document: \(err)")
+                                                                                completion(err, nil)
+                                                                            } else {
+                                                                                print("Document added with ID: \(ref!.documentID)")
+                                                                                completion(nil, ref!.documentID)
+                                                                            }
+                }
             } else {
                 let error = error
                 print("Nao foi possivel escrever o nome da empresa no documento da vaga/n Error: ", error!)
             }
-        }
-        
-        var ref: DocumentReference? = nil
-        
-        ref = self.db.collection("vacancy").addDocument(data: ["benefits": benefits,
-                                                               "description": description ,
-                                                                "isActivated": isActivated,
-                                                                "candidatesList": candidateList,
-                                                                "companyName": companyName,
-                                                                "companyPhoto": companyPhoto,
-                                                                "name": name ,
-                                                                "numberOfVacancies": numberOfVacancies ,
-                                                                "region": region,
-                                                                "releaseTime": releaseTime,
-                                                                "salary": salary ,
-                                                                "typeOfWork": typeOfWork,
-                                                                "workday": workday,
-                                                                "UID": userID,
-                                                                "startWork": startWork]) { err in
-                                                                    if let err = err {
-                                                                        print("Error adding document: \(err)")
-                                                                        completion(err, nil)
-                                                                    } else {
-                                                                        print("Document added with ID: \(ref!.documentID)")
-                                                                        completion(nil, ref!.documentID)
-                                                                    }
         }
     }
     

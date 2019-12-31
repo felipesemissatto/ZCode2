@@ -12,17 +12,7 @@ class CreateAnnounceViewController: UIViewController {
     
     //MARK: Properties
     
-//    let company = Company(name: "PanoSocial",
-//                          foundationDate: 2005,
-//                          region: "Campinas, SP",
-//                          photo: "",
-//                          description: "Irá auxiliar no corte e costura, atendendo prazos estabelecidos e zelando pela organizaçao e limpeza dos equipamentos",
-//                          site: nil,
-//                          sectors: "Costura; Corte; Limpeza",
-//                          contact: "(019)3263-6537",
-//                          vancancies: nil)
-    
-    var vacancy: Vacancy?
+    var vacancy: Vacancy? = Vacancy()
     
     var createDataPicker: CreateDataPicker = CreateDataPicker()
     var dataPicker: [String] = [String]()
@@ -115,7 +105,6 @@ class CreateAnnounceViewController: UIViewController {
            fillAlert()
         } else {
             
-//            self.vacancy = Vacancy(company: company)
             self.vacancy?.name = self.nameTextField.text!
             self.vacancy?.region = self.regionTextField.text!
             self.vacancy?.numberOfVacancies = self.numberOfVacanciesTextField.text!

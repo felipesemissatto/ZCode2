@@ -31,12 +31,43 @@ class CompanyNotificationViewController: UIViewController {
     @IBOutlet weak var shadowView: UIView!
     //MARK: Views
     
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        switch Appearance.theme {
+//        case .dark:
+//            return .lightContent
+//        case .light:
+//            if #available(iOS 13.0, *) {
+//                return .darkContent
+//            } else {
+//                return .default
+//            }
+//        case .apple:
+//            return .default
+//        }
+//    }
+//
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if #available(iOS 13.0, *) {
+//             switch Appearance.theme {
+//             case .dark:
+//                 overrideUserInterfaceStyle = .dark
+//             case .light:
+//                 overrideUserInterfaceStyle = .light
+//             case .apple:
+//                 overrideUserInterfaceStyle = .unspecified
+//             }
+//         }
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         loadCandidates()
         
         navigationController?.navigationBar.prefersLargeTitles = true
+//        UIApplication.shared.statusBarStyle = .lightContent
         
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
@@ -46,7 +77,7 @@ class CompanyNotificationViewController: UIViewController {
             navBarAppearance.backgroundColor = UIColor(displayP3Red: 1/255, green: 196/255, blue: 89/255, alpha: 1)
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            UIApplication.shared.statusBarStyle = .lightContent
+            overrideUserInterfaceStyle = .light
         }
     }
     
